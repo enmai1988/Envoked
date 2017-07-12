@@ -82,6 +82,6 @@ Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
-db.sync({ force: true });
+db.sync();
 
 module.exports = db;

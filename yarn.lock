@@ -3448,6 +3448,12 @@ passport-google-oauth@^1.0.0:
     passport-google-oauth1 "1.x.x"
     passport-google-oauth20 "1.x.x"
 
+passport-linkedin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/passport-linkedin/-/passport-linkedin-1.0.0.tgz#e3300cf232f7e7b4b95710e238f0bb7936b5d85a"
+  dependencies:
+    passport-oauth1 "1.x.x"
+
 passport-local@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-local/-/passport-local-1.0.0.tgz#1fe63268c92e75606626437e3b906662c15ba6ee"
@@ -3789,6 +3795,10 @@ react-redux@^5.0.5:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
     prop-types "^15.5.10"
+
+react-router-redux@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.8.tgz#227403596b5151e182377dab835b5d45f0f8054e"
 
 react-router@^4.1.1:
   version "4.1.1"
