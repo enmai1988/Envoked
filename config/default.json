@@ -1,10 +1,10 @@
 {
-  "knex": {
+  "sequelize": {
     "client": "postgresql",
     "connection": {
-      "database": "thesis",
-      "user": "postgres",
-      "password": "postgres",
+      "database": "techstarter",
+      "user": "",
+      "password": "",
       "host": "localhost",
       "port": 5432
     },

@@ -62,11 +62,11 @@ const Funding = db.define('funding', {
   amount: Sequelize.DECIMAL(10, 2)
 });
 
-User.hasMany(Project, { foreignKey: 'user_id'});
+User.hasMany(Project, { foreignKey: 'userId'});
 
-User.hasMany(Interest, { foreignKey: 'user_id' });
+Project.belongsTo(User);
 
-User.hasMany(Funding, { foreignKey: 'user_id' });
+Project.hasMany(Funding, { foreignKey: 'projectId' });
 
 Funding.belongsTo(User);
 
@@ -76,10 +76,12 @@ Interest.belongsToMany(User, { through: 'UserInterest' });
 
 Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
-Project.belongsTo(User);
+// User.hasMany(Interest);
 
-Project.hasMany(Funding, { foreignKey: 'project_id' });
+// User.hasMany(Funding);
 
-Project.hasMany(Interest, { foreignKey: 'project_id' });
+// Project.hasMany(Interest, { foreignKey: 'projectId' });
+
+db.sync({ force: true });
 
 module.exports = db;

@@ -43,7 +43,9 @@ router.route('/logout')
 
 router.get('/auth/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile']
-}));
+}), (req, res) => {
+  res.redirect('/');
+});
 
 router.get('/auth/google/callback', middleware.passport.authenticate('google', {
   successRedirect: '/profile',
