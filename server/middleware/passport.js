@@ -2,8 +2,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LinkedinStrategy = require('passport-linkedin').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-// const TwitterStrategy = require('passport-twitter').Strategy;
 const config = require('config')['passport'];
 const models = require('../../db/models');
 
@@ -50,16 +50,12 @@ passport.use('facebook', new FacebookStrategy({
 
 }));
 
-// REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
-// passport.use('twitter', new TwitterStrategy({
-//   consumerKey: config.Twitter.consumerKey,
-//   consumerSecret: config.Twitter.consumerSecret,
-//   callbackURL: config.Twitter.callbackURL,
-//   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true'
-// },
-//   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
-// );
-
-
+// passport.use('linkedin', new LinkedinStrategy({
+//   consumerKey: config.Linkedin.clientID,
+//   consumerSecret: config.Linkedin.clientSecret,
+//   callbackURL: config.Linkedin.callbackURL
+// }, (accessToken, refreshToken, profile, done) => {
+//
+// }));
 
 module.exports = passport;
