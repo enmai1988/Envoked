@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
-    "start": "node server/index.js",
+    "start": "nodemon server",
     "test": "NODE_ENV=test grunt test",
     "server-dev": "nodemon server",
     "build": "webpack --watch"
