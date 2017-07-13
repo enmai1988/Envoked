@@ -2,14 +2,26 @@ export const styles = {
   layout: {
     width: '100%'
   },
+  nav: {
+    a: {
+      color: 'white'
+    }
+  },
   header: {
+    height: '32px',
     backgroundColor: 'rgb(59, 62, 60)',
     position: 'absolute',
-    left: 0,
-    clear: 'both'
+    width: '100%',
+    borderRadius: '0px',
+    border: '0px',
+    margin: '0px',
+    left: '0px'
+  },
+  searchDiv: {
+    width: '200px'
   },
   container: {
-    marginTop: '64px',
+    marginTop: '50px',
     position: 'absolute',
     left: 0,
     width: '100%',
