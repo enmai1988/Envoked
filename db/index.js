@@ -40,6 +40,7 @@ const Project = db.define('project', {
   technologies: Sequelize.TEXT,
   coFounders: Sequelize.TEXT,
   stripeAmount: Sequelize.DECIMAL(10, 2)
+  // img column to save images user uploads
 });
 
 const Interest = db.define('interest', {

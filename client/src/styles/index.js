@@ -2,28 +2,36 @@ export const styles = {
   layout: {
     width: '100%'
   },
-  header: {
-    backgroundColor: 'rgb(59, 62, 60)',
-    position: 'absolute',
-    left: 0,
-    clear: 'both'
+  nav: {
+    a: {
+      color: 'white'
+    }
   },
-  container: {
-    marginTop: '64px',
-    position: 'absolute',
-    left: 0,
+  header: {
+    height: '32px',
+    backgroundColor: 'rgb(59, 62, 60)',
     width: '100%',
-    height: '650px',
-    backgroundColor: 'rgb(193, 193, 193)'
+    borderRadius: '0px',
+    border: '0px',
+    left: '0px',
+    display: 'block',
+    position: 'fixed',
+    zIndex: 100
+  },
+  searchDiv: {
+    width: '200px'
+  },
+  showcase: {
+    height: '1650px',
+    borderRadius: '0px'
   },
   footer: {
-    position: 'absolute',
-    left: '50%',
-    height: '32px',
-    width: '600px',
-    marginLeft: '-300px',
-    backgroundColor: 'rgb(59, 62, 60)',
-    bottom: 0,
-    borderRadius: '5px 5px 0 0'
+    button: {
+      backgroundColor: 'Transparent',
+      border: 'none',
+      borderRadius: '0px',
+      color: 'rgb(250, 250, 250)',
+      outline: 'none'
+    }
   }
 };
