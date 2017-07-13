@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-export const projectReducer = (state = {
+const initProjectState = {
 
-}, action) => {
+};
+
+const projectReducer = (state = initProjectState, action) => {
   return state;
 };
+
+export default projectReducer;

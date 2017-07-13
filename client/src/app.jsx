@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Link, Route, withRouter, browserHistory } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import store from './store';
 import Header from './components/header.jsx';
 import Container from './components/container.jsx';
@@ -13,6 +13,9 @@ import { styles } from './styles';
 class App extends React.Component {
   constructor() {
     super();
+    this.state = {
+      showLoginModal: false
+    };
   }
 
   render() {
