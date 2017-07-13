@@ -21,31 +21,11 @@ export const styles = {
   searchDiv: {
     width: '200px'
   },
-  container: {
-    marginTop: '50px',
-    position: 'absolute',
-    left: '0px',
-    width: '100%',
+  showcase: {
     height: '1650px',
-    backgroundColor: 'rgb(193, 193, 193)',
-    borderRadius: '0px',
-    overFlowY: 'scroll'
+    borderRadius: '0px'
   },
   footer: {
-    div: {
-      position: 'absolute',
-      left: '50%',
-      height: '30px',
-      width: '600px',
-      marginLeft: '-300px',
-      bottom: 0,
-      borderRadius: '0',
-      backgroundColor: 'rgb(59, 62, 60)',
-      display: 'block',
-      position: 'fixed',
-      zIndex: 100,
-      clear: 'both'
-    },
     button: {
       backgroundColor: 'Transparent',
       border: 'none',

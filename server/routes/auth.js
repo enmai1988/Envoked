@@ -10,7 +10,8 @@ router.route('/')
 
 router.route('/login')
   .get((req, res) => {
-    res.render('login.ejs', { message: req.flash('loginMessage') });
+    // res.render('login.ejs', { message: req.flash('loginMessage') });
+    res.render('index.ejs');
   })
   .post(middleware.passport.authenticate('local-login', {
     successRedirect: '/profile',

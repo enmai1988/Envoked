@@ -1,0 +1,36 @@
+body {
+  background-color: rgb(59, 62, 60);
+}
+
+.header a {
+  background-color: rgb(59, 62, 60) !important;
+}
+
+.main {
+  margin-top: 50px;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: 1650px;
+  background-color: rgb(193, 193, 193);
+  border-radius: 0;
+  overflow-y: : scroll
+}
+
+.footer {
+  position: absolute;
+  left: 0%;
+  height: 30px;
+  width: 100%;
+  bottom: 0;
+  border-radius: 0;
+  background-color: rgb(59, 62, 60);
+  display: block;
+  position: fixed;
+  z-index: 100;
+  clear: both;
+}
+
+.footer a:hover{
+  background-color: rgb(205, 82, 0) !important;
+}

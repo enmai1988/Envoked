@@ -6,8 +6,8 @@ import { styles } from '../styles';
 class Footer extends React.Component {
   render() {
     return (
-      <div style={styles.footer.div} className='footer'>
-        <ButtonGroup justified>
+      <div className='text-center footer'>
+        <ButtonGroup>
           <LinkContainer to='/about' style={styles.footer.button}>
             <Button>About Us</Button>
           </LinkContainer>

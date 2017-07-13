@@ -5,8 +5,8 @@ import { styles } from '../styles';
 class Container extends React.Component {
   render() {
     return (
-      <div style={styles.container}>
-        <Jumbotron style={styles.container}></Jumbotron>
+      <div className='main'>
+        <Jumbotron style={styles.showcase}></Jumbotron>
       </div>
     );
   }
