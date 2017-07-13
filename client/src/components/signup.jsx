@@ -5,6 +5,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
+        test
       </div>
     );
   }
