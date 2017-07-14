@@ -1,6 +1,4 @@
-const initLoginModalState = {
-  open: false
-};
+const initLoginModalState = { open: false };
 
 const handleLoginModal = (state = initLoginModalState, action) => {
   switch (action.type) {

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { fetchUser } from '../actions/userActions.js';
 
 const initUserState = {
-  user: null,
+  currUser: null,
   fetchingUser: false,
   fetchedUser: false,
   fetchError: null
@@ -20,7 +21,7 @@ const userReducer = (state = initUserState, action) => {
       ...state,
       fetchingUser: false,
       fetchedUser: true,
-      user: action.payload
+      currUser: action.payload
     };
   case 'FETCH_USER_REJECTED':
     return {

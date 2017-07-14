@@ -12,7 +12,7 @@ passport.serializeUser((profile, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-
+  done(null, id);
 });
 
 passport.use('local-signup', new LocalStrategy({
@@ -38,7 +38,7 @@ passport.use('google', new GoogleStrategy({
   clientSecret: config.Google.clientSecret,
   callbackURL: config.Google.callbackURL
 }, (accessToken, refreshToken, profile, done) => {
-
+  done(null, profile);
 }));
 
 passport.use('facebook', new FacebookStrategy({
@@ -47,7 +47,7 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name']
 }, (accessToken, refreshToken, profile, done) => {
-
+  done(null, profile);
 }));
 
 // passport.use('linkedin', new LinkedinStrategy({

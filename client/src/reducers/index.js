@@ -5,7 +5,7 @@ import handleLoginModal from './loginModalReducer.js';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
-  userReducer,
-  projectReducer,
-  handleLoginModal
+  user: userReducer,
+  project: projectReducer,
+  login: handleLoginModal
 });

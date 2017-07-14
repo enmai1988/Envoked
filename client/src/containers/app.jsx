@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, withRouter, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, browserHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/header.jsx';
 import Container from '../components/container.jsx';
@@ -10,23 +10,15 @@ import { styles } from '../styles';
 import { fetchUser } from '../actions/userActions.js';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  handleLoginClick() {
-    this.setState({ showLoginModal: true });
+  componentDidMount() {
+    this.props.fetchUser();
   }
 
   render() {
-    console.log(this.props);
     return (
       <Router history={browserHistory}>
         <div style={styles.layout}>
-          <Header
-            handleLoginClick={this.handleLoginClick.bind(this)}
-          />
+          <Header />
             <Route exact path='/' component={() =>
               <Container />}
             />
@@ -38,11 +30,8 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({ currUser: state.user.currUser });
 
-const mapStateToProps = state => {
-  return {
-    user: fetchUser(state)
-  };
-};
+const mapDispatchToProps = dispatch => ({ fetchUser: () => dispatch(fetchUser()) });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
