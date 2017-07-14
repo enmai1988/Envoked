@@ -50,7 +50,7 @@ const Interest = db.define('interest', {
     allowNull: false,
     primaryKey: true
   },
-  name: Sequelize.TEXT
+  name: {type: Sequelize.TEXT, unique: true }
 });
 
 const Funding = db.define('funding', {
@@ -83,6 +83,6 @@ Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
-db.sync();
+// db.sync({ force: true });
 
 module.exports = db;
