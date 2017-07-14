@@ -3,8 +3,9 @@ export const styles = {
     width: '100%'
   },
   nav: {
-    a: {
-      color: 'white'
+    title: {
+      color: 'white',
+      cursor: 'pointer'
     }
   },
   header: {
@@ -17,6 +18,9 @@ export const styles = {
     display: 'block',
     position: 'fixed',
     zIndex: 100
+  },
+  loginModal: {
+    marginTop: '5%'
   },
   searchDiv: {
     width: '200px'

@@ -7,7 +7,7 @@ class Login extends React.Component {
     return (
       <Fade in={true}>
         <div className='login'>
-          <Modal.Dialog>
+          <Modal.Dialog style={styles.loginModal}>
             <Modal.Header>
               <Modal.Title>
                 Please login
