@@ -7,9 +7,7 @@ export const FETCH_USER_REJECTED = 'FETCH_USER_REJECTED';
 export const fetchUser = () => {
   console.log('running fetchUser');
   return dispatch => {
-    dispatch({
-      type: FETCH_USER_PENDING
-    });
+    dispatch({ type: FETCH_USER_PENDING });
     axios.get('/user')
       .then(response => {
         console.log(response);

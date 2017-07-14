@@ -16,7 +16,7 @@ const userReducer = (state = initUserState, action) => {
       fetchingUser: true,
       fetchedUser: false
     };
-  case 'FETCH_USER_FUFILLED':
+  case 'FETCH_USER_FULFILLED':
     return {
       ...state,
       fetchingUser: false,
