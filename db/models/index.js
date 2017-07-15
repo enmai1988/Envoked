@@ -1,2 +1,2 @@
 // module.exports.Auth = require('./auths');
-module.exports.Profile = require('./users');
+module.exports.User = require('./users');

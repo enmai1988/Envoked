@@ -6,9 +6,9 @@ import Search from './search.jsx';
 
 const Header = ({ user }) => {
   let displayAuths = null;
-  let authActions = [{ name: 'Login', link: '/login'}, { name: 'Signup', link: '/signup' }];
+  let authActions = [{ name: 'Login', link: '/auth/login'}, { name: 'Signup', link: '/auth/signup' }];
   if (user.fetched && user.fetchedUser) {
-    displayAuths = <NavItem href='/logout'>Logout</NavItem>;
+    displayAuths = <NavItem href='/auth/logout'>Logout</NavItem>;
   } else if (!user.fetching && !user.fetchedUser) {
     displayAuths = authActions.map((action, index) =>
       <LinkContainer to={action.link} key={index}>

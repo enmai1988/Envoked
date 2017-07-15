@@ -87,4 +87,4 @@ Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
 // db.sync({ force: true });
 
-module.exports = db;
+module.exports = { db, User, Project, Interest, Funding };
