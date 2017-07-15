@@ -30,14 +30,16 @@ const Project = db.define('project', {
     primaryKey: true
   },
   name: Sequelize.TEXT,
-  description: Sequelize.TEXT,
   byline: Sequelize.TEXT,
+  companyName: Sequelize.TEXT,
+  description: Sequelize.TEXT,
   location: Sequelize.TEXT,
   targetUsers: Sequelize.TEXT,
   technologies: Sequelize.TEXT,
   coFounders: Sequelize.TEXT,
   stripeAmount: Sequelize.DECIMAL(10, 2),
-  imageURL: Sequelize.TEXT
+  imageURL: Sequelize.TEXT,
+  url: Sequelize.TEXT
 });
 
 const Interest = db.define('interest', {
@@ -60,6 +62,18 @@ const Funding = db.define('funding', {
   amount: Sequelize.DECIMAL(10, 2)
 });
 
+/* not MVP
+const Image = db.define('image', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  location: Sequelize.TEXT
+});
+*/
+
 User.hasMany(Project, { foreignKey: 'userId'});
 
 Project.belongsTo(User);
@@ -73,6 +87,8 @@ Funding.belongsTo(Project);
 Interest.belongsToMany(User, { through: 'UserInterest' });
 
 Interest.belongsToMany(Project, { through: 'ProjectInterest' });
+
+// Image.belongsTo(Project);
 
 // User.hasMany(Interest);
 

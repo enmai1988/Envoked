@@ -10,7 +10,7 @@ const Footer = () => (
         <Button>About Us</Button>
       </LinkContainer>
       <Button href='https://github.com/TechStarter/TechStarter' style={styles.footer.button}>See Repo</Button>
-      <LinkContainer to='/startproject' style={styles.footer.button}>
+      <LinkContainer to='/project' style={styles.footer.button}>
         <Button >Start a Project</Button>
       </LinkContainer>
     </ButtonGroup>

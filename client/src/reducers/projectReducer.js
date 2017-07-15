@@ -1,12 +1,10 @@
-import { fetchProjects } from '../actions/projectActions.js';
-
-const initProjectState = {
+const initState = {
   content: [],
   fetching: false,
   fetched: false
 };
 
-const projectReducer = (state = initProjectState, action) => {
+const projectReducer = (state = initState, action) => {
   switch (action.type) {
   case 'FETCH_PROJECTS_PENDING':
     return {

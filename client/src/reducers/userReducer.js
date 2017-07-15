@@ -1,13 +1,11 @@
-import { fetchUser } from '../actions/userActions.js';
-
-const initUserState = {
+const initState = {
   fetchedUser: null,
   fetching: false,
   fetched: false,
   error: null
 };
 
-const userReducer = (state = initUserState, action) => {
+const userReducer = (state = initState, action) => {
   switch (action.type) {
   case 'FETCH_USER_PENDING':
     return {
