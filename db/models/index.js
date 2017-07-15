@@ -1,2 +1,2 @@
-// module.exports.Auth = require('./auths');
-module.exports.User = require('./users');
+module.exports.Project = require('./project');
+module.exports.User = require('./user');
