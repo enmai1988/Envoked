@@ -20,7 +20,7 @@ passport.use('local-signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, (req, email, password, done) => {
-    // check to see if there is any account with this email address
+  // check to see if there is any account with this email address
 
 }));
 
@@ -29,7 +29,7 @@ passport.use('local-login', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, (req, email, password, done) => {
-    // fetch any profiles that have a local auth account with this email address
+  // fetch any profiles that have a local auth account with this email address
 
 }));
 

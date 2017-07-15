@@ -19,15 +19,16 @@ router.route('/login')
     failureFlash: true
   }));
 
-// router.route('/signup')
-//   .get((req, res) => {
-//     res.render('signup.ejs', { message: req.flash('signupMessage') });
-//   })
-//   .post(middleware.passport.authenticate('local-signup', {
-//     successRedirect: '/profile',
-//     failureRedirect: '/signup',
-//     failureFlash: true
-//   }));
+router.route('/signup')
+  .get((req, res) => {
+    // res.render('signup.ejs', { message: req.flash('signupMessage') });
+    res.render('index.ejs');
+  })
+  .post(middleware.passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }));
 
 // router.route('/profile')
 //   .get(middleware.auth.verify, (req, res) => {
@@ -38,11 +39,7 @@ router.route('/login')
 
 router.route('/user')
   .get(middleware.auth.verify, (req, res) => {
-    console.log('getting user profile');
-    res.send({
-      firstName: 'Eric',
-      lastName: 'Mai'
-    });
+    res.send(req.session.passport.user);
   });
 
 router.route('/logout')
@@ -67,7 +64,7 @@ router.get('/auth/facebook', middleware.passport.authenticate('facebook', {
 }));
 
 router.get('/auth/facebook/callback', middleware.passport.authenticate('facebook', {
-  successRedirect: '/profile',
+  successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: true
 }));

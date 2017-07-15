@@ -2,11 +2,35 @@ body {
   /*background-color: rgb(59, 62, 60);*/
 }
 
+#main {
+  left: 0;
+  margin-top: 50px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+}
+
+.start_a_project {
+  bottom: 15%;
+  width: 150px;
+  left: 50%;
+  margin-left: -75px;
+  position: absolute;
+}
+
+.landing_page {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  background-color: rgb(160, 165, 170);
+}
+
 .header a {
   background-color: rgb(59, 62, 60) !important;
 }
 
-.main {
+/*.main {
   margin-top: 50px;
   position: absolute;
   left: 0px;
@@ -15,7 +39,7 @@ body {
   background-color: rgb(193, 193, 193);
   border-radius: 0;
   overflow-y: : scroll
-}
+}*/
 
 .footer {
   position: absolute;
@@ -35,7 +59,15 @@ body {
   background-color: rgb(205, 82, 0) !important;
 }
 
-/*login*/
+/*login & signup*/
+.signup {
+  margin-top: 5%;
+  position: absolute;;
+}
+
+.signup img {
+  width: 28px;
+}
 
 @media (min-width: 768px) {
     .omb_row-sm-offset-3 div:first-child[class*="col-"] {
