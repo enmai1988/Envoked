@@ -47,6 +47,7 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name']
 }, (accessToken, refreshToken, profile, done) => {
+  console.log('facebook profile: ', profile);
   done(null, profile);
 }));
 

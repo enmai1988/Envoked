@@ -5,13 +5,12 @@ const UserController = require('../controllers').User;
 
 router.route('/')
   .get(UserController.getAll)
-  // .post(UserController.create)
+  .post(UserController.create)
 ;
 
 router.route('/:id')
   .get(UserController.getOne)
   .put(UserController.update)
-  // .delete(UserController.deleteOne)
 ;
 
 module.exports = router;

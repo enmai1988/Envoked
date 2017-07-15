@@ -1,10 +1,6 @@
+/*
 const models = require('../models');
 
-exports.seed = () => {
-
-};
-
-/*
 exports.seed = function (knex, Promise) {
 
   return models.Profile.where({ email: 'admin@domain.com' }).fetch()
