@@ -7,6 +7,9 @@ export const styles = {
       color: 'white',
       cursor: 'pointer'
     },
+    authButton: {
+      backgroundColor: 'rgb(59, 62, 60)'
+    }
   },
   header: {
     height: '32px',

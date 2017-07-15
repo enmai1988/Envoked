@@ -15,7 +15,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.getOne = (req, res) => {
-  User.findOne({ where: req.params.id })
+  User.findOne({ where: { id: req.params.id } })
     .then(user => {
       if (!user) { throw user; }
       res.send(user);

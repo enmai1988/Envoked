@@ -12,10 +12,10 @@ const Header = ({ user }) => {
   } else if (!user.fetching && !user.fetchedUser) {
     displayAuths =
       <Nav pullRight>
-        <LinkContainer to='/auth/signup'>
+        <LinkContainer to='/auth/signup' id='nav_signup_btn'>
           <NavItem>Signup</NavItem>
         </LinkContainer>
-        <NavDropdown title="Login" id="basic-nav-dropdown">
+        <NavDropdown title="Login" id="login_dropdown">
           <Login />
         </NavDropdown>
       </Nav>;

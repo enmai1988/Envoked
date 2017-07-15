@@ -23,7 +23,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.getOne = (req, res) => {
-  Project.findOne({ where: req.params.id })
+  Project.findOne({ where: { id: req.params.id } })
     .then(project => {
       if (!project) { throw project; }
       res.send(project);

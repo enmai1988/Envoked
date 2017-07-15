@@ -126,3 +126,9 @@ body {
       border-top:0 none;
   }
 }
+#login_dropdown {
+  background-color: rgb(59, 62, 60) !important;
+}
+#nav_signup_btn {
+  background-color: rgb(59, 62, 60) !important;
+}
