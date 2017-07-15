@@ -6,7 +6,7 @@ export const styles = {
     title: {
       color: 'white',
       cursor: 'pointer'
-    }
+    },
   },
   header: {
     height: '32px',

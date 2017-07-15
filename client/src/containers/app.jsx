@@ -24,7 +24,7 @@ class App extends React.Component {
           <Route exact path='/' component={() =>
             <Container projects={this.props.projects}/>}
           />
-          <Route path='/auth/login' component={Login} />
+          {/* <Route path='/auth/login' component={Login} /> */}
           <Route path='/auth/signup' component={Signup} />
           <Footer />
         </div>

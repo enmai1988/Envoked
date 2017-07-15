@@ -1,20 +1,24 @@
 import React from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { styles } from '../styles';
 import Search from './search.jsx';
+import Login from './login.jsx';
 
 const Header = ({ user }) => {
   let displayAuths = null;
-  let authActions = [{ name: 'Login', link: '/auth/login'}, { name: 'Signup', link: '/auth/signup' }];
   if (user.fetched && user.fetchedUser) {
-    displayAuths = <NavItem href='/auth/logout'>Logout</NavItem>;
+    displayAuths = <Nav pullRight><NavItem href='/auth/logout'>Logout</NavItem></Nav>;
   } else if (!user.fetching && !user.fetchedUser) {
-    displayAuths = authActions.map((action, index) =>
-      <LinkContainer to={action.link} key={index}>
-        <NavItem>{action.name}</NavItem>
-      </LinkContainer>
-    );
+    displayAuths =
+      <Nav pullRight>
+        <LinkContainer to='/auth/signup'>
+          <NavItem>Signup</NavItem>
+        </LinkContainer>
+        <NavDropdown title="Login" id="basic-nav-dropdown">
+          <Login />
+        </NavDropdown>
+      </Nav>;
   }
 
   return (
@@ -27,9 +31,7 @@ const Header = ({ user }) => {
             </LinkContainer>
           </Navbar.Brand>
         </Navbar.Header>
-        <Nav pullRight>
-          {displayAuths}
-        </Nav>
+        {displayAuths}
       </Navbar>
     </div>
   );
