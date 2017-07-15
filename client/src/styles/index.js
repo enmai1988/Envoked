@@ -6,6 +6,9 @@ export const styles = {
     title: {
       color: 'white',
       cursor: 'pointer'
+    },
+    authButton: {
+      backgroundColor: 'rgb(59, 62, 60)'
     }
   },
   header: {
@@ -21,6 +24,9 @@ export const styles = {
   },
   loginModal: {
     marginTop: '5%'
+  },
+  signupMsg: {
+    textAlign: 'center'
   },
   searchDiv: {
     width: '200px'

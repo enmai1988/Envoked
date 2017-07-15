@@ -1,0 +1,134 @@
+body {
+  /*background-color: rgb(59, 62, 60);*/
+}
+
+#main {
+  left: 0;
+  margin-top: 50px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+}
+
+.start_a_project {
+  bottom: 15%;
+  width: 150px;
+  left: 50%;
+  margin-left: -75px;
+  position: absolute;
+}
+
+.landing_page {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  background-color: rgb(160, 165, 170);
+}
+
+/*.main {
+  margin-top: 50px;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: 1650px;
+  background-color: rgb(193, 193, 193);
+  border-radius: 0;
+  overflow-y: : scroll
+}*/
+
+.footer {
+  position: absolute;
+  left: 0%;
+  height: 30px;
+  width: 100%;
+  bottom: 0;
+  border-radius: 0;
+  background-color: rgb(59, 62, 60);
+  display: block;
+  position: fixed;
+  z-index: 100;
+  clear: both;
+}
+
+.footer a:hover{
+  background-color: rgb(205, 82, 0) !important;
+}
+
+/*login & signup*/
+.signup {
+  margin-top: 5%;
+  position: absolute;;
+}
+
+.signup img {
+  width: 28px;
+}
+#login-dp{
+  min-width: 250px;
+  padding: 14px 14px 0;
+  overflow:hidden;
+  background-color:rgba(255,255,255,0.8) !important;
+}
+#login-dp .help-block{
+  font-size:12px
+}
+#login-dp .bottom{
+  background-color:rgba(255,255,255,0.8);
+  border-top:1px solid #ddd;
+  clear:both;
+  padding:14px;
+}
+#login-dp .social-buttons{
+  margin:12px 0
+}
+#login-dp .social-buttons a{
+  width: 49%;
+}
+#login-dp .form-group {
+  margin-bottom: 10px;
+}
+/*#login-dp a {
+  background-color: white !important;
+}*/
+.btn-fb{
+  margin-right: 2%;
+  color: #fff;
+  background-color:#3b5998;
+}
+.btn-fb:hover{
+  color: #fff;
+  background-color:#496ebc
+}
+.btn-google{
+  color: #fff;
+  background-color:rgb(222, 74, 50);
+}
+.btn-google:hover{
+  color: #fff;
+  background-color:rgb(240, 70, 55);
+}
+.btn-tw{
+  color: #fff;
+  background-color:#55acee;
+}
+.btn-tw:hover{
+  color: #fff;
+  background-color:#59b5fa;
+}
+@media(max-width:768px){
+  #login-dp{
+      background-color: inherit;
+      color: #fff;
+  }
+  #login-dp .bottom{
+      background-color: inherit;
+      border-top:0 none;
+  }
+}
+#login_dropdown {
+  background-color: rgb(59, 62, 60) !important;
+}
+#nav_signup_btn {
+  background-color: rgb(59, 62, 60) !important;
+}

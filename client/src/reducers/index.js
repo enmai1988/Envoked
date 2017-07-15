@@ -6,6 +6,6 @@ import { combineReducers } from 'redux';
 
 export default combineReducers({
   user: userReducer,
-  project: projectReducer,
+  projects: projectReducer,
   login: handleLoginModal
 });

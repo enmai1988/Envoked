@@ -8,7 +8,7 @@ export const fetchUser = () => {
   console.log('running fetchUser');
   return dispatch => {
     dispatch({ type: FETCH_USER_PENDING });
-    axios.get('/user')
+    axios.get('/session')
       .then(response => {
         console.log(response);
         dispatch({

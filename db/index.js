@@ -1,8 +1,3 @@
-// const knex = require('knex')(require('../knexfile'));
-// const db = require('bookshelf')(knex);
-//
-// db.plugin('registry');
-
 const Sequelize = require('sequelize');
 
 let db = null;
@@ -22,7 +17,9 @@ const User = db.define('user', {
   email: { type: Sequelize.TEXT, unique: true },
   firstName: Sequelize.TEXT,
   lastName: Sequelize.TEXT,
-  phone: Sequelize.TEXT
+  phone: Sequelize.TEXT,
+  password: Sequelize.TEXT,
+  salt: Sequelize.TEXT
 });
 
 const Project = db.define('project', {
@@ -39,8 +36,8 @@ const Project = db.define('project', {
   targetUsers: Sequelize.TEXT,
   technologies: Sequelize.TEXT,
   coFounders: Sequelize.TEXT,
-  stripeAmount: Sequelize.DECIMAL(10, 2)
-  // img column to save images user uploads
+  stripeAmount: Sequelize.DECIMAL(10, 2),
+  imageURL: Sequelize.TEXT
 });
 
 const Interest = db.define('interest', {
@@ -85,4 +82,4 @@ Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
 // db.sync({ force: true });
 
-module.exports = db;
+module.exports = { db, User, Project, Interest, Funding };
