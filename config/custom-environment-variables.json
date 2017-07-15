@@ -3,7 +3,7 @@
     "Google": {
       "clientID": "593807276631-e08hdn4fqmv04vot7udek436scr73c1d.apps.googleusercontent.com",
       "clientSecret": "x9u_04gRhE0Nme2JJJjHo6z0",
-      "callbackURL": "http://localhost:3000"
+      "callbackURL": "http://localhost:3000/auth/google/callback"
     },
 
     "Facebook": {
