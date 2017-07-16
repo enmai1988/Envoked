@@ -11,9 +11,6 @@ router.route('/')
     res.status(201).send({ data: 'Posted!' });
   });
 
-router.route('/project')
-  .get((req, res) => res.render('index.ejs'));
-
 router.route('/session')
   .get((req, res) => {
     res.send(req.session.passport.user);

@@ -8,7 +8,7 @@ import Header from '../components/header.jsx';
 import Container from '../components/container.jsx';
 import Footer from '../components/footer.jsx';
 import Signup from '../components/signup.jsx';
-import ProjectSubmission from './projectSubmission.jsx';
+import Login from '../components/login.jsx';
 
 class App extends React.Component {
   componentWillMount() {
@@ -16,6 +16,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Router history={browserHistory}>
         <div style={styles.layout}>
@@ -23,7 +24,7 @@ class App extends React.Component {
           <Route exact path='/' component={() =>
             <Container projects={this.props.projects}/>}
           />
-          <Route path='/project' component={ProjectSubmission} />
+          {/* <Route path='/auth/login' component={Login} /> */}
           <Route path='/auth/signup' component={Signup} />
           <Footer />
         </div>

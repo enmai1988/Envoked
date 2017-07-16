@@ -79,7 +79,7 @@ class Signup extends React.Component {
             </div>
           </Modal.Body>
           <Modal.Footer style={styles.signupMsg}>
-            <span>Already have an account? <a href="/auth/login">Log in here</a></span>
+            <span>Already have an account? <a href="/login">Log in here</a></span>
           </Modal.Footer>
         </Modal.Dialog>
       </div>
