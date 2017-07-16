@@ -8,7 +8,7 @@ import { combineReducers } from 'redux';
 export default combineReducers({
   user: userReducer,
   projects: projectReducer,
-  projectPage: projectPageReducer, 
+  projectPage: projectPageReducer,
   projectCreation: newProjectReducer,
   formControl: formReducer
 });

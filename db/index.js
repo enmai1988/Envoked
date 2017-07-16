@@ -70,8 +70,12 @@ const Image = db.define('image', {
     allowNull: false,
     primaryKey: true
   },
+<<<<<<< HEAD
   small: Sequelize.TEXT,
   full: Sequelize.TEXT
+=======
+  url: { type: Sequelize.TEXT, unique: true }
+>>>>>>> create user with social network login
 });
 
 
@@ -99,4 +103,9 @@ Image.belongsTo(Project);
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
+<<<<<<< HEAD
+=======
+// db.sync({ force: true });
+
+>>>>>>> create user with social network login
 module.exports = { db, User, Project, Interest, Funding, Image };
