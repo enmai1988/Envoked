@@ -8,23 +8,26 @@ import Header from '../components/header.jsx';
 import Container from '../components/container.jsx';
 import Footer from '../components/footer.jsx';
 import Signup from '../components/signup.jsx';
-import Login from '../components/login.jsx';
+import ProjectSubmission from './projectSubmission.jsx';
 
 class App extends React.Component {
   componentWillMount() {
     this.props.fetchUser();
   }
 
+  componentDidMount() {
+    this.props.fetchProjects();
+  }
+
   render() {
-    console.log(this.props);
     return (
       <Router history={browserHistory}>
-        <div style={styles.layout}>
+        <div style={styles.layout} className='container'>
           <Header user={this.props.user}/>
           <Route exact path='/' component={() =>
             <Container projects={this.props.projects}/>}
           />
-          {/* <Route path='/auth/login' component={Login} /> */}
+          <Route path='/project' component={ProjectSubmission} />
           <Route path='/auth/signup' component={Signup} />
           <Footer />
         </div>

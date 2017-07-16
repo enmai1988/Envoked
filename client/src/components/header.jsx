@@ -22,7 +22,7 @@ const Header = ({ user }) => {
   }
 
   return (
-    <div className='header'>
+    <div className='row'>
       <Navbar inverse fluid={true} style={styles.header}>
         <Navbar.Header>
           <Navbar.Brand>
