@@ -99,4 +99,6 @@ Image.belongsTo(Project);
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
+// db.sync({ force: true });
+
 module.exports = { db, User, Project, Interest, Funding, Image };
