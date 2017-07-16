@@ -1,11 +1,16 @@
 import axios from 'axios';
-import { FETCH_USER_PENDING, FETCH_USER_FULFILLED, FETCH_USER_REJECTED } from '../constants';
+
+export const FETCH_USER_PENDING = 'FETCH_USER_PENDING';
+export const FETCH_USER_FULFILLED = 'FETCH_USER_FULFILLED';
+export const FETCH_USER_REJECTED = 'FETCH_USER_REJECTED';
 
 export const fetchUser = () => {
+  console.log('running fetchUser');
   return dispatch => {
     dispatch({ type: FETCH_USER_PENDING });
     axios.get('/session')
       .then(response => {
+        console.log(response);
         dispatch({
           type: FETCH_USER_FULFILLED,
           payload: response.data
