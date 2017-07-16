@@ -9,15 +9,20 @@ body {
   height: auto;
   position: absolute;
 }
-
-.start_a_project {
+.start_project_btn {
   bottom: 15%;
   width: 150px;
   left: 50%;
   margin-left: -75px;
   position: absolute;
 }
-
+.create_project{
+  margin-top: 70px;
+  margin-left: -250px;
+  width: 500px;
+  left: 50%;
+  position: absolute;
+}
 .landing_page {
   left: 0;
   position: absolute;

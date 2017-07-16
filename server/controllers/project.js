@@ -1,4 +1,6 @@
 const Project = require('../../db/').Project;
+const request = require('request-promise');
+const config = require('config')['screenshotlayer'];
 
 module.exports.getAll = (req, res) => {
   Project.findAll()
@@ -12,12 +14,25 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  Project.create(req.body)
+  let project = req.body;
+  let imageURL = `
+    http://api.screenshotlayer.com/api/capture?access_key=${config.access_key}&url=${req.body.url}
+  `;
+
+  request(imageURL)
+    .then(response => {
+      if (!response) { throw response; }
+      console.log('got the image');
+      project.imageURL = imageURL;
+      return Project.create(project);
+    })
     .then(created => {
+      console.log('trying to create project: ', created);
       if (!created) { throw created; }
       res.sendStatus(201);
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err);
       res.sendStatus(500);
     });
 };

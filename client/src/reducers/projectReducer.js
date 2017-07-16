@@ -1,27 +1,27 @@
-import { fetchProjects } from '../actions/projectActions.js';
+import { FETCH_PROJECTS_PENDING, FETCH_PROJECTS_FULFILLED, FETCH_PROJECTS_REJECTED } from '../constants';
 
-const initProjectState = {
+const initState = {
   content: [],
   fetching: false,
   fetched: false
 };
 
-const projectReducer = (state = initProjectState, action) => {
+const projectReducer = (state = initState, action) => {
   switch (action.type) {
-  case 'FETCH_PROJECTS_PENDING':
+  case FETCH_PROJECTS_PENDING:
     return {
       ...state,
       fetching: true,
       fetched: false
     };
-  case 'FETCH_PROJECTS_FULFILLED':
+  case FETCH_PROJECTS_FULFILLED:
     return {
       ...state,
       fetching: false,
       fetched: true,
       content: action.payload
     };
-  case 'FETCH_PROJECTS_REJECTED':
+  case FETCH_PROJECTS_REJECTED:
     return {
       ...state,
       fetching: false,
