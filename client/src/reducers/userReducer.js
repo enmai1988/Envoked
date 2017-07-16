@@ -1,3 +1,5 @@
+import { FETCH_USER_PENDING, FETCH_USER_FULFILLED, FETCH_USER_REJECTED } from '../constants';
+
 const initState = {
   fetchedUser: null,
   fetching: false,
@@ -7,20 +9,20 @@ const initState = {
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
-  case 'FETCH_USER_PENDING':
+  case FETCH_USER_PENDING:
     return {
       ...state,
       fetching: true,
       fetched: false
     };
-  case 'FETCH_USER_FULFILLED':
+  case FETCH_USER_FULFILLED:
     return {
       ...state,
       fetching: false,
       fetched: true,
       fetchedUser: action.payload
     };
-  case 'FETCH_USER_REJECTED':
+  case FETCH_USER_REJECTED:
     return {
       ...state,
       fetching: false,

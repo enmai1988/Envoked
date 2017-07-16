@@ -22,14 +22,17 @@ module.exports.create = (req, res) => {
   request(imageURL)
     .then(response => {
       if (!response) { throw response; }
+      console.log('got the image');
       project.imageURL = imageURL;
       return Project.create(project);
     })
     .then(created => {
+      console.log('trying to create project: ', created);
       if (!created) { throw created; }
       res.sendStatus(201);
     })
     .catch(err => {
+      console.log(err);
       res.sendStatus(500);
     });
 };

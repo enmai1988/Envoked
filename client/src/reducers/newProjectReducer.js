@@ -7,7 +7,7 @@ const initState = {
   targetUsers: '',
   technologies: '',
   coFounders: '',
-  stripeAmount: null,
+  stripeAmount: 0,
   imageURL: '',
   url: ''
 };
@@ -24,7 +24,7 @@ const newProjectReducer = (state = initState, action) => {
     return { ...state, description: action.payload };
   case 'CHANGE_LOCATION':
     return { ...state, location: action.payload };
-  case 'CHANGE_TARGET_USERS':
+  case 'CHANGE_TARGETUSERS':
     return { ...state, targetUsers: action.payload };
   case 'CHANGE_TECHNOLOGIES':
     return { ...state, technologies: action.payload };

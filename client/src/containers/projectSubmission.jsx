@@ -1,18 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateProjectForm } from '../actions/newProjectActions.js';
+import { createProject } from '../actions/formActions.js';
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 
-class CreateProject extends React.Component {
+class ProjectSubmission extends React.Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
   }
 
   handleInputChange(e) {
     let input = e.target.value;
     let field = e.target.name;
     this.props.updateProjectForm(field, input);
+  }
+
+  handleCreate() {
+    console.log(this.props);
+    const form = this.props.form;
+    this.props.createProject(form);
   }
 
   render() {
@@ -69,15 +79,17 @@ class CreateProject extends React.Component {
               key={index}
             />)}
         </form>
+        <Button bsSize="large" block onClick={this.handleCreate}>Create</Button>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ form: state.newProject });
+const mapStateToProps = state => ({ form: state.projectCreation, formControl: state.formControl });
 
 const mapDispatchToProps = dispatch => ({
   updateProjectForm: (field, value) => dispatch(updateProjectForm(field, value)),
+  createProject: form => dispatch(createProject(form))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission);

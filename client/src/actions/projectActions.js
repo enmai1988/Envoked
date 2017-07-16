@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-export const FETCH_PROJECTS_PENDING = 'FETCH_PROJECTS_PENDING';
-export const FETCH_PROJECTS_FULFILLED = 'FETCH_PROJECTS_FULFILLED';
-export const FETCH_PROJECTS_REJECTED = 'FETCH_PROJECTS_REJECTED';
+import { FETCH_PROJECTS_PENDING, FETCH_PROJECTS_FULFILLED, FETCH_PROJECTS_REJECTED } from '../constants';
 
 export const fetchProjects = () => {
   console.log('running fetchProjects');
@@ -10,7 +7,6 @@ export const fetchProjects = () => {
     dispatch({ type: FETCH_PROJECTS_PENDING });
     axios.get('/api/projects')
       .then(response => {
-        console.log(response);
         dispatch({
           type: FETCH_PROJECTS_FULFILLED,
           payload: response.data
