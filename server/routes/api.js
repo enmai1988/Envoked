@@ -15,10 +15,7 @@ router.route('/')
 router.route('/create')
   .get(middleware.auth.verify, (req, res) => res.render('index.ejs'));
 
-<<<<<<< HEAD
 router.route('/project/:id')
   .get((req, res) => res.render('index.ejs'));
 
-=======
->>>>>>> create user with social network login
 module.exports = router;

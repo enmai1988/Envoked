@@ -5,10 +5,6 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-<<<<<<< HEAD
-=======
-    console.log('getSession: ', req.user);
->>>>>>> create user with social network login
     res.send(req.user ? {
       isLoggedIn: true,
       user: req.user
