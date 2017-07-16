@@ -5,7 +5,7 @@ export const fetchProjects = () => {
   console.log('running fetchProjects');
   return dispatch => {
     dispatch({ type: FETCH_PROJECTS_PENDING });
-    axios.get('/api/projects')
+    axios.get('/api/project')
       .then(response => {
         dispatch({
           type: FETCH_PROJECTS_FULFILLED,

@@ -15,10 +15,14 @@ class App extends React.Component {
     this.props.fetchUser();
   }
 
+  componentDidMount() {
+    this.props.fetchProjects();
+  }
+
   render() {
     return (
       <Router history={browserHistory}>
-        <div style={styles.layout}>
+        <div style={styles.layout} className='container'>
           <Header user={this.props.user}/>
           <Route exact path='/' component={() =>
             <Container projects={this.props.projects}/>}

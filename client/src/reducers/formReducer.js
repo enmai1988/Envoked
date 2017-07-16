@@ -5,7 +5,7 @@ import {
 } from '../constants';
 
 const initState = {
-  submitted: false,
+  initiated: false,
   created: false,
   error: null
 };

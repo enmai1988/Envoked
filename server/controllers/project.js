@@ -15,9 +15,7 @@ module.exports.getAll = (req, res) => {
 
 module.exports.create = (req, res) => {
   let project = req.body;
-  let imageURL = `
-    http://api.screenshotlayer.com/api/capture?access_key=${config.access_key}&url=${req.body.url}
-  `;
+  let imageURL = `http://api.screenshotlayer.com/api/capture?access_key=${config.access_key}&url=${req.body.url}`;
 
   request(imageURL)
     .then(response => {
