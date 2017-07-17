@@ -1,5 +1,5 @@
 body {
-  /*background-color: rgb(59, 62, 60);*/
+  background-color: rgb(236, 236, 236);
 }
 .container {
   width: 100%;
@@ -26,10 +26,13 @@ body {
 .project_entry {
   width: 25%;
   margin-left: 6.25%;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 0px;
   box-shadow: 0 2px 6px -2px rgba(22, 22, 22, 0.45);
 }
 .project_entry_info {
+  background-color: rgb(250, 250, 250);
   padding: 10px;
 }
 .project_miniview {
@@ -37,16 +40,35 @@ body {
 }
 .thumbnails {
   text-align: center;
+  cursor: pointer;
 }
 .thumbnails:before {
   width: 100%;
   display: block;
   padding-top: 56.25%;
   position: relative;
+  overflow: hidden;
 }
 .thumbnails img {
   width: 100%;
   height: 100%;
+}
+.project-content {
+  margin-top: 50px;
+  height: 800px;
+}
+.project-content.left {
+  background-color: rgb(250, 250, 250);
+}
+.project-content.mid {
+  background-color: wheat;
+}
+.project-content.mid img {
+  width: 100%;
+  height: 100%;
+}
+.project-content.right {
+  background-color: rgb(250, 250, 250);
 }
 .footer {
   position: absolute;
@@ -61,19 +83,23 @@ body {
   z-index: 100;
   clear: both;
 }
-
 .footer a:hover{
   background-color: rgb(205, 82, 0) !important;
 }
-
-/*login & signup*/
 .signup {
   margin-top: 5%;
   position: absolute;;
 }
-
 .signup img {
   width: 28px;
+}
+.login_container {
+  margin-top: 60px;
+  width: 400px;
+  height: auto;
+  left: 50%;
+  margin-left: -200px;
+  position: relative;
 }
 #login-dp{
   min-width: 250px;
@@ -99,9 +125,6 @@ body {
 #login-dp .form-group {
   margin-bottom: 10px;
 }
-/*#login-dp a {
-  background-color: white !important;
-}*/
 .btn-fb{
   margin-right: 2%;
   color: #fff;

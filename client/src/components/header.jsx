@@ -7,9 +7,9 @@ import Login from './login.jsx';
 
 const Header = ({ user }) => {
   let displayAuths = null;
-  if (user.fetched && user.fetchedUser) {
+  if (user.isLoggedIn) {
     displayAuths = <Nav pullRight><NavItem href='/auth/logout'>Logout</NavItem></Nav>;
-  } else if (!user.fetching && !user.fetchedUser) {
+  } else if (!user.requesting && !user.isLoggedIn) {
     displayAuths =
       <Nav pullRight>
         <LinkContainer to='/auth/signup' id='nav_signup_btn'>

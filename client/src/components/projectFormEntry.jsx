@@ -9,13 +9,9 @@ class ProjectFormEntry extends React.Component {
 
   getValidationState(name) {
     const length = this.props.value[name].length;
-    if (length > 10) {
+    if (length > 0) {
       return 'success';
-    } else if (length > 5) {
-      return 'warning';
-    } else if (length > 0) {
-      return 'error';
-    }
+    } 
   }
 
   render() {

@@ -6,7 +6,7 @@ module.exports.verify = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
+  res.redirect('/auth/login');
 };
 
 module.exports.session = session({
@@ -15,7 +15,7 @@ module.exports.session = session({
     host: 'localhost',
     port: 6379
   }),
-  secret: 'more laughter, more love, more life',
+  secret: '55iW',
   resave: false,
   saveUninitialized: false
 });

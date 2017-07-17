@@ -32,6 +32,20 @@ const newProjectReducer = (state = initState, action) => {
     return { ...state, coFounders: action.payload };
   case 'CHANGE_URL':
     return { ...state, url: action.payload };
+  case 'PROJECT_CREATED':
+    return {
+      ...state,
+      name: '',
+      byline: '',
+      companyName: '',
+      description: '',
+      location: '',
+      targetUsers: '',
+      technologies: '',
+      coFounders: '',
+      imageURL: '',
+      url: ''
+    };
   default:
     return state;
   }

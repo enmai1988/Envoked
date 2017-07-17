@@ -1,7 +1,4 @@
 export const styles = {
-  layout: {
-    width: '100%'
-  },
   nav: {
     title: {
       color: 'white',

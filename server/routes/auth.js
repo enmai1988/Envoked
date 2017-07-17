@@ -3,6 +3,14 @@ const middleware = require('../middleware');
 
 const router = express.Router();
 
+router.route('/')
+  .get((req, res) => {
+    res.send(req.user ? {
+      isLoggedIn: true,
+      user: req.user
+    } : { isLoggedIn: false, user: {} });
+  });
+
 router.route('/login')
   .get((req, res) => {
     // res.render('login.ejs', { message: req.flash('loginMessage') });
@@ -39,7 +47,7 @@ router.get('/google', middleware.passport.authenticate('google', {
 
 router.get('/google/callback', middleware.passport.authenticate('google', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/auth/login'
 }));
 
 router.get('/facebook', middleware.passport.authenticate('facebook', {
@@ -48,7 +56,7 @@ router.get('/facebook', middleware.passport.authenticate('facebook', {
 
 router.get('/facebook/callback', middleware.passport.authenticate('facebook', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/auth/login',
   failureFlash: true
 }));
 
@@ -60,7 +68,7 @@ router.get('/linkedin', middleware.passport.authenticate('linkedin', {
 
 router.get('/linkedin/callback', middleware.passport.authenticate('linkedin', {
   successRedirect: '/profile',
-  failureRedirect: '/login'
+  failureRedirect: '/auth/login'
 }));
 
 module.exports = router;

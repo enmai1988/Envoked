@@ -1,12 +1,14 @@
-import userReducer from './userReducer.js';
-import projectReducer from './projectReducer.js';
-import newProjectReducer from './newProjectReducer.js';
-import formReducer from './formReducer.js';
+import userReducer from './userReducer';
+import projectReducer from './projectReducer';
+import projectPageReducer from './projectPageReducer';
+import newProjectReducer from './newProjectReducer';
+import formReducer from './formReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
   user: userReducer,
   projects: projectReducer,
+  projectPage: projectPageReducer, 
   projectCreation: newProjectReducer,
   formControl: formReducer
 });

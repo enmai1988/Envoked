@@ -1,7 +1,8 @@
 import { FETCH_USER_PENDING, FETCH_USER_FULFILLED, FETCH_USER_REJECTED } from '../constants';
 
 const initState = {
-  fetchedUser: null,
+  fetchedUser: {},
+  isLoggedIn: false,
   fetching: false,
   fetched: false,
   error: null
@@ -20,7 +21,8 @@ const userReducer = (state = initState, action) => {
       ...state,
       fetching: false,
       fetched: true,
-      fetchedUser: action.payload
+      fetchedUser: action.payload.user,
+      isLoggedIn: action.payload.isLoggedIn
     };
   case FETCH_USER_REJECTED:
     return {

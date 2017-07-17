@@ -18,6 +18,7 @@ const User = db.define('user', {
   firstName: Sequelize.TEXT,
   lastName: Sequelize.TEXT,
   phone: Sequelize.TEXT,
+  avatar: Sequelize.TEXT,
   password: Sequelize.TEXT,
   salt: Sequelize.TEXT
 });
@@ -38,8 +39,8 @@ const Project = db.define('project', {
   technologies: Sequelize.TEXT,
   coFounders: Sequelize.TEXT,
   stripeAmount: Sequelize.DECIMAL(10, 2),
-  imageURL: Sequelize.TEXT,
-  url: Sequelize.TEXT
+  url: Sequelize.TEXT,
+  status: Sequelize.ENUM('ready', 'creating', 'failed')
 });
 
 const Interest = db.define('interest', {
@@ -62,7 +63,6 @@ const Funding = db.define('funding', {
   amount: Sequelize.DECIMAL(10, 2)
 });
 
-/* not MVP
 const Image = db.define('image', {
   id: {
     type: Sequelize.INTEGER,
@@ -70,15 +70,18 @@ const Image = db.define('image', {
     allowNull: false,
     primaryKey: true
   },
-  location: Sequelize.TEXT
+  small: Sequelize.TEXT,
+  full: Sequelize.TEXT
 });
-*/
+
 
 User.hasMany(Project, { foreignKey: 'userId'});
 
 Project.belongsTo(User);
 
 Project.hasMany(Funding, { foreignKey: 'projectId' });
+
+Project.hasMany(Image, { foreignKey: 'projectId' });
 
 Funding.belongsTo(User);
 
@@ -88,7 +91,7 @@ Interest.belongsToMany(User, { through: 'UserInterest' });
 
 Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
-// Image.belongsTo(Project);
+Image.belongsTo(Project);
 
 // User.hasMany(Interest);
 
@@ -96,6 +99,4 @@ Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
-// db.sync({ force: true });
-
-module.exports = { db, User, Project, Interest, Funding };
+module.exports = { db, User, Project, Interest, Funding, Image };
