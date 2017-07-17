@@ -30,7 +30,7 @@ class ProjectSubmission extends React.Component {
     const entries = [
       {
         title: 'Project name',
-        name: 'name',
+        name: 'appName',
         validation: true
       },
       {

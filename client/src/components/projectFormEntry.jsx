@@ -11,11 +11,12 @@ class ProjectFormEntry extends React.Component {
     const length = this.props.value[name].length;
     if (length > 0) {
       return 'success';
-    } 
+    }
   }
 
   render() {
     const { entry, value, handleInputChange } = this.props;
+    console.log(entry);
     return (
       <FormGroup
         controlId="formBasicText"

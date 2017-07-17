@@ -5,8 +5,15 @@ const crypto = require('crypto');
 const _ = require('underscore');
 
 module.exports.getAll = (req, res) => {
-  console.log('getAll: ', req.query);
-  let option = _.extend({ include: [ { model: Image } ] }, req.query);
+  let option = {};
+  if (req.query.origin === 'home page') {
+    option = {
+      where: { status: 'ready' },
+      include: [ { model: Image } ],
+      limit: 6
+    };
+  }
+  console.log('findAll, querying db with: ', option);
   Project.findAll(option)
     .then(projects => {
       if (!projects) { throw projects; }

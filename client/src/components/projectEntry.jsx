@@ -9,7 +9,7 @@ const ProjectEntry = ({ project }) => (
       </div>
     </Link>
     <div className='project_entry_info'>
-      <h4>{project.name}</h4>
+      <h4>{project.appName}</h4>
     </div>
   </div>
 );
