@@ -19,7 +19,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log('App:', this.props);
     this.props.fetchUser();
-    this.props.fetchProjects({ params: { limit: 6 } });
+    this.props.fetchProjects({ params: { where: { status: 'ready' }, limit: 6 } });
   }
 
   render() {

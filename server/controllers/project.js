@@ -22,19 +22,11 @@ module.exports.create = (req, res) => {
   // ensure unique filename
   const screenshotXS = crypto.randomBytes(8).toString('hex');
   const screenshotXL = crypto.randomBytes(8).toString('hex');
-  console.log('capturing screenshot for: ', req.body.url);
 
-  pageres.src(req.body.url, ['1366x768'], { filename: screenshotXS, crop: true })
-    .dest(__dirname + '/../../public/assets/pageres/').run()
-    .then(() => {
-      return pageres.src(req.body.url, ['1280x720'], { filename: screenshotXL })
-        .dest(__dirname + '/../../public/assets/pageres/').run();
-    })
-    .then(() => {
-      return Project.create(req.body);
-    })
+  Project.create(req.body)
     .then(project => {
       if (!project) { throw project; }
+      pageres(req.body.url, project.dataValues.id, screenshotXS, screenshotXL);
       return Image.create({ small: `${screenshotXS}.png`, full: `${screenshotXL}.png`, projectId: project.dataValues.id });
     })
     .then(result => {
@@ -42,7 +34,7 @@ module.exports.create = (req, res) => {
       res.sendStatus(201);
     })
     .catch(err => {
-      console.log('failed to create project: ', err);
+      console.log('project creation:', err);
       res.sendStatus(500);
     });
 };
