@@ -20,7 +20,6 @@ module.exports.getAll = (req, res) => {
 
 module.exports.create = (req, res) => {
   // ensure unique filename
-  console.log(new Date());
   const screenshotXS = crypto.randomBytes(8).toString('hex');
   const screenshotXL = crypto.randomBytes(8).toString('hex');
   console.log('capturing screenshot for: ', req.body.url);
