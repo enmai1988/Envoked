@@ -11,5 +11,4 @@ const ProjectFormEntry = ({ entry, handleInputChange, inputValue }) => (
   </div>
 );
 
-
 export default ProjectFormEntry;
