@@ -19,8 +19,6 @@ const User = db.define('user', {
   lastName: Sequelize.TEXT,
   phone: Sequelize.TEXT,
   avatar: Sequelize.TEXT,
-  password: Sequelize.TEXT,
-  salt: Sequelize.TEXT
 });
 
 const Project = db.define('project', {
@@ -30,16 +28,17 @@ const Project = db.define('project', {
     allowNull: false,
     primaryKey: true
   },
-  name: Sequelize.TEXT,
+  companyName: Sequelize.TEXT,
+  appName: Sequelize.TEXT,
   byline: Sequelize.TEXT,
   companyName: Sequelize.TEXT,
-  description: Sequelize.TEXT,
   location: Sequelize.TEXT,
-  targetUsers: Sequelize.TEXT,
-  technologies: Sequelize.TEXT,
+  description: Sequelize.TEXT,
   coFounders: Sequelize.TEXT,
-  stripeAmount: Sequelize.DECIMAL(10, 2),
   url: Sequelize.TEXT,
+  currency: currency,
+  fundedAmount: Sequelize.DECIMAL(10, 2),
+  neededFunding: Sequelize.DECIMAL(10, 2),
   status: Sequelize.ENUM('ready', 'creating', 'failed')
 });
 
@@ -50,7 +49,8 @@ const Interest = db.define('interest', {
     allowNull: false,
     primaryKey: true
   },
-  name: {type: Sequelize.TEXT, unique: true }
+  name: {type: Sequelize.TEXT, unique: true },
+  image: Sequelize.TEXT
 });
 
 const Funding = db.define('funding', {
