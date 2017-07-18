@@ -1,8 +1,9 @@
 import React from 'react';
 
 const ProjectPageMini = ({ formData, user }) => {
-  if (formData.image) {
-    var image = <img src={formData.image}></img>;
+  let image = <img src="http://via.placeholder.com/350x197?text=Hello+world!"></img>;
+  if (formData.imageURL) {
+    image = <img src={formData.imageURL}></img>;
   }
 
   return (
@@ -12,9 +13,10 @@ const ProjectPageMini = ({ formData, user }) => {
       </div>
       <div className='row col-md project-preview content'>
         <h2>{formData.appName}</h2>
-        <h4>{`${user.firstName} ${user.lastName}`}</h4>
+        <span style={{fontStyle: 'italic', color: 'rgb(130, 130, 130)'}}>{formData.byline}</span>
+        <a href={formData.url} style={{display: 'block'}}>{formData.url}</a>
         <br></br>
-        <span>{formData.description}</span>
+        <p style={{whiteSpace: 'pre-wrap'}}>{formData.description}</p>
       </div>
     </div>
   );

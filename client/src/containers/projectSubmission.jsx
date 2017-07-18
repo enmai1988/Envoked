@@ -26,13 +26,14 @@ class ProjectSubmission extends React.Component {
       maxFiles: 1,
     }).then(result => {
       console.log(result.filesUploaded);
-      this.props.updateProjectForm('image', result.filesUploaded[0].url);
+      this.props.updateProjectForm('imageURL', result.filesUploaded[0].url);
     });
   }
 
   handleInputChange(e) {
     let input = e.target.value;
     let field = e.target.name;
+
     this.props.updateProjectForm(field, input);
   }
 
@@ -46,8 +47,8 @@ class ProjectSubmission extends React.Component {
   render() {
     const entries = [
       { name: 'appName', title: 'Project title' },
-      { name: 'url', title: 'Project URL' },
       { name: 'byline', title: 'Byline' },
+      { name: 'url', title: 'Project URL' },
       { name: 'location', title: 'Project location' },
       { name: 'description', title: 'Project description' },
       { name: 'companyName', title: 'Company name' },
@@ -66,9 +67,9 @@ class ProjectSubmission extends React.Component {
               <span>Project image</span>
             </div>
             <div className='col-md-9' onClick={this.handleFileUpload}>
-              {this.props.form.image ?
+              {this.props.form.imageURL ?
                 <div className='project-image-picker-box image-uploaded'>
-                  <img src={this.props.form.image}></img>
+                  <img src={this.props.form.imageURL}></img>
                 </div>
                 :
                 <div className='project-image-picker-box'>

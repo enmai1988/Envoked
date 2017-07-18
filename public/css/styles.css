@@ -56,9 +56,6 @@
 .project-submission-main span {
   font-weight: bold;
 }
-.project-submission-entry.file-upload {
-  height: 425px;
-}
 .project-image-picker-box {
   border-style: dashed;
   border-radius: 5px;
@@ -124,12 +121,13 @@
   margin-left: 0;
   margin-right: 0;
   width: 100%;
-  display: block;
-  padding-top: 56.25%;
-  position: relative;
-  overflow: hidden;
 }
 .project-preview-image img {
+  margin-top: -56.25%;
+  padding-top: 56.25%;
+  display: block;
+  overflow: hidden;
+  position: relative;
   width: 100%;
 }
 .thumbnails {
