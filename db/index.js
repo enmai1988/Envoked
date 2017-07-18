@@ -36,7 +36,7 @@ const Project = db.define('project', {
   description: Sequelize.TEXT,
   coFounders: Sequelize.TEXT,
   url: Sequelize.TEXT,
-  currency: currency,
+  currency: Sequelize.TEXT,
   fundedAmount: Sequelize.DECIMAL(10, 2),
   neededFunding: Sequelize.DECIMAL(10, 2),
   status: Sequelize.ENUM('ready', 'creating', 'failed')

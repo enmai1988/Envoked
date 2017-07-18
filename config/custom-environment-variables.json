@@ -11,5 +11,11 @@
       "clientSecret": "9459a54547c10ef0e279c0d711817162",
       "callbackURL": "http://localhost:3000/auth/facebook/callback"
     }
+
+    // "Twitter": {
+    //   "consumerKey": "TWITTER_CLIENT_ID",
+    //   "consumerSecret": "TWITTER_CLIENT_SECRET",
+    //   "callbackURL": "TWITTER_CALLBACK_URL"
+    // }
   }
 }
