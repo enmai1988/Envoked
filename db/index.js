@@ -38,8 +38,7 @@ const Project = db.define('project', {
   url: Sequelize.TEXT,
   currency: Sequelize.TEXT,
   fundedAmount: Sequelize.DECIMAL(10, 2),
-  neededFunding: Sequelize.DECIMAL(10, 2),
-  status: Sequelize.ENUM('ready', 'creating', 'failed')
+  fundingGoal: Sequelize.DECIMAL(10, 2),
 });
 
 const Interest = db.define('interest', {

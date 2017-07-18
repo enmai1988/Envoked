@@ -7,7 +7,6 @@ module.exports.getAll = (req, res) => {
   let option = {};
   if (req.query.origin === 'home page') {
     option = {
-      where: { status: 'ready' },
       include: [ { model: Image } ],
       limit: 6
     };

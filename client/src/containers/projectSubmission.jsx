@@ -5,6 +5,7 @@ import { createProject } from '../actions/formActions.js';
 import { Button } from 'react-bootstrap';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
+import ProjectPageMini from '../components/projectPageMini.jsx';
 
 class ProjectSubmission extends React.Component {
   constructor(props) {
@@ -36,13 +37,24 @@ class ProjectSubmission extends React.Component {
   }
 
   handleCreate() {
-    console.log('project submission: ', this.props);
     let form = this.props.form;
     form.userId = this.props.user.id;
+    console.log('submitting project: ', form);
     this.props.createProject(form);
   }
 
   render() {
+    const entries = [
+      { name: 'appName', title: 'Project title' },
+      { name: 'url', title: 'Project URL' },
+      { name: 'byline', title: 'Byline' },
+      { name: 'location', title: 'Project location' },
+      { name: 'description', title: 'Project description' },
+      { name: 'companyName', title: 'Company name' },
+      { name: 'fundingGoal', title: 'Funding goal' },
+      { name: 'coFounders', title: 'Co-founders' }
+    ];
+
     return (
       <div className='container project-submission-container'>
         <div className='row col-md project-submission-title'>
@@ -66,65 +78,12 @@ class ProjectSubmission extends React.Component {
               }
             </div>
           </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Project Title</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Byline</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Project location</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Project description</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Company name</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Funding duration</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
-          <div className='row project-submission-entry'>
-            <div className='col-md-3'>
-              <span>Funding goal</span>
-            </div>
-            <div className='col-md-9'>
-
-            </div>
-          </div>
+          {entries.map((entry, index) =>
+            <ProjectFormEntry entry={entry} handleInputChange={this.handleInputChange} key={index} inputValue={this.props.form[entry.name]}/>
+          )}
         </div>
         <div className='col-md-4 project-submission-side'>
-
+          <ProjectPageMini formData={this.props.form} user={this.props.user}/>
         </div>
       </div>
     );
