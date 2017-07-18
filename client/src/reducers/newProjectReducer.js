@@ -1,4 +1,5 @@
 const initState = {
+  image: null,
   appName: '',
   byline: '',
   companyName: '',
@@ -14,6 +15,8 @@ const initState = {
 
 const newProjectReducer = (state = initState, action) => {
   switch (action.type) {
+  case 'CHANGE_IMAGE':
+    return { ...state, image: action.payload };
   case 'CHANGE_APPNAME':
     return { ...state, appName: action.payload };
   case 'CHANGE_COMPANYNAME':
@@ -35,6 +38,7 @@ const newProjectReducer = (state = initState, action) => {
   case 'PROJECT_CREATED':
     return {
       ...state,
+      image: null,
       appName: '',
       byline: '',
       companyName: '',

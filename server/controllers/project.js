@@ -1,5 +1,4 @@
-const { Project, Image } = require('../../db/');
-const { pageres } = require('../middleware/');
+const { Project, Image, User } = require('../../db/');
 const url = require('url');
 const crypto = require('crypto');
 const _ = require('underscore');
@@ -27,14 +26,13 @@ module.exports.getAll = (req, res) => {
 
 module.exports.create = (req, res) => {
   // ensure unique filename
-  const screenshotXS = crypto.randomBytes(8).toString('hex');
-  const screenshotXL = crypto.randomBytes(8).toString('hex');
+  const smallScreenshot = crypto.randomBytes(8).toString('hex');
+  const fullScreenshot = crypto.randomBytes(8).toString('hex');
 
   Project.create(req.body)
     .then(project => {
       if (!project) { throw project; }
-      pageres(req.body.url, project.dataValues.id, screenshotXS, screenshotXL);
-      return Image.create({ small: `${screenshotXS}.png`, full: `${screenshotXL}.png`, projectId: project.dataValues.id });
+      return Image.create({ small: `${smallScreenshot}.png`, full: `${fullScreenshot}.png`, projectId: project.dataValues.id });
     })
     .then(result => {
       if (!result) { throw result; }
@@ -47,7 +45,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.getOne = (req, res) => {
-  Project.findOne({ where: { id: req.params.id }, include: [ { model: Image } ] })
+  Project.findOne({ where: { id: req.params.id }, include: [ { model: Image }, { model: User } ] })
     .then(project => {
       if (!project) { throw project; }
       res.send(project);

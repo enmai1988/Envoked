@@ -1,5 +1,8 @@
-body {
-  background-color: rgb(236, 236, 236);
+* {
+  font-family: 'Roboto', sans-serif;
+}
+.fix {
+  position: fixed;
 }
 .container {
   width: 100%;
@@ -38,6 +41,62 @@ body {
 .project_miniview {
   padding: 32px 15px;
 }
+.project-submission-container {
+  margin-top: 50px;
+  padding: 15px;
+}
+.project-submission-title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.project-submission-main {
+  padding: 15px;
+  height: 100%;
+}
+.project-submission-entry {
+  width: 95%;
+  padding: 15px 0;
+  height: 64px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color: rgba(238, 238, 238, 0.5);
+}
+.project-submission-entry.file-upload {
+  height: 425px;
+}
+.project-image-picker-box {
+  border-style: dashed;
+  border-radius: 5px;
+  border-color: rgba(59, 62, 60, 0.8);
+  text-align: center;
+}
+.project-image-picker-box.image-uploaded {
+  border: 0px;
+  cursor: pointer;
+}
+.project-image-picker-box img {
+  width: 100%;
+}
+.project-image-picker {
+  outline: none;
+  width: 100%;
+  display: block;
+  padding-top: 56.25%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+}
+.project-image-picker:focus {
+  outline: none;
+}
+.project-submission-side {
+  padding: 15px;
+  height: 1600px;
+  background-color: grey;
+}
 .thumbnails {
   text-align: center;
   cursor: pointer;
@@ -53,15 +112,30 @@ body {
   width: 100%;
   height: 100%;
 }
-.project-content {
-  margin-top: 50px;
-  height: 800px;
+.project-page {
+  margin-top: 60px;
 }
 .project-content.left {
-  background-color: rgb(250, 250, 250);
+  width: 15%;
+}
+.left .user-info {
+  height: 120px;
+  padding: 10px;
+  display: block;
+  clear: both;
+}
+.user-info .avatar {
+  margin: 5px 0;
+  border-radius: 50%;
+}
+.user-info span {
+  display: block;
+}
+.user-info.text {
+  position: relative;
 }
 .project-content.mid {
-  background-color: wheat;
+  width: 60%
 }
 .project-content.mid img {
   width: 100%;
@@ -71,7 +145,6 @@ body {
   background-color: rgb(250, 250, 250);
 }
 .footer {
-  position: absolute;
   left: 0%;
   height: 30px;
   width: 100%;
@@ -79,7 +152,6 @@ body {
   border-radius: 0;
   background-color: rgb(59, 62, 60);
   display: block;
-  position: fixed;
   z-index: 100;
   clear: both;
 }

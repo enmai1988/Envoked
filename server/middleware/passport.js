@@ -12,7 +12,7 @@ passport.serializeUser((profile, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findOne({ where: { id: id }, attributes: ['id', 'firstName', 'lastName', 'email', 'phone'] })
+  User.findOne({ where: { id: id }, attributes: ['id', 'firstName', 'lastName', 'email', 'phone', 'avatar'] })
     .then(user => {
       if (!user) { throw user; }
       done(null, user.dataValues);
@@ -51,7 +51,7 @@ passport.use('google', new GoogleStrategy({
     defaults: {
       firstName: profile.name.givenName,
       lastName: profile.name.familyName,
-      photo: profile.photos[0].value,
+      avatar: profile.photos[0].value,
       email: profile.emails[0].value
     }
   }).spread(user => {
@@ -67,17 +67,24 @@ passport.use('facebook', new FacebookStrategy({
   clientID: config.Facebook.clientID,
   clientSecret: config.Facebook.clientSecret,
   callbackURL: config.Facebook.callbackURL,
-  profileFields: ['id', 'emails', 'name']
+  profileFields: ['id', 'emails', 'name', 'picture']
 }, (accessToken, refreshToken, profile, done) => {
   console.log('facebook profile: ', profile);
-  User.findOne({ where: { email: profile.emails[0].value } })
-    .then(user => {
-      if (!user) { throw user; }
-      done(null, user.dataValues);
-    }).catch(err => {
-      console.log('passport google: ', err);
-      done(null, false, { message: 'user not found' });
-    });
+  User.findOrCreate({
+    where: { email: profile.emails[0].value },
+    defaults: {
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName,
+      avatar: profile.photos[0].value,
+      email: profile.emails[0].value
+    }
+  }).spread(user => {
+    if (!user) { throw user; }
+    done(null, user);
+  }).catch(err => {
+    console.log('passport google: ', err);
+    done(null, false, { message: 'user not found' });
+  });
 }));
 
 module.exports = passport;

@@ -16,7 +16,6 @@ class ProjectFormEntry extends React.Component {
 
   render() {
     const { entry, value, handleInputChange } = this.props;
-    console.log(entry);
     return (
       <FormGroup
         controlId="formBasicText"

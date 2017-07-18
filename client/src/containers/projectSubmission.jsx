@@ -3,14 +3,30 @@ import { connect } from 'react-redux';
 import { updateProjectForm } from '../actions/newProjectActions.js';
 import { createProject } from '../actions/formActions.js';
 import { Button } from 'react-bootstrap';
-import axios from 'axios';
+import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 
 class ProjectSubmission extends React.Component {
   constructor(props) {
     super(props);
+
+    this.apikey = 'AjcTDrnNSKWZY48TkFUHPz';
+    this.client = filestack.init(this.apikey);
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+  }
+
+  handleFileUpload(e) {
+    e.preventDefault();
+    this.client.pick({
+      accept: 'image/*',
+      maxFiles: 1,
+    }).then(result => {
+      console.log(result.filesUploaded);
+      this.props.updateProjectForm('image', result.filesUploaded[0].url);
+    });
   }
 
   handleInputChange(e) {
@@ -27,60 +43,89 @@ class ProjectSubmission extends React.Component {
   }
 
   render() {
-    const entries = [
-      {
-        title: 'Project name',
-        name: 'appName',
-        validation: true
-      },
-      {
-        title: 'Project URL',
-        name: 'url',
-        validation: false
-      },
-      {
-        title: 'Byline',
-        name: 'byline',
-        validation: false
-      },
-      {
-        title: 'Company name',
-        name: 'companyName',
-        validation: false
-      },
-      {
-        title: 'Location',
-        name: 'location',
-        validation: false
-      },
-      {
-        title: 'Target Users',
-        name: 'targetUsers',
-        validation: false
-      },
-      {
-        title: 'Technologies',
-        name: 'technologies',
-        validation: false
-      },
-      {
-        title: 'Co-founders',
-        name: 'coFounders',
-        validation: false
-      }
-    ];
     return (
-      <div className='create_project'>
-        <form>
-          {entries.map((entry, index) =>
-            <ProjectFormEntry
-              entry={entry}
-              handleInputChange={this.handleInputChange}
-              value={this.props.form}
-              key={index}
-            />)}
-        </form>
-        <Button bsSize="large" block onClick={this.handleCreate}>Create</Button>
+      <div className='container project-submission-container'>
+        <div className='row col-md project-submission-title'>
+          <h2>Let's create your project</h2>
+        </div>
+        <div className='col-md-8 project-submission-main'>
+          <div className='row project-submission-entry file-upload'>
+            <div className='col-md-3'>
+              <span>Project image</span>
+            </div>
+            <div className='col-md-9' onClick={this.handleFileUpload}>
+              {this.props.form.image ?
+                <div className='project-image-picker-box image-uploaded'>
+                  <img src={this.props.form.image}></img>
+                </div>
+                :
+                <div className='project-image-picker-box'>
+                  <span className='center'>This is first thing people will see</span>
+                  <input type='file' className='project-image-picker'></input>
+                </div>
+              }
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Project Title</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Byline</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Project location</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Project description</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Company name</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Funding duration</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+          <div className='row project-submission-entry'>
+            <div className='col-md-3'>
+              <span>Funding goal</span>
+            </div>
+            <div className='col-md-9'>
+
+            </div>
+          </div>
+        </div>
+        <div className='col-md-4 project-submission-side'>
+
+        </div>
       </div>
     );
   }

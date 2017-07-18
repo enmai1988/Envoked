@@ -4,7 +4,7 @@ import { ButtonGroup, Button } from 'react-bootstrap';
 import { styles } from '../styles';
 
 const Footer = () => (
-  <div className='text-center footer'>
+  <div className='text-center footer fix'>
     <ButtonGroup>
       <LinkContainer to='/about' style={styles.footer.button}>
         <Button>About Us</Button>
