@@ -1,5 +1,4 @@
 const initState = {
-  image: null,
   appName: '',
   byline: '',
   companyName: '',
@@ -38,7 +37,6 @@ const newProjectReducer = (state = initState, action) => {
   case 'PROJECT_CREATED':
     return {
       ...state,
-      image: null,
       appName: '',
       byline: '',
       companyName: '',
