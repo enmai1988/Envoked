@@ -1,5 +1,5 @@
 const initState = {
-  name: '',
+  appName: '',
   byline: '',
   companyName: '',
   description: '',
@@ -8,14 +8,16 @@ const initState = {
   technologies: '',
   coFounders: '',
   stripeAmount: 0,
-  imageURL: '',
+  imageURL: null,
   url: ''
 };
 
 const newProjectReducer = (state = initState, action) => {
   switch (action.type) {
-  case 'CHANGE_NAME':
-    return { ...state, name: action.payload };
+  case 'CHANGE_IMAGEURL':
+    return { ...state, imageURL: action.payload };
+  case 'CHANGE_APPNAME':
+    return { ...state, appName: action.payload };
   case 'CHANGE_COMPANYNAME':
     return { ...state, companyName: action.payload };
   case 'CHANGE_BYLINE':
@@ -35,7 +37,7 @@ const newProjectReducer = (state = initState, action) => {
   case 'PROJECT_CREATED':
     return {
       ...state,
-      name: '',
+      appName: '',
       byline: '',
       companyName: '',
       description: '',
