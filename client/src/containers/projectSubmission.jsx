@@ -5,7 +5,7 @@ import { createProject } from '../actions/formActions.js';
 import { Button } from 'react-bootstrap';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
-import ProjectPageMini from '../components/projectPageMini.jsx';
+import ProjectPageMain from '../components/projectPageMain.jsx';
 
 class ProjectSubmission extends React.Component {
   constructor(props) {
@@ -39,6 +39,7 @@ class ProjectSubmission extends React.Component {
 
   handleCreate() {
     let form = this.props.form;
+    let n = Array.from(form);
     form.userId = this.props.user.id;
     console.log('submitting project: ', form);
     this.props.createProject(form);
@@ -57,11 +58,12 @@ class ProjectSubmission extends React.Component {
     ];
 
     return (
-      <div className='container project-submission-container'>
-        <div className='row col-md project-submission-title'>
+      <div className='container project-submission-container clearfix'>
+        <div className='row col-md project-submission-title clearfix'>
           <h2>Let's create your project</h2>
+          <button type='button' className='btn project-submission-btn'>Save</button>
         </div>
-        <div className='col-md-8 project-submission-main'>
+        <div className='col-md-8 project-submission-main clearfix'>
           <div className='row project-submission-entry file-upload'>
             <div className='col-md-3'>
               <span>Project image</span>
@@ -83,8 +85,8 @@ class ProjectSubmission extends React.Component {
             <ProjectFormEntry entry={entry} handleInputChange={this.handleInputChange} key={index} inputValue={this.props.form[entry.name]}/>
           )}
         </div>
-        <div className='col-md-4 project-submission-side'>
-          <ProjectPageMini formData={this.props.form} user={this.props.user}/>
+        <div className='col-md-4 project-submission-side clearfix'>
+          <ProjectPageMain formData={this.props.form} user={this.props.user}/>
         </div>
       </div>
     );

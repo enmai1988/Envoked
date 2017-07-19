@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProjectPageMini = ({ formData, user }) => {
+const ProjectPageMain = ({ formData, user }) => {
   let image = <img src="http://via.placeholder.com/350x197?text=Hello+world!"></img>;
   if (formData.imageURL) {
     image = <img src={formData.imageURL}></img>;
@@ -22,4 +22,4 @@ const ProjectPageMini = ({ formData, user }) => {
   );
 };
 
-export default ProjectPageMini;
+export default ProjectPageMain;

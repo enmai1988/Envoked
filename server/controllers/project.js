@@ -7,7 +7,7 @@ module.exports.getAll = (req, res) => {
   let option = {};
   if (req.query.origin === 'home page') {
     option = { limit: 6 };
-  }
+  } 
   console.log('findAll, querying db with: ', option);
   Project.findAll(option)
     .then(projects => {
@@ -33,7 +33,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.getOne = (req, res) => {
-  Project.findOne({ where: { id: req.params.id }, include: [ { model: Image }, { model: User } ] })
+  Project.findOne({ where: { id: req.params.id }, include: [ { model: User } ] })
     .then(project => {
       if (!project) { throw project; }
       res.send(project);
