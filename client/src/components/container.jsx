@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 const Container = ({ projects }) => (
   <div className='container'>
     <div className='row justify-content-center landing_page clearfix'>
-      <div className='start_project_btn'>
+      <div className='col-md start_project_btn'>
         <LinkContainer to='/create'>
           <Button bsSize="large" block>Start a Project</Button>
         </LinkContainer>

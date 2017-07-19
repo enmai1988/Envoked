@@ -1,13 +1,10 @@
 const { Project, User } = require('../../db/');
-const url = require('url');
-const crypto = require('crypto');
-const _ = require('underscore');
 
 module.exports.getAll = (req, res) => {
   let option = {};
   if (req.query.origin === 'home page') {
     option = { limit: 6 };
-  } 
+  }
   console.log('findAll, querying db with: ', option);
   Project.findAll(option)
     .then(projects => {

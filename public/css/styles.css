@@ -26,6 +26,9 @@
   height: 600px;
   background-color: rgb(160, 165, 170);
 }
+.project-main {
+  margin-bottom: 20px;
+}
 .project_entry {
   width: 25%;
   margin-left: 6.25%;
@@ -57,6 +60,11 @@
 }
 .project-submission-main span {
   font-weight: bold;
+}
+.project-description {
+  white-space: pre-wrap;
+  font-size: 1.6rem;
+  padding-bottom: 35px;
 }
 .project-image-picker-box {
   border-style: dashed;
@@ -119,21 +127,28 @@
   margin-top: 15px;
   background-color: rgba(238, 238, 238, 0.5);
   display: block;
-}
-.project-preview.content {
-  height: 356px;
   overflow: scroll;
+}
+.project-content {
+  height: 356px;
   padding: 0 15px;
   margin: 0;
   border-radius: 0;
 }
-.project-preview-image {
+.project-content span {
+  color: rgb(130, 130, 130);
+  font-style: italic;
+}
+.project-content a {
+  display: block;
+}
+.project-image {
   border-radius: 5px 5px 0 0;
   margin-left: 0;
   margin-right: 0;
   width: 100%;
 }
-.project-preview-image img {
+.project-image img {
   margin-top: -56.25%;
   padding-top: 56.25%;
   display: block;
