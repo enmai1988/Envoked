@@ -63,22 +63,6 @@ const Funding = db.define('funding', {
   amount: Sequelize.DECIMAL(10, 2)
 });
 
-<<<<<<< HEAD
-const Image = db.define('image', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
-  },
-<<<<<<< HEAD
-  small: Sequelize.TEXT,
-  full: Sequelize.TEXT
-=======
-  url: { type: Sequelize.TEXT, unique: true }
->>>>>>> create user with social network login
-});
-=======
 // const Image = db.define('image', {
 //   id: {
 //     type: Sequelize.INTEGER,
@@ -89,7 +73,6 @@ const Image = db.define('image', {
 //   small: Sequelize.TEXT,
 //   full: Sequelize.TEXT
 // });
->>>>>>> ae7560050d7246ca480925a0ab3533d2481860d0
 
 
 User.hasMany(Project, { foreignKey: 'userId'});
@@ -116,13 +99,6 @@ Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 // db.sync({ force: true });
 
->>>>>>> create user with social network login
-module.exports = { db, User, Project, Interest, Funding, Image };
-=======
 module.exports = { db, User, Project, Interest, Funding };
->>>>>>> ae7560050d7246ca480925a0ab3533d2481860d0
