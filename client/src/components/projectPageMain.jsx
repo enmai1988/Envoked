@@ -1,22 +1,22 @@
 import React from 'react';
 
-const ProjectPageMain = ({ formData, user }) => {
+const ProjectPageMain = ({ project, user, match }) => {
+  let containerClass = 'container project-preview';
   let image = <img src="http://via.placeholder.com/350x197?text=Hello+world!"></img>;
-  if (formData.imageURL) {
-    image = <img src={formData.imageURL}></img>;
-  }
+  if (project.imageURL) { image = <img src={project.imageURL}></img>; }
+  if (match.params.id) { containerClass = 'container project-main'; }
 
   return (
-    <div className='container project-preview'>
-      <div className='row col-md project-preview-image'>
+    <div className={containerClass}>
+      <div className='row col-md project-image'>
         {image}
       </div>
-      <div className='row col-md project-preview content'>
-        <h2>{formData.appName}</h2>
-        <span style={{fontStyle: 'italic', color: 'rgb(130, 130, 130)'}}>{formData.byline}</span>
-        <a href={formData.url} style={{display: 'block'}}>{formData.url}</a>
+      <div className='row col-md project-content'>
+        <h2>{project.appName}</h2>
+        <span>{project.byline}</span>
+        <a href={project.url}>{project.url}</a>
         <br></br>
-        <p style={{whiteSpace: 'pre-wrap'}}>{formData.description}</p>
+        <p className='project-description'>{project.description}</p>
       </div>
     </div>
   );

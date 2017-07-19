@@ -37,7 +37,8 @@ class ProjectSubmission extends React.Component {
     this.props.updateProjectForm(field, input);
   }
 
-  handleCreate() {
+  handleCreate(e) {
+    e.preventDefault();
     let form = this.props.form;
     let n = Array.from(form);
     form.userId = this.props.user.id;
@@ -61,7 +62,6 @@ class ProjectSubmission extends React.Component {
       <div className='container project-submission-container clearfix'>
         <div className='row col-md project-submission-title clearfix'>
           <h2>Let's create your project</h2>
-          <button type='button' className='btn project-submission-btn'>Save</button>
         </div>
         <div className='col-md-8 project-submission-main clearfix'>
           <div className='row project-submission-entry file-upload'>
@@ -86,7 +86,8 @@ class ProjectSubmission extends React.Component {
           )}
         </div>
         <div className='col-md-4 project-submission-side clearfix'>
-          <ProjectPageMain formData={this.props.form} user={this.props.user}/>
+          <ProjectPageMain project={this.props.form} user={this.props.user} match={this.props.match}/>
+          <button type='button' className='btn project-submission-btn' onClick={this.handleCreate}>Save</button>
         </div>
       </div>
     );
