@@ -10,24 +10,38 @@ class ProjectPage extends React.Component {
 
   render() {
     console.log(this.props);
+    let sessionOwner = this.props.user;
     let fetched = this.props.projectPage.fetched;
-    let { id, name, images, description, companyName } = this.props.projectPage.content;
+    let { id, appName, byline, images, description, companyName, user } = this.props.projectPage.content;
     return (
-      <div className='Container'>
-        <div className='col-md-3 project-content left'>
+      <div className='container project-page'>
+        {
+          fetched ?
+            <div>
+              <div className='col-md-3 project-content left'>
+                <div className='row fix'>
+                  <div className='col-md user-info'>
+                    <img className='avatar' src={user.avatar}></img>
+                    <span>By {`${user.firstName} ${user.lastName}`}</span>
+                  </div>
+                </div>
+              </div>
+              <div className='col-md-6 project-content mid'>
+                <div className='row justify-content-center img-holder'>
+                  {images.map((image, index) => <img src={`/assets/screenshots/${image.full}`} key={index}></img>)}
+                </div>
+                <div className='row justify-content-center'>
 
-        </div>
-        <div className='col-md-6 project-content mid'>
-          <div className='row justify-content-center img-holder'>
-            {fetched ? images.map((image, index) => <img src={`/assets/pageres/${image.full}`} key={index}></img>) : 'loading...'}
-          </div>
-          <div className='row justify-content-center'>
+                </div>
+              </div>
+              <div className='col-md-3 project-content right'>
 
-          </div>
-        </div>
-        <div className='col-md-3 project-content right'>
+              </div>
+            </div>
+            :
+            <div>loading...</div>
+        }
 
-        </div>
       </div>
     );
   }
