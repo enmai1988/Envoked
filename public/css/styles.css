@@ -50,6 +50,8 @@
   width: 100%;
 }
 .project-submission-main {
+  width: 55%;
+  margin-left: 10%;
   padding: 15px;
   height: 100%;
 }
@@ -106,8 +108,9 @@
   height: 128px;
 }
 .project-submission-side {
+  width: 25%;
   position: fixed;
-  margin-right: 15px;
+  margin-right: 11%;
   right: 0;
 }
 .project-preview {
@@ -139,13 +142,13 @@
   width: 100%;
 }
 .project-submission-btn {
-  right: 0;
+  float: right;
   width: 100px;
-  position: fixed;
-  margin-right: 45px;
-  margin-top: -45px;
-  font-size: 22px;
-  z-index: 500;
+  position: relative;
+  margin-right: 15px;
+  margin-top: 20px;
+  font-size: 20px;
+  display: block;
 }
 .project-submission-btn:hover {
   color: white;

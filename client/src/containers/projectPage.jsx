@@ -50,7 +50,7 @@ class ProjectPage extends React.Component {
 const mapStateToProps = state => ({ projectPage: state.projectPage });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProject: (id) => dispatch(fetchProject(id))
+  fetchProject: id => dispatch(fetchProject(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectPage);
