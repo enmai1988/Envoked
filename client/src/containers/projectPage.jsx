@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProject } from '../actions/projectPageActions.js';
 import ProjectPageMain from '../components/projectPageMain.jsx';
@@ -38,4 +39,4 @@ const mapDispatchToProps = dispatch => ({
   fetchProject: id => dispatch(fetchProject(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectPage));

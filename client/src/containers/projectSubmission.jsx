@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
@@ -10,12 +11,14 @@ class ProjectSubmission extends React.Component {
   constructor(props) {
     super(props);
 
-    this.apikey = 'AjcTDrnNSKWZY48TkFUHPz';
-    this.client = filestack.init(this.apikey);
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
+  }
+
+  componentDidMount() {
+    const apikey = 'AjcTDrnNSKWZY48TkFUHPz';
+    this.client = filestack.init(apikey);
   }
 
   handleFileUpload(e) {
@@ -75,7 +78,7 @@ class ProjectSubmission extends React.Component {
                 :
                 <div className='project-image-picker-box'>
                   <span className='center'>This is first thing people will see</span>
-                  <input type='file' className='project-image-picker'></input>
+                  <input type='button' className='project-image-picker'></input>
                 </div>
               }
             </div>
@@ -100,4 +103,4 @@ const mapDispatchToProps = dispatch => ({
   submitForm: (form, endpoint) => dispatch(submitForm(form, endpoint))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission));
