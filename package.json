@@ -7,7 +7,7 @@
     "test": "NODE_ENV=test grunt test",
     "server-dev": "nodemon server",
     "build": "webpack --watch",
-    "rollback": "node db/lib/utils.js"
+    "seed": "node db/seeds/seed.js"
   },
   "author": "Hack Reactor",
   "license": "MIT",
