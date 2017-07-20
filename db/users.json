@@ -1,4 +1,4 @@
-const users = [{"id":1,"email":"rbiggam0@delicious.com","firstName":"Rozamond","lastName":"Biggam","phone":"52-(437)875-8106","avatar":"https://robohash.org/accusamusassumendaenim.png?size=50x50&set=set1"},
+[{"id":1,"email":"rbiggam0@delicious.com","firstName":"Rozamond","lastName":"Biggam","phone":"52-(437)875-8106","avatar":"https://robohash.org/accusamusassumendaenim.png?size=50x50&set=set1"},
 {"id":2,"email":"aberwick1@amazon.de","firstName":"Adria","lastName":"Berwick","phone":"970-(811)571-5171","avatar":"https://robohash.org/voluptatemquasdelectus.png?size=50x50&set=set1"},
 {"id":3,"email":"aeliez2@shinystat.com","firstName":"Allyce","lastName":"Eliez","phone":"55-(601)779-0447","avatar":"https://robohash.org/utautquis.bmp?size=50x50&set=set1"},
 {"id":4,"email":"shartrick3@statcounter.com","firstName":"Skippie","lastName":"Hartrick","phone":"57-(257)530-8687","avatar":"https://robohash.org/etdoloremin.bmp?size=50x50&set=set1"},
@@ -997,6 +997,4 @@ const users = [{"id":1,"email":"rbiggam0@delicious.com","firstName":"Rozamond","
 {"id":997,"email":"ibartomieuro@reddit.com","firstName":"Ivar","lastName":"Bartomieu","phone":"1-(379)816-4613","avatar":"https://robohash.org/omnisetad.jpg?size=50x50&set=set1"},
 {"id":998,"email":"aswindellsrp@example.com","firstName":"Annalee","lastName":"Swindells","phone":"49-(622)869-6242","avatar":"https://robohash.org/perferendisautmaiores.png?size=50x50&set=set1"},
 {"id":999,"email":"lmcellenrq@geocities.jp","firstName":"Laney","lastName":"McEllen","phone":"92-(843)120-3543","avatar":"https://robohash.org/autrerumfacere.png?size=50x50&set=set1"},
-{"id":1000,"email":"abouskillrr@weebly.com","firstName":"Ardenia","lastName":"Bouskill","phone":"850-(148)514-8785","avatar":"https://robohash.org/etiustolaudantium.png?size=50x50&set=set1"}];
-
-module.exports.users;
+{"id":1000,"email":"abouskillrr@weebly.com","firstName":"Ardenia","lastName":"Bouskill","phone":"850-(148)514-8785","avatar":"https://robohash.org/etiustolaudantium.png?size=50x50&set=set1"}]
