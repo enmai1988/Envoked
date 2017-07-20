@@ -12,9 +12,9 @@ const projects = require('../projects.json');
 const interests = require('../interests.json');
 
 db.sync({force: true})
-  // .then(() => {
-  //   return User.bulkCreate(users);
-  // })
+  .then(() => {
+    return User.bulkCreate(users);
+  })
   .then(() => {
     return Project.bulkCreate(projects);
   })
