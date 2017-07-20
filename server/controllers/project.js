@@ -2,8 +2,10 @@ const { Project, User } = require('../../db/');
 
 module.exports.getAll = (req, res) => {
   let option = {};
-  if (req.query.origin === 'home page') {
+  if (req.query.origin === '/') {
     option = { limit: 6 };
+  } else if (req.query.origin === '/myprofile') {
+    option = { where: { userId: req.user.id } };
   }
   console.log('findAll, querying db with: ', option);
   Project.findAll(option)
