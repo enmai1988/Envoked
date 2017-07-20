@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateProjectForm } from '../actions/newProjectActions.js';
-import { createProject } from '../actions/formActions.js';
-import { Button } from 'react-bootstrap';
+import { updateInput } from '../actions/inputActions.js';
+import { submitForm } from '../actions/formActions.js';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
@@ -26,7 +25,7 @@ class ProjectSubmission extends React.Component {
       maxFiles: 1,
     }).then(result => {
       console.log(result.filesUploaded);
-      this.props.updateProjectForm('imageURL', result.filesUploaded[0].url);
+      this.props.updateInput('imageURL', result.filesUploaded[0].url);
     });
   }
 
@@ -34,16 +33,16 @@ class ProjectSubmission extends React.Component {
     let input = e.target.value;
     let field = e.target.name;
 
-    this.props.updateProjectForm(field, input);
+    this.props.updateInput(field, input);
   }
 
   handleCreate(e) {
     e.preventDefault();
     let form = this.props.form;
-    let n = Array.from(form);
+
     form.userId = this.props.user.id;
     console.log('submitting project: ', form);
-    this.props.createProject(form);
+    this.props.submitForm(form, '/api/project');
   }
 
   render() {
@@ -97,8 +96,8 @@ class ProjectSubmission extends React.Component {
 const mapStateToProps = state => ({ form: state.projectCreation, formControl: state.formControl });
 
 const mapDispatchToProps = dispatch => ({
-  updateProjectForm: (field, value) => dispatch(updateProjectForm(field, value)),
-  createProject: form => dispatch(createProject(form))
+  updateInput: (field, value) => dispatch(updateInput(field, value)),
+  submitForm: (form, endpoint) => dispatch(submitForm(form, endpoint))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission);

@@ -40,5 +40,30 @@ export const styles = {
       color: 'rgb(250, 250, 250)',
       outline: 'none'
     }
+  },
+  paymentForm: {
+    iconStyle: 'solid',
+    style: {
+      base: {
+        iconColor: '#8898AA',
+        color: 'white',
+        lineHeight: '36px',
+        fontWeight: 300,
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '19px',
+
+        '::placeholder': {
+          color: '#8898AA',
+        },
+      },
+      invalid: {
+        iconColor: '#e85746',
+        color: '#e85746',
+      }
+    },
+    classes: {
+      focus: 'is-focused',
+      empty: 'is-empty',
+    },
   }
 };
