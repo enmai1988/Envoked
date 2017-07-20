@@ -195,6 +195,26 @@
   background-color: rgb(236, 236, 236);
   border-radius: 5px;
 }
+/* Profile Start */
+.profile-container {
+  margin-top: 50px;
+}
+.profile-top {
+  padding: 15px;
+  background-color: rgb(246, 246, 246);
+}
+.profile-top span {
+  display: block;
+  font-size: 36px;
+  font-weight: 400;
+}
+.profile-content {
+  height: 400px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: rgb(236, 236, 236);
+}
+/* Profile End*/
 .footer {
   left: 0%;
   height: 30px;

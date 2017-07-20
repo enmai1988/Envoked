@@ -9,7 +9,6 @@ class Payment extends React.Component {
     super(props);
     this.stripe = Stripe('pk_test_sMvTrVbdTKzUNCSvhAtOH9wS');
 
-    this.validatePayment = this.validatePayment.bind(this);
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this);
   }
 
@@ -30,56 +29,43 @@ class Payment extends React.Component {
     });
   }
 
-  validatePayment(e) {
-    this.props.updateInput('error', null);
-    if (e.target) {
-      this.props.updateInput(e.target.name, e.target.value);
-    }
+  validatePayment(result) {
+    let successElement = document.querySelector('.success');
+    let errorElement = document.querySelector('.error');
+    successElement.classList.remove('visible');
+    errorElement.classList.remove('visible');
 
-    if (e.error) {
-      this.props.updateInput('error', 'visible');
-      this.props.updateInput('errorMessage', e.error.message);
+    if (result.token) {
+      successElement.querySelector('.token').textContent = result.token.id;
+      successElement.classList.add('visible');
+    } else if (result.error) {
+      errorElement.textContent = result.error.message;
+      errorElement.classList.add('visible');
     }
   }
-
-  // setOutcome(result) {
-  //   let successElement = document.querySelector('.success');
-  //   let errorElement = document.querySelector('.error');
-  //   successElement.classList.remove('visible');
-  //   errorElement.classList.remove('visible');
-  //
-  //   if (result.token) {
-  //     successElement.querySelector('.token').textContent = result.token.id;
-  //     successElement.classList.add('visible');
-  //   } else if (result.error) {
-  //     errorElement.textContent = result.error.message;
-  //     errorElement.classList.add('visible');
-  //   }
-  // }
 
   handlePaymentSubmit(e) {
     e.preventDefault();
     let form = document.querySelector('form');
 
     this.stripe.createToken(this.card).then(result => {
-      result.name = form.querySelector('input[name=name]').value;
-      result.amount = form.querySelector('input[name=amount]').value;
+      result.name = form.querySelector('input[name=cardholder-name]').value;
+      result.amount = form.querySelector('input[name=payment-amount]').value;
       console.log(result);
       this.validatePayment(result);
     });
   }
 
   render() {
-    const { error, errorMessage, success, successMessage } = this.props.paymentInfo;
     return (
       <div className='payment-body'>
         <form>
           <label>
-            <input name='name' className='field is-empty' placeholder='Jane Doe' />
+            <input name='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
             <span><span>Name</span></span>
           </label>
           <label>
-            <input name='amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
+            <input name='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
             <span><span>Amount</span></span>
           </label>
           <label>
@@ -88,10 +74,9 @@ class Payment extends React.Component {
           </label>
           <button onClick={this.handlePaymentSubmit}>Pay</button>
           <div className='outcome'>
-            <div className={`error ${error}`} role='alert'>{errorMessage}</div>
-            <div className={`success ${success}`}>
-              {/* Success! Your Stripe token is <span className="token"></span> */}
-              {successMessage}
+            <div className='error' role='alert'></div>
+            <div className='success'>
+              Success! Your Stripe token is <span className="token"></span>
             </div>
           </div>
         </form>
@@ -100,11 +85,4 @@ class Payment extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ paymentInfo: state.paymentInfo });
-
-const mapDispatchToProps = dispatch => ({
-  updateInput: (field, value) => dispatch(updateInput(field, value)),
-  submitForm: (form, endpoint) => dispatch(submitForm(form, endpoint))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+export default Payment;

@@ -12,6 +12,7 @@ export const submitForm = (form, endpoint) => {
       .then(response => {
         if (response.status !== 201) { throw response; }
         dispatch({ type: FORM_SUBMISSION_FULFILLED });
+        dispatch({ type: 'PROJECT_CREATED' });
       })
       .catch(err => {
         dispatch({ type: FORM_SUBMISSION_REJECTED });
