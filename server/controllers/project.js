@@ -1,6 +1,6 @@
-const { Project, User } = require('../../db/');
 
-const { Project, Image } = require('../../db/');
+const { Project, User, Image } = require('../../db/');
+// const { Project, Image} = require('../../db/');
 const { pageres } = require('../middleware/');
 const url = require('url');
 const crypto = require('crypto');
@@ -22,7 +22,7 @@ discovery.addDocument(('9f85920a-44e6-4591-a34e-2bcf260e7b9e', '00c84fed-2bf8-4f
 function(error, data) {
   console.log('WATSON DATA: ', data);
 });
-
+  
 module.exports.getAll = (req, res) => {
   let option = { include: [ { model: User } ]};
   let origin = req.query.origin;
