@@ -5,14 +5,13 @@ import {
   FORM_SUBMISSION_REJECTED
 } from '../constants';
 
-export const createProject = (form) => {
+export const submitForm = (form, endpoint) => {
   return dispatch => {
     dispatch({ type: FORM_SUBMISSION_PENDING });
-    axios.post('/api/project', form)
+    axios.post(endpoint, form)
       .then(response => {
         if (response.status !== 201) { throw response; }
         dispatch({ type: FORM_SUBMISSION_FULFILLED });
-        dispatch({ type: 'PROJECT_CREATED' });
       })
       .catch(err => {
         dispatch({ type: FORM_SUBMISSION_REJECTED });
