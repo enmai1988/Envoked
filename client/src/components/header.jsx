@@ -8,7 +8,13 @@ import Login from './login.jsx';
 const Header = ({ user }) => {
   let displayAuths = null;
   if (user.isLoggedIn) {
-    displayAuths = <Nav pullRight><NavItem href='/auth/logout'>Logout</NavItem></Nav>;
+    displayAuths =
+    <Nav pullRight>
+      <LinkContainer to='/myprofile'>
+        <NavItem>My Profile</NavItem>
+      </LinkContainer>
+      <NavItem href='/auth/logout'>Logout</NavItem>
+    </Nav>;
   } else if (!user.requesting && !user.isLoggedIn) {
     displayAuths =
       <Nav pullRight>

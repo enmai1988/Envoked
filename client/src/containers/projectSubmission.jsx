@@ -1,8 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateProjectForm } from '../actions/newProjectActions.js';
-import { createProject } from '../actions/formActions.js';
-import { Button } from 'react-bootstrap';
+import { updateInput } from '../actions/inputActions.js';
+import { submitForm } from '../actions/formActions.js';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
@@ -11,12 +11,14 @@ class ProjectSubmission extends React.Component {
   constructor(props) {
     super(props);
 
-    this.apikey = 'AjcTDrnNSKWZY48TkFUHPz';
-    this.client = filestack.init(this.apikey);
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
+  }
+
+  componentDidMount() {
+    const apikey = 'AjcTDrnNSKWZY48TkFUHPz';
+    this.client = filestack.init(apikey);
   }
 
   handleFileUpload(e) {
@@ -26,7 +28,7 @@ class ProjectSubmission extends React.Component {
       maxFiles: 1,
     }).then(result => {
       console.log(result.filesUploaded);
-      this.props.updateProjectForm('imageURL', result.filesUploaded[0].url);
+      this.props.updateInput('imageURL', result.filesUploaded[0].url);
     });
   }
 
@@ -34,16 +36,16 @@ class ProjectSubmission extends React.Component {
     let input = e.target.value;
     let field = e.target.name;
 
-    this.props.updateProjectForm(field, input);
+    this.props.updateInput(field, input);
   }
 
   handleCreate(e) {
     e.preventDefault();
     let form = this.props.form;
-    let n = Array.from(form);
+
     form.userId = this.props.user.id;
     console.log('submitting project: ', form);
-    this.props.createProject(form);
+    this.props.submitForm(form, '/api/project');
   }
 
   render() {
@@ -76,7 +78,7 @@ class ProjectSubmission extends React.Component {
                 :
                 <div className='project-image-picker-box'>
                   <span className='center'>This is first thing people will see</span>
-                  <input type='file' className='project-image-picker'></input>
+                  <input type='button' className='project-image-picker'></input>
                 </div>
               }
             </div>
@@ -97,8 +99,8 @@ class ProjectSubmission extends React.Component {
 const mapStateToProps = state => ({ form: state.projectCreation, formControl: state.formControl });
 
 const mapDispatchToProps = dispatch => ({
-  updateProjectForm: (field, value) => dispatch(updateProjectForm(field, value)),
-  createProject: form => dispatch(createProject(form))
+  updateInput: (field, value) => dispatch(updateInput(field, value)),
+  submitForm: (form, endpoint) => dispatch(submitForm(form, endpoint))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission));

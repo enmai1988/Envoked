@@ -24,24 +24,24 @@
 }
 .landing_page {
   height: 600px;
-  background-color: rgb(160, 165, 170);
+  background-color: rgb(245, 245, 245);
 }
 .project-main {
   margin-bottom: 20px;
 }
-.project_entry {
+.project-entry {
   width: 25%;
   margin-left: 6.25%;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   padding: 0px;
   box-shadow: 0 2px 6px -2px rgba(22, 22, 22, 0.45);
 }
-.project_entry_info {
+.project-entry-info {
   background-color: rgb(250, 250, 250);
   padding: 10px;
 }
-.project_miniview {
+.project-miniview {
   padding: 32px 15px;
 }
 .project-submission-container {
@@ -83,7 +83,7 @@
   outline: none;
   width: 100%;
   display: block;
-  padding-top: 56.25%;
+  padding-top: 50%;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -186,34 +186,103 @@
 .project-page {
   margin-top: 60px;
 }
-.project-content.left {
-  width: 15%;
+.project-page-left {
+  width: 50%;
+  margin-left: 12.5%;
 }
-.left .user-info {
-  height: 120px;
-  padding: 10px;
+.project-page-right {
+  padding: 15px;
+  background-color: rgb(236, 236, 236);
+  border-radius: 5px;
+}
+/* Profile Start */
+.profile-container {
+  margin-top: 50px;
+}
+.profile-top {
+  padding: 15px;
+  height: 328px;;
+}
+.profile-top span {
   display: block;
-  clear: both;
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 100px;
 }
-.user-info .avatar {
-  margin: 5px 0;
-  border-radius: 50%;
+.profile-tabs-container {
+  margin-bottom: 30px;
 }
-.user-info span {
-  display: block;
+.profile-tabs {
+  display: flex;
+  justify-content: center;
 }
-.user-info.text {
+.profile-tabs-item .nav-link {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid transparent;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  color: rgb(56, 121, 217);
   position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-right: 2px;
+  line-height: 1.42857143;
+  outline: none;
 }
-.project-content.mid {
-  width: 60%
+.profile-tabs-item .nav-link:hover {
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  color: rgb(55, 92, 130);
 }
-.project-content.mid img {
-  width: 100%;
+.profile-tabs-item .nav-link.active {
+  color: black;
+  border: 1px solid rgb(221, 221, 221);
+  border-bottom: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+  outline: none;
+}
+.profile-content-list {
+  padding: 0;
+}
+/* Profile End*/
+.list-entry {
+  list-style: none;
+  border: 1px solid rgb(221, 221, 221);
+  margin: 20px 0;
+}
+.list-entry-container {
+  height: 280px;
+}
+.list-image-container {
+  background-color: rgb(0, 0, 0);
+  padding: 0;
   height: 100%;
 }
-.project-content.right {
-  background-color: rgb(250, 250, 250);
+.list-entry img{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.list-entry-content-container {
+  padding: 0 40px;
+}
+.list-entry-content-container a {
+  color: black;
+  font-style: normal;
+  font-weight: bolder;
+}
+.list-entry-content-container a:hover {
+  text-decoration: none;
+}
+.list-entry-content-container p {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .footer {
   left: 0%;
@@ -309,3 +378,122 @@
 #nav_signup_btn {
   background-color: rgb(59, 62, 60) !important;
 }
+/* Strip Payment CSS Start */
+.field {
+  background: transparent;
+  font-weight: 300;
+  border: 0;
+  color: rgb(59, 62, 60);
+  outline: none;
+  cursor: text;
+  display: block;
+  width: 100%;
+  line-height: 32px;
+  padding-bottom: 3px;
+  transition: opacity 200ms ease-in-out;
+}
+.field::-webkit-input-placeholder { color: #8898AA; }
+.field::-moz-placeholder { color: #8898AA; }
+
+/* IE doesn't show placeholders when empty+focused */
+.field:-ms-input-placeholder { color: #424770; }
+
+.field.is-empty:not(.is-focused) {
+  opacity: 0;
+}
+.outcome {
+  float: left;
+  width: 100%;
+  padding-top: 8px;
+  min-height: 20px;
+  text-align: center;
+}
+.success, .error {
+  display: none;
+  font-size: 15px;
+}
+.success.visible, .error.visible {
+  display: inline;
+}
+.error {
+  color: #E4584C;
+}
+.success {
+  color: #34D08C;
+}
+.success .token {
+  font-weight: 500;
+  font-size: 15px;
+}
+.payment-body {
+  /*background: #424770;*/
+  background-color: rgb(230, 230, 230);
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+}
+.payment-body form {
+  width: 90%;
+  margin: 20px auto;
+}
+.payment-body label {
+  height: 35px;
+  position: relative;
+  color: #8798AB;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.payment-body label > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-weight: 300;
+  line-height: 32px;
+  color: #8798AB;
+  border-bottom: 1px solid #586A82;
+  transition: border-bottom-color 200ms ease-in-out;
+  cursor: text;
+  pointer-events: none;
+}
+.payment-body label > span span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0% 50%;
+  transition: transform 200ms ease-in-out;
+  cursor: text;
+}
+.payment-body label .field.is-focused + span span,
+.payment-body label .field:not(.is-empty) + span span {
+  transform: scale(0.68) translateY(-36px);
+  cursor: default;
+}
+
+.payment-body label .field.is-focused + span {
+  border-bottom-color: #34D08C;
+}
+.payment-body button {
+  float: left;
+  display: block;
+  background: #34D08C;
+  color: white;
+  border-radius: 2px;
+  border: 0;
+  margin-top: 20px;
+  font-size: 19px;
+  font-weight: 400;
+  width: 100%;
+  height: 47px;
+  line-height: 45px;
+  outline: none;
+}
+.payment-body button:focus {
+  background: #24B47E;
+}
+.payment-body button:active {
+  background: #159570;
+}
+/* Strip Payment CSS End */
