@@ -7,7 +7,7 @@ import { styles } from '../styles';
 import Header from '../components/header.jsx';
 import Container from '../components/container.jsx';
 import ProjectPage from './projectPage.jsx';
-import ProfilePage from './profilePage.jsx';
+import ProfilePage from '../components/profilePage.jsx';
 import Footer from '../components/footer.jsx';
 import Signup from '../components/signup.jsx';
 import Login from '../components/login.jsx';
@@ -45,12 +45,7 @@ class App extends React.Component {
             <ProjectPage {...props} user={this.props.user.fetchedUser}/>
           }/>
           <Route path='/myprofile' render={props =>
-            <ProfilePage
-              {...props}
-              user={this.props.user.fetchedUser}
-              projects={this.props.projects}
-              handleProjectFetching={this.handleProjectFetching}
-            />
+            <ProfilePage {...props} user={this.props.user.fetchedUser}/>
           }/>
           <Route path='/auth/login' component={props =>
             <div className='col align-self-center login_container'>

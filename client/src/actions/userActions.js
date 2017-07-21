@@ -6,7 +6,6 @@ export const fetchUser = () => {
     dispatch({ type: FETCH_USER_PENDING });
     axios.get('/auth')
       .then(response => {
-        console.log('fetched user: ', response);
         dispatch({
           type: FETCH_USER_FULFILLED,
           payload: response.data

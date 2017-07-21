@@ -6,6 +6,8 @@ module.exports.getAll = (req, res) => {
     option = { limit: 6 };
   } else if (req.query.origin === '/myprofile') {
     option = { where: { userId: req.user.id } };
+  } else if (req.query.origin === '1') {
+    option = { where: { userId: req.user.id } };
   }
   console.log('findAll, querying db with: ', option);
   Project.findAll(option)

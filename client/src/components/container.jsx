@@ -18,7 +18,7 @@ class Container extends React.Component {
             </LinkContainer>
           </div>
         </div>
-        <div className='row justify-content-md-center project_miniview'>
+        <div className='row col-md-10 col-md-offset-1 project-miniview'>
           {this.props.projects.content.map((project, index) => <ProjectEntry project={project} key={index}/>)}
         </div>
       </div>
