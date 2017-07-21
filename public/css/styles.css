@@ -223,11 +223,30 @@
   background-color: rgb(245, 245, 245);
   height: 600px;
 }
-.profile-tabs-item .active {
-  color: black;
+.profile-tabs-item .nav-link {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid transparent;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  color: rgb(56, 121, 217);
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-right: 2px;
+  line-height: 1.42857143;
+  outline: none;
+}
+.profile-tabs-item .nav-link:hover {
   border: 1px solid rgb(240, 240, 240);
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  color: rgb(55, 92, 130);
+}
+.profile-tabs-item .nav-link.active {
+  color: black;
+  border: 1px solid rgb(221, 221, 221);
   border-bottom: 1px solid transparent;
-  background-color: wheat;
+  border-radius: 4px 4px 0 0;
+  outline: none;
 }
 /* Profile End*/
 .footer {

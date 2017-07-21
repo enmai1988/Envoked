@@ -2,42 +2,51 @@ import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../actions/projectActions.js';
+import { selectTab } from '../actions/tabsActions.js';
 import ProfileContentList from '../components/profileContentList.jsx';
+import _ from 'underscore';
 
 class ProfileContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      tab1: 'active',
-      tab2: null
-    };
-    this.handleSelect = this.handleSelect.bind(this);
+    this.handleTabSelect = this.handleTabSelect.bind(this);
   }
 
   componentDidMount() {
-    // this.props.fetchProjects({ params: { origin: location.pathname } });
-    this.props.fetchProjects({ params: { origin: this.state.activeKey } });
-    console.log('ProfileContent: ', this.props.projects);
+    _.each(this.props.tabs, (value, key) => {
+      if (value.includes('active')) {
+        this.handleTabSelect(null, key);
+      }
+    });
   }
 
-  handleSelect(e) {
-    console.log(e.target);
-    e.target.className = 'nav-link active';
+  handleTabSelect(e, key) {
+    let origin;
+    if (e) {
+      this.props.selectTab(e.target.name);
+      key = e.target.name;
+    }
+    if (key === '0') {
+      origin = 'my projects';
+    } else if (key === '1') {
+      origin = 'projects you may like';
+    }
+    this.props.fetchProjects({ params: { origin } });
   }
 
   render() {
     const tabs = [
-      { className: 'nav-link', title: 'My Projects' },
-      { className: 'nav-link', title: 'Projects you may like' }
+      { title: 'My Projects' },
+      { title: 'Projects you may like' }
     ];
 
     return (
       <div className='col-md profile-tabs-container'>
         <ul className='nav nav-tabs profile-tabs'>
           {tabs.map((tab, index) =>
-            <li className='nav-item profile-tabs-item' key={index} onClick={this.handleSelect}>
-              <a className={tab.className} href='#'>{tab.title}</a>
+            <li className='nav-item profile-tabs-item' key={index} onClick={this.handleTabSelect}>
+              <button className={this.props.tabs[index]} name={`${index}`}>{tab.title}</button>
             </li>
           )}
         </ul>
@@ -49,10 +58,11 @@ class ProfileContent extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ projects: state.projects });
+const mapStateToProps = state => ({ projects: state.projects, tabs: state.tabs });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProjects: (option) => dispatch(fetchProjects(option))
+  fetchProjects: (option) => dispatch(fetchProjects(option)),
+  selectTab: (tabName) => dispatch(selectTab(tabName))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileContent));
