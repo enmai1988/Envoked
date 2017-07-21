@@ -201,12 +201,14 @@
 }
 .profile-top {
   padding: 15px;
-  background-color: rgb(246, 246, 246);
+  height: 328px;;
 }
 .profile-top span {
   display: block;
   font-size: 36px;
   font-weight: 400;
+  text-align: center;
+  margin-top: 100px;
 }
 .profile-tabs-container {
   margin-bottom: 30px;
@@ -214,14 +216,6 @@
 .profile-tabs {
   display: flex;
   justify-content: center;
-}
-.profile-tabs:active {
-
-}
-.profile-content {
-  padding: 15px;
-  background-color: rgb(245, 245, 245);
-  height: 600px;
 }
 .profile-tabs-item .nav-link {
   background-color: rgb(255, 255, 255);
@@ -248,7 +242,48 @@
   border-radius: 4px 4px 0 0;
   outline: none;
 }
+.profile-content-list {
+  padding: 0;
+}
 /* Profile End*/
+.list-entry {
+  list-style: none;
+  border: 1px solid rgb(221, 221, 221);
+  margin: 20px 0;
+}
+.list-entry-container {
+  height: 280px;
+}
+.list-image-container {
+  background-color: rgb(0, 0, 0);
+  padding: 0;
+  height: 100%;
+}
+.list-entry img{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.list-entry-content-container {
+  padding: 0 40px;
+}
+.list-entry-content-container a {
+  color: black;
+  font-style: normal;
+  font-weight: bolder;
+}
+.list-entry-content-container a:hover {
+  text-decoration: none;
+}
+.list-entry-content-container p {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .footer {
   left: 0%;
   height: 30px;

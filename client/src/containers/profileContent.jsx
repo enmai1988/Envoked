@@ -51,7 +51,10 @@ class ProfileContent extends React.Component {
           )}
         </ul>
         <div className='col-md-8 col-md-offset-2 profile-content'>
-          <ProfileContentList projects={this.props.projects.content}/>
+          {this.props.projects.fetched ?
+            <ProfileContentList projects={this.props.projects.content}/> :
+            <div>loading...</div>
+          }
         </div>
       </div>
     );
