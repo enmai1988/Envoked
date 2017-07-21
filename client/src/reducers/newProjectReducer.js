@@ -6,7 +6,8 @@ const initState = {
   location: '',
   goal: 0,
   imageURL: null,
-  url: ''
+  url: '',
+  category: ''
 };
 
 const newProjectReducer = (state = initState, action) => {
@@ -27,6 +28,8 @@ const newProjectReducer = (state = initState, action) => {
     return { ...state, goal: action.payload };
   case 'CHANGE_URL':
     return { ...state, url: action.payload };
+  case 'CHANGE_CATEGORY':
+    return { ...state, category: action.payload };
   case 'PROJECT_CREATED':
     return {
       ...state,
@@ -37,7 +40,8 @@ const newProjectReducer = (state = initState, action) => {
       location: '',
       goal: 0,
       imageURL: '',
-      url: ''
+      url: '',
+      category: ''
     };
   default:
     return state;

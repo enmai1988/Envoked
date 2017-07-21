@@ -7,11 +7,15 @@ import { convertToSlug } from '../../../helpers/util';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
+import CategorySelector from '../components/categorySelector.jsx';
 
 class ProjectSubmission extends React.Component {
   constructor(props) {
     super(props);
 
+
+    this.apikey = 'AjcTDrnNSKWZY48TkFUHPz';
+    this.client = filestack.init(this.apikey);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
@@ -98,6 +102,9 @@ class ProjectSubmission extends React.Component {
           {entries.map((entry, index) =>
             <ProjectFormEntry entry={entry} handleInputChange={this.handleInputChange} key={index} inputValue={this.props.form[entry.name]}/>
           )}
+        </div>
+        <div className='col-md-8 project-submission-main clearfix'>
+          <CategorySelector handleInputChange={this.handleInputChange}/>
         </div>
         <div className='col-md-4 project-submission-side clearfix'>
           <ProjectPageMain project={this.props.form} user={this.props.user} match={this.props.match}/>
