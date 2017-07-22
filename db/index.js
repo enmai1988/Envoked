@@ -30,16 +30,14 @@ const Project = db.define('project', {
   },
   companyName: Sequelize.TEXT,
   appName: Sequelize.TEXT,
-  byline: Sequelize.TEXT,
+  blurb: Sequelize.TEXT,
   logo: Sequelize.TEXT,
   imageURL: Sequelize.TEXT,
   location: Sequelize.TEXT,
   description: Sequelize.TEXT,
-  coFounders: Sequelize.TEXT,
   url: Sequelize.TEXT,
-  fundedAmount: Sequelize.DECIMAL(10, 2),
-  neededFunding: Sequelize.DECIMAL(10, 2),
-  status: Sequelize.ENUM('ready', 'creating', 'failed'),
+  currentFunding: Sequelize.INTEGER,
+  goal: Sequelize.INTEGER,
   category: Sequelize.TEXT
 });
 

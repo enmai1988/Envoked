@@ -51,13 +51,12 @@ class ProjectSubmission extends React.Component {
   render() {
     const entries = [
       { name: 'appName', title: 'Project title' },
-      { name: 'byline', title: 'Byline' },
+      { name: 'blurb', title: 'Blurb' },
       { name: 'url', title: 'Project URL' },
       { name: 'location', title: 'Project location' },
       { name: 'description', title: 'Project description' },
       { name: 'companyName', title: 'Company name' },
-      { name: 'fundingGoal', title: 'Funding goal' },
-      { name: 'coFounders', title: 'Co-founders' }
+      { name: 'goal', title: 'Funding goal' }
     ];
 
     return (

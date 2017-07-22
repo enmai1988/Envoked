@@ -4,7 +4,7 @@ module.exports.getAll = (req, res) => {
   let option = {};
   let origin = req.query.origin;
   if (origin === '/') {
-    option = { limit: 6, order: [['fundedAmount', 'DESC']] };
+    option = { limit: 6, order: [['currentFunding', 'DESC']] };
   } else if (origin === '/myprofile' || origin === 'my projects') {
     option = { where: { userId: req.user.id } };
   } else if (origin === 'projects you may like') {

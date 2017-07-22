@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchProjects } from '../actions/projectActions.js';
 import { selectTab } from '../actions/tabsActions.js';
 import ProfileContentList from '../components/profileContentList.jsx';
+import Spinner from '../components/spinner.jsx';
 import _ from 'underscore';
 
 class ProfileContent extends React.Component {
@@ -53,7 +54,7 @@ class ProfileContent extends React.Component {
         <div className='col-md-8 col-md-offset-2 profile-content'>
           {this.props.projects.fetched ?
             <ProfileContentList projects={this.props.projects.content}/> :
-            <div>loading...</div>
+            <Spinner />
           }
         </div>
       </div>

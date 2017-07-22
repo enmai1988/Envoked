@@ -13,7 +13,7 @@ const ProjectPageMain = ({ project, user, match }) => {
       </div>
       <div className='row col-md project-content'>
         <h2>{project.appName}</h2>
-        <span>{project.byline}</span>
+        <span>{project.blurb}</span>
         <a href={project.url}>{project.url}</a>
         <br></br>
         <p className='project-description'>{project.description}</p>

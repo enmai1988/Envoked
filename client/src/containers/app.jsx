@@ -12,6 +12,7 @@ import Footer from '../components/footer.jsx';
 import Signup from '../components/signup.jsx';
 import Login from '../components/login.jsx';
 import ProjectSubmission from './projectSubmission.jsx';
+import PrivateRoute from '../components/privateRoute.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,9 +39,6 @@ class App extends React.Component {
               projects={this.props.projects}
               handleProjectFetching={this.handleProjectFetching}/>
           }/>
-          <Route path='/create' component={props =>
-            <ProjectSubmission {...props} user={this.props.user.fetchedUser}/>
-          }/>
           <Route path='/project/:id' component={props =>
             <ProjectPage {...props} user={this.props.user.fetchedUser}/>
           }/>
@@ -52,6 +50,11 @@ class App extends React.Component {
               <Login {...props}/>
             </div>
           }/>
+          <PrivateRoute path='/create'
+            session={this.props.user}
+            component={props =>
+              <ProjectSubmission {...props} user={this.props.user.fetchedUser}/>
+            }/>
           <Route path='/auth/signup' component={Signup} />
           <Footer />
         </div>
