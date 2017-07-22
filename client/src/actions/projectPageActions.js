@@ -4,7 +4,7 @@ import { FETCH_PROJECT_PENDING, FETCH_PROJECT_FULFILLED, FETCH_PROJECT_REJECTED 
 export const fetchProject = id => {
   return dispatch => {
     dispatch({ type: FETCH_PROJECT_PENDING });
-    axios.get(`/api/project/${id}`)
+    return axios.get(`/api/project/${id}`)
       .then(response => {
         dispatch({
           type: FETCH_PROJECT_FULFILLED,

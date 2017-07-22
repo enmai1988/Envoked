@@ -10,7 +10,7 @@ const PrivateRoute = ({ component: Component, session, spinnerStyle, ...rest }) 
         if (session.fetched && session.isLoggedIn) {
           return <Component {...props}/>;
         } else if (session.fetched && !session.isLoggedIn) {
-          return <Redirect to={{pathname: '/auth/login', state: {from: props.location}}}></Redirect>;
+          return <Redirect to={{pathname: '/auth/login', from: props.location}}></Redirect>;
         } else {
           return <Spinner style={spinnerStyle}/>;
         }

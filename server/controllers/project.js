@@ -27,11 +27,8 @@ module.exports.create = (req, res) => {
   Project.create(req.body)
     .then(project => {
       if (!project) { throw project; }
-      // res.sendStatus(201);
-      console.log(req.url);
-      // console.log('redirecting to:', `/project/${project.dataValues.id}`);
-      // res.redirect(201, 'http://127.0.0.1:3000');
-      res.render('');
+      let id = JSON.stringify(project.dataValues.id);
+      res.status(201).send(id);
     })
     .catch(err => {
       console.log('project creation:', err);

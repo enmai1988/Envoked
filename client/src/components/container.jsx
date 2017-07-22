@@ -7,7 +7,12 @@ class Container extends React.Component {
     this.props.handleProjectFetching();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('history: ', nextProps.history);
+  }
+
   render() {
+    console.log('container props: ', this.props);
     return (
       <div className='container'>
         <div className='row justify-content-center landing_page clearfix'>

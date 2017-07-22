@@ -6,6 +6,7 @@ import { submitForm } from '../actions/formActions.js';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
+import axios from 'axios';
 
 class ProjectSubmission extends React.Component {
   constructor(props) {
@@ -41,10 +42,20 @@ class ProjectSubmission extends React.Component {
   handleSave(e) {
     e.preventDefault();
     let form = this.props.form;
-
     form.userId = this.props.user.id;
-    console.log('submitting project: ', form);
-    this.props.submitForm(form, '/api/project');
+    
+    this.props.submitForm(form, '/api/project')
+      .then(id => {
+        if (!id) { throw id; }
+        this.redirectToProject(id);
+      })
+      .catch(err => {
+        console.log('project submission failed: ', err);
+      });
+  }
+
+  redirectToProject(id) {
+    this.props.history.push(`/project/${id}`);
   }
 
   render() {

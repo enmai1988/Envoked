@@ -4,7 +4,7 @@ import { FETCH_USER_PENDING, FETCH_USER_FULFILLED, FETCH_USER_REJECTED } from '.
 export const fetchUser = () => {
   return dispatch => {
     dispatch({ type: FETCH_USER_PENDING });
-    axios.get('/auth')
+    return axios.get('/auth')
       .then(response => {
         dispatch({
           type: FETCH_USER_FULFILLED,

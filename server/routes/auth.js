@@ -41,14 +41,14 @@ router.route('/logout')
 
 router.get('/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile']
-}), (req, res) => {
-  res.redirect('/');
-});
+}));
 
 router.get('/google/callback', middleware.passport.authenticate('google', {
-  successRedirect: '/',
   failureRedirect: '/auth/login'
-}));
+}), (req, res) => {
+  console.log('google auth: ', req.url);
+  res.redirect('/');
+});
 
 router.get('/facebook', middleware.passport.authenticate('facebook', {
   scope: ['public_profile', 'email']
