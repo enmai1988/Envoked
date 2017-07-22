@@ -42,6 +42,12 @@
   border: 1px solid transparent;
   border-radius: 10px;
   padding: 10px 15px;
+  outline: none;
+}
+.get-started:hover {
+  color: rgb(254, 254, 254);
+  background-color: #ee4b28;
+  outline: none;
 }
 .create_project{
   margin-top: 70px;
@@ -195,6 +201,12 @@
   margin-top: 20px;
   font-size: 18px;
   display: block;
+  outline: none;
+  border-radius: 8px;
+}
+.project-submission-btn:focus {
+  color: rgb(254, 254, 254);
+  outline: none;
 }
 .project-submission-btn:hover {
   color: rgb(254, 254, 254);
