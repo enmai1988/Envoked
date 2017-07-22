@@ -10,7 +10,6 @@ export const submitForm = (form, endpoint) => {
     dispatch({ type: FORM_SUBMISSION_PENDING });
     axios.post(endpoint, form)
       .then(response => {
-        if (response.status !== 201) { throw response; }
         dispatch({ type: FORM_SUBMISSION_FULFILLED });
         dispatch({ type: 'PROJECT_CREATED' });
       })

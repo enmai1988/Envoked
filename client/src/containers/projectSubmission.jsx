@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
@@ -12,7 +12,7 @@ class ProjectSubmission extends React.Component {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleCreate = this.handleCreate.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
   }
 
@@ -27,7 +27,6 @@ class ProjectSubmission extends React.Component {
       accept: 'image/*',
       maxFiles: 1,
     }).then(result => {
-      console.log(result.filesUploaded);
       this.props.updateInput('imageURL', result.filesUploaded[0].url);
     });
   }
@@ -39,7 +38,7 @@ class ProjectSubmission extends React.Component {
     this.props.updateInput(field, input);
   }
 
-  handleCreate(e) {
+  handleSave(e) {
     e.preventDefault();
     let form = this.props.form;
 
@@ -88,7 +87,7 @@ class ProjectSubmission extends React.Component {
         </div>
         <div className='col-md-4 project-submission-side clearfix'>
           <ProjectPageMain project={this.props.form} user={this.props.user} match={this.props.match}/>
-          <button type='button' className='btn project-submission-btn' onClick={this.handleCreate}>Save</button>
+          <button type='button' className='btn project-submission-btn' onClick={this.handleSave}>Save</button>
         </div>
       </div>
     );

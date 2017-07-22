@@ -4,7 +4,7 @@ const initState = {
   companyName: '',
   description: '',
   location: '',
-  goal: '',
+  goal: 0,
   imageURL: null,
   url: ''
 };
@@ -35,7 +35,7 @@ const newProjectReducer = (state = initState, action) => {
       companyName: '',
       description: '',
       location: '',
-      goal: '',
+      goal: 0,
       imageURL: '',
       url: ''
     };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Spinner from './spinner.jsx';
 
-const PrivateRoute = ({ component: Component, session, ...rest }) => {
+const PrivateRoute = ({ component: Component, session, spinnerStyle, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, session, ...rest }) => {
         } else if (session.fetched && !session.isLoggedIn) {
           return <Redirect to={{pathname: '/auth/login', state: {from: props.location}}}></Redirect>;
         } else {
-          return <Spinner/>;
+          return <Spinner style={spinnerStyle}/>;
         }
       }}
     >

@@ -51,6 +51,7 @@ class App extends React.Component {
             </div>
           }/>
           <PrivateRoute path='/create'
+            spinnerStyle={{top: '50%', marginTop: '-25px'}}
             session={this.props.user}
             component={props =>
               <ProjectSubmission {...props} user={this.props.user.fetchedUser}/>

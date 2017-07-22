@@ -1,11 +1,12 @@
 const { Project, User } = require('../../db/');
+const url = require('url');
 
 module.exports.getAll = (req, res) => {
   let option = {};
   let origin = req.query.origin;
   if (origin === '/') {
     option = { limit: 6, order: [['currentFunding', 'DESC']] };
-  } else if (origin === '/myprofile' || origin === 'my projects') {
+  } else if (origin === 'my projects') {
     option = { where: { userId: req.user.id } };
   } else if (origin === 'projects you may like') {
     // get projects matching interest
@@ -26,7 +27,11 @@ module.exports.create = (req, res) => {
   Project.create(req.body)
     .then(project => {
       if (!project) { throw project; }
-      res.sendStatus(201);
+      // res.sendStatus(201);
+      console.log(req.url);
+      // console.log('redirecting to:', `/project/${project.dataValues.id}`);
+      // res.redirect(201, 'http://127.0.0.1:3000');
+      res.render('');
     })
     .catch(err => {
       console.log('project creation:', err);
