@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Progressbar from './progressbar.jsx';
+import { calculatePercentage } from '../../helpers/util';
 
 const ProfileContentListEntry = ({ project }) => (
   <li className='list-entry'>
@@ -13,7 +15,11 @@ const ProfileContentListEntry = ({ project }) => (
         <Link to={`/project/${project.id}`}>
           <h3>{project.appName}</h3>
         </Link>
-        <p>{project.description}</p>
+        <p style={{margin: '30px 0'}}>{project.description}</p>
+        <div className='row col-md-10'>
+          <Progressbar percentage={calculatePercentage(project.currentFunding, project.goal)}/>
+          <span style={{padding: '6px 1px', display: 'block'}}>{`${calculatePercentage(project.currentFunding, project.goal)}% funded`}</span>
+        </div>
       </div>
     </div>
   </li>

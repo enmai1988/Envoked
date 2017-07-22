@@ -4,6 +4,27 @@
 .fix {
   position: fixed;
 }
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid rgb(240, 95, 64);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 1s linear infinite;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: 50px;
+  position: absolute;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .container {
   width: 100%;
   padding: 0;
@@ -15,6 +36,13 @@
   margin-left: -75px;
   position: absolute;
 }
+.get-started {
+  color: rgb(254, 254, 254);
+  background-color: rgb(240, 95, 64);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
 .create_project{
   margin-top: 70px;
   margin-left: -250px;
@@ -24,7 +52,8 @@
 }
 .landing_page {
   height: 600px;
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(59, 62, 60);
+  text-align: center;
 }
 .project-main {
   margin-bottom: 20px;
@@ -43,6 +72,7 @@
 }
 .project-miniview {
   padding: 32px 15px;
+  text-align: center;
 }
 .project-submission-container {
   margin-top: 50px;
@@ -83,7 +113,7 @@
   outline: none;
   width: 100%;
   display: block;
-  padding-top: 50%;
+  padding-top: 56.25%;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -157,16 +187,18 @@
   width: 100%;
 }
 .project-submission-btn {
+  color: rgb(254, 254, 254);
+  background-color: rgb(240, 95, 64);
   float: right;
   width: 100px;
   position: relative;
-  margin-right: 15px;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 18px;
   display: block;
 }
 .project-submission-btn:hover {
-  color: white;
+  color: rgb(254, 254, 254);
+  background-color: #ee4b28;
 }
 .thumbnails {
   text-align: center;
@@ -242,6 +274,9 @@
   border-radius: 4px 4px 0 0;
   outline: none;
 }
+.profile-content {
+  margin-bottom: 45px;
+}
 .profile-content-list {
   padding: 0;
 }
@@ -296,7 +331,7 @@
   clear: both;
 }
 .footer a:hover{
-  background-color: rgb(205, 82, 0) !important;
+  background-color: rgb(240, 95, 64) !important;
 }
 .signup {
   margin-top: 5%;
@@ -497,3 +532,14 @@
   background: #159570;
 }
 /* Strip Payment CSS End */
+.progressbar {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  height: 12px;
+  padding: 0;
+}
+.progressbar-fill {
+  border-radius: 10px;
+  background-color: rgb(240, 95, 64);
+  height: 100%
+}
