@@ -4,7 +4,7 @@ import ProjectEntry from '../components/projectEntry.jsx';
 
 class Container extends React.Component {
   componentDidMount() {
-    this.props.handleProjectFetching();
+    this.props.handleProjectFetching('landing page');
   }
 
   render() {

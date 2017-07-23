@@ -54,7 +54,7 @@ class ProfileContent extends React.Component {
         <div className='col-md-8 col-md-offset-2 profile-content'>
           {this.props.projects.fetched ?
             <ProfileContentList projects={this.props.projects.content}/> :
-            <Spinner />
+            <Spinner style={{marginTop: '50px'}}/>
           }
         </div>
       </div>

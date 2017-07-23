@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
+import { convertToSlug } from '../../../helpers/util';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
@@ -12,7 +13,7 @@ class ProjectSubmission extends React.Component {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleCreate = this.handleCreate.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
   }
 
@@ -27,7 +28,6 @@ class ProjectSubmission extends React.Component {
       accept: 'image/*',
       maxFiles: 1,
     }).then(result => {
-      console.log(result.filesUploaded);
       this.props.updateInput('imageURL', result.filesUploaded[0].url);
     });
   }
@@ -39,13 +39,26 @@ class ProjectSubmission extends React.Component {
     this.props.updateInput(field, input);
   }
 
-  handleCreate(e) {
+  handleSave(e) {
     e.preventDefault();
     let form = this.props.form;
-
     form.userId = this.props.user.id;
-    console.log('submitting project: ', form);
-    this.props.submitForm(form, '/api/project');
+    form.slug = convertToSlug(form.appName);
+    this.props.submitForm(form, '/api/projects')
+      .then(created => {
+        if (!created) {
+          alert('existing project');
+          return;
+        }
+        this.redirectToProject(form.userId, form.slug);
+      })
+      .catch(err => {
+        console.log('project submission failed: ', err);
+      });
+  }
+
+  redirectToProject(userId, project) {
+    this.props.history.push(`/projects/${userId}/${project}`);
   }
 
   render() {
@@ -88,7 +101,7 @@ class ProjectSubmission extends React.Component {
         </div>
         <div className='col-md-4 project-submission-side clearfix'>
           <ProjectPageMain project={this.props.form} user={this.props.user} match={this.props.match}/>
-          <button type='button' className='btn project-submission-btn' onClick={this.handleCreate}>Save</button>
+          <button type='button' className='btn project-submission-btn' onClick={this.handleSave}>Save</button>
         </div>
       </div>
     );

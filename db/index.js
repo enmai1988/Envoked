@@ -14,6 +14,7 @@ const User = db.define('user', {
     allowNull: false,
     primaryKey: true
   },
+  slug: { type: Sequelize.TEXT, unique: true },
   email: { type: Sequelize.TEXT, unique: true },
   firstName: Sequelize.TEXT,
   lastName: Sequelize.TEXT,
@@ -30,6 +31,7 @@ const Project = db.define('project', {
   },
   companyName: Sequelize.TEXT,
   appName: Sequelize.TEXT,
+  slug: { type: Sequelize.TEXT, unique: true },
   blurb: Sequelize.TEXT,
   logo: Sequelize.TEXT,
   imageURL: Sequelize.TEXT,

@@ -21,8 +21,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes.api);
 app.use('/auth', routes.auth);
-app.use('/api/user', routes.user);
-app.use('/api/project', routes.project);
+app.use('/api/user', middleware.auth.verify, routes.user);
+app.use('/api/projects', routes.project);
 app.use('/api/payment', routes.payment);
 
 module.exports = app;

@@ -8,11 +8,12 @@ import {
 export const submitForm = (form, endpoint) => {
   return dispatch => {
     dispatch({ type: FORM_SUBMISSION_PENDING });
-    axios.post(endpoint, form)
+    return axios.post(endpoint, form)
       .then(response => {
-        if (response.status !== 201) { throw response; }
-        dispatch({ type: FORM_SUBMISSION_FULFILLED });
+        console.log(response);
         dispatch({ type: 'PROJECT_CREATED' });
+        dispatch({ type: FORM_SUBMISSION_FULFILLED });
+        return response.status === 201 ? true : false;
       })
       .catch(err => {
         dispatch({ type: FORM_SUBMISSION_REJECTED });

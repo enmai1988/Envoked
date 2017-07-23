@@ -14,7 +14,6 @@
   animation: spin 1s linear infinite;
   left: 50%;
   margin-left: -25px;
-  margin-top: 50px;
   position: absolute;
 }
 @-webkit-keyframes spin {
@@ -42,6 +41,12 @@
   border: 1px solid transparent;
   border-radius: 10px;
   padding: 10px 15px;
+  outline: none;
+}
+.get-started:hover {
+  color: rgb(254, 254, 254);
+  background-color: #ee4b28;
+  outline: none;
 }
 .create_project{
   margin-top: 70px;
@@ -160,7 +165,7 @@
   overflow: scroll;
 }
 .project-content {
-  height: 356px;
+  height: 45vh;
   padding: 0 15px;
   margin: 0;
   border-radius: 0;
@@ -195,10 +200,17 @@
   margin-top: 20px;
   font-size: 18px;
   display: block;
+  outline: none;
+  border-radius: 8px;
+}
+.project-submission-btn:focus {
+  color: rgb(254, 254, 254);
+  outline: none;
 }
 .project-submission-btn:hover {
   color: rgb(254, 254, 254);
   background-color: #ee4b28;
+  outline: none;
 }
 .thumbnails {
   text-align: center;

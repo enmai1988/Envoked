@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser } from '../actions/userActions.js';
 import { fetchProjects } from '../actions/projectActions.js';
@@ -17,6 +17,7 @@ import PrivateRoute from '../components/privateRoute.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.handleProjectFetching = this.handleProjectFetching.bind(this);
   }
 
@@ -24,38 +25,42 @@ class App extends React.Component {
     this.props.fetchUser();
   }
 
-  handleProjectFetching() {
-    this.props.fetchProjects({ params: { origin: location.pathname } });
+  handleProjectFetching(origin) {
+    this.props.fetchProjects({ params: { origin } });
   }
 
   render() {
     return (
-      <Router history={browserHistory}>
+      <Router history={history}>
         <div className='container'>
           <Header user={this.props.user}/>
-          <Route exact path='/' render={props =>
-            <Container
-              {...props}
-              projects={this.props.projects}
-              handleProjectFetching={this.handleProjectFetching}/>
-          }/>
-          <Route path='/project/:id' component={props =>
-            <ProjectPage {...props} user={this.props.user.fetchedUser}/>
-          }/>
-          <Route path='/myprofile' render={props =>
-            <ProfilePage {...props} user={this.props.user.fetchedUser}/>
-          }/>
-          <Route path='/auth/login' component={props =>
-            <div className='col align-self-center login_container'>
-              <Login {...props}/>
-            </div>
-          }/>
-          <PrivateRoute path='/create'
-            session={this.props.user}
-            component={props =>
-              <ProjectSubmission {...props} user={this.props.user.fetchedUser}/>
+          <Switch>
+            <Route exact path='/' render={props =>
+              <Container
+                {...props}
+                projects={this.props.projects}
+                handleProjectFetching={this.handleProjectFetching}/>
             }/>
-          <Route path='/auth/signup' component={Signup} />
+            <Route path='/projects/:userId/:project' component={props =>
+              <ProjectPage {...props} user={this.props.user.fetchedUser}/>
+            }/>
+            <Route path='/myprofile' render={props =>
+              <ProfilePage {...props} user={this.props.user.fetchedUser}/>
+            }/>
+            <Route path='/auth/login' component={props =>
+              <div className='col align-self-center login_container'>
+                <Login {...props}/>
+              </div>
+            }/>
+            <PrivateRoute path='/create'
+              spinnerStyle={{top: '50%', marginTop: '-25px'}}
+              session={this.props.user}
+              component={props =>
+                <ProjectSubmission {...props} user={this.props.user.fetchedUser}/>
+              }
+            />
+            <Route path='/auth/signup' component={Signup} />
+          </Switch>
           <Footer />
         </div>
       </Router>
