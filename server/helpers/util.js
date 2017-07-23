@@ -1,17 +1,7 @@
-const _ = require('underscore');
+const convertToSlug = (str) => {
+  let hyphenated = str.split(/[^A-Za-z0-9]/g).filter(el => el !== '').map(el => el.toLowerCase()).join('-');
 
-const getLinks = (array, str) => {
-  let regex = /href="\/\w+/;
-
-  let filter = array.filter(el => {
-    return regex.test(el);
-  });
-
-  let reject = _.reject(filter, el => {
-    return el.includes(str) || el.includes('.css');
-  });
-  return reject;
-  // return _.shuffle(res);
+  return hyphenated;
 };
 
-module.exports = { getLinks };
+module.exports = { convertToSlug };
