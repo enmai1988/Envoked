@@ -11,7 +11,9 @@ class ProjectPage extends React.Component {
     super(props);
   }
   componentDidMount() {
-    this.props.fetchProject(this.props.match.params.id);
+    let userId = this.props.match.params.userId;
+    let project = this.props.match.params.project;
+    this.props.fetchProject(`${userId}/${project}`);
   }
 
   render() {

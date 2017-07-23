@@ -7,6 +7,7 @@ NOTE: 1. run 'createdb techstarter to create database'
       6. run database with: psql techstarter.
 ************************************************/
 const { db, User, Project, Interest } = require('../');
+const { convertToSlug } = require('../../helpers/util');
 const users = require('../users.json');
 const projects = require('../projects.json');
 const interests = require('../interests.json');
@@ -17,6 +18,7 @@ const compileProjects = (array) => {
     let obj = {};
     obj.userId = Math.floor(Math.random() * 999) + 1;
     obj.appName = el.name;
+    obj.slug = el.slug;
     obj.blurb = el.blurb;
     obj.imageURL = el.photo['1024x576'];
     obj.goal = el.goal;
@@ -39,9 +41,16 @@ const compileProjects = (array) => {
   return res;
 };
 
+const addSlugToUsers = array => {
+  return array.map(el => {
+    el.slug = convertToSlug(`${el.firstName} ${el.lastName}`);
+    return el;
+  });
+};
+
 db.sync({force: true})
   .then(() => {
-    return User.bulkCreate(users);
+    return User.bulkCreate(addSlugToUsers(users));
   })
   .then(() => {
     return Project.bulkCreate(compileProjects(projects.projects));

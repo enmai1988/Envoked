@@ -8,7 +8,7 @@ router.route('/')
   .post(ProjectController.create)
 ;
 
-router.route('/:id')
+router.route('/:userId/:project')
   .get(ProjectController.getOne)
   .put(ProjectController.update)
   // .delete(ProjectController.deleteOne)

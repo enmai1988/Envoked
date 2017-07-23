@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
+import { convertToSlug } from '../../../helpers/util';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
@@ -42,19 +43,22 @@ class ProjectSubmission extends React.Component {
     e.preventDefault();
     let form = this.props.form;
     form.userId = this.props.user.id;
-
-    this.props.submitForm(form, '/api/project')
-      .then(id => {
-        if (!id) { throw id; }
-        this.redirectToProject(id);
+    form.slug = convertToSlug(form.appName);
+    this.props.submitForm(form, '/api/projects')
+      .then(created => {
+        if (!created) {
+          alert('existing project');
+          return;
+        }
+        this.redirectToProject(form.userId, form.slug);
       })
       .catch(err => {
         console.log('project submission failed: ', err);
       });
   }
 
-  redirectToProject(id) {
-    this.props.history.push(`/project/${id}`);
+  redirectToProject(userId, project) {
+    this.props.history.push(`/projects/${userId}/${project}`);
   }
 
   render() {

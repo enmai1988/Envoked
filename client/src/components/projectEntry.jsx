@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ProjectEntry = ({ project }) => (
   <div className='col-md-4 project-entry'>
-    <Link to={`/project/${project.id}`}>
+    <Link to={`/projects/${project.user.id}/${project.slug}`}>
       <div className='thumbnails'>
         <img src={project.imageURL}></img>
       </div>

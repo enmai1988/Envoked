@@ -5,7 +5,8 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  User.findOrCreate({ where: { email: req.body.email }, default: req.body })
+  let userInfo = req.body;
+  User.findOrCreate({ where: { email: req.body.email }, default: userInfo })
     .spread((user, created) => {
       res.sendStatus(created ? 201 : 200);
     })

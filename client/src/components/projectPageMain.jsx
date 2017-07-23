@@ -4,7 +4,7 @@ const ProjectPageMain = ({ project, user, match }) => {
   let containerClass = 'container project-preview';
   let image = <img src="http://via.placeholder.com/350x197?text=Hello+world!"></img>;
   if (project.imageURL) { image = <img src={project.imageURL}></img>; }
-  if (match.params.id) { containerClass = 'container project-main'; }
+  if (match.params.project) { containerClass = 'container project-main'; }
 
   return (
     <div className={containerClass}>

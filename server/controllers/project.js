@@ -2,12 +2,12 @@ const { Project, User } = require('../../db/');
 const url = require('url');
 
 module.exports.getAll = (req, res) => {
-  let option = {};
+  let option = { include: [ { model: User } ]};
   let origin = req.query.origin;
-  if (origin === '/') {
-    option = { limit: 6, order: [['currentFunding', 'DESC']] };
+  if (origin === 'landing page') {
+    option = { limit: 6, order: [['currentFunding', 'DESC']], include: [ { model: User } ] };
   } else if (origin === 'my projects') {
-    option = { where: { userId: req.user.id } };
+    option = { where: { userId: req.user.id }, include: [ { model: User } ] };
   } else if (origin === 'projects you may like') {
     // get projects matching interest
   }
@@ -24,20 +24,22 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  Project.create(req.body)
-    .then(project => {
-      if (!project) { throw project; }
-      let id = project.dataValues.id;
-      res.status(201).send(JSON.stringify(id));
-    })
-    .catch(err => {
-      console.log('project creation:', err);
-      res.sendStatus(500);
-    });
+  Project.findOrCreate({
+    where: { userId: req.body.userId, slug: req.body.slug },
+    defaults: req.body
+  }).spread((project, created) => {
+    if (!project) { throw project; }
+    res.sendStatus(created ? 201 : 200);
+  }).catch(err => {
+    console.log('project creation:', err);
+    res.sendStatus(500);
+  });
+  // Project.create(projectInfo)
+
 };
 
 module.exports.getOne = (req, res) => {
-  Project.findOne({ where: { id: req.params.id }, include: [ { model: User } ] })
+  Project.findOne({ where: { userId: req.params.userId, slug: req.params.project }, include: [ { model: User } ] })
     .then(project => {
       if (!project) { throw project; }
       res.send(project);

@@ -25,8 +25,8 @@ class App extends React.Component {
     this.props.fetchUser();
   }
 
-  handleProjectFetching() {
-    this.props.fetchProjects({ params: { origin: location.pathname } });
+  handleProjectFetching(origin) {
+    this.props.fetchProjects({ params: { origin } });
   }
 
   render() {
@@ -41,7 +41,7 @@ class App extends React.Component {
                 projects={this.props.projects}
                 handleProjectFetching={this.handleProjectFetching}/>
             }/>
-            <Route path='/project/:id' component={props =>
+            <Route path='/projects/:userId/:project' component={props =>
               <ProjectPage {...props} user={this.props.user.fetchedUser}/>
             }/>
             <Route path='/myprofile' render={props =>

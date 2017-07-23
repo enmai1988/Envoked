@@ -11,7 +11,7 @@ router.route('/')
 router.route('/create')
   .get(middleware.auth.verify, (req, res) => res.render('index.ejs'));
 
-router.route('/project/:id')
+router.route('/projects/:userId/:project')
   .get((req, res) => res.render('index.ejs'));
 
 router.route('/myprofile')
