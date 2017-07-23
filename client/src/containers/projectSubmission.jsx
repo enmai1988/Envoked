@@ -1,12 +1,11 @@
 import React from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import filestack from 'filestack-js';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
-import axios from 'axios';
 
 class ProjectSubmission extends React.Component {
   constructor(props) {
@@ -43,7 +42,7 @@ class ProjectSubmission extends React.Component {
     e.preventDefault();
     let form = this.props.form;
     form.userId = this.props.user.id;
-    
+
     this.props.submitForm(form, '/api/project')
       .then(id => {
         if (!id) { throw id; }

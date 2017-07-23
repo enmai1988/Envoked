@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchProject } from '../actions/projectPageActions.js';
 import ProjectPageMain from '../components/projectPageMain.jsx';
 import Payment from './payment.jsx';
+import Spinner from '../components/spinner.jsx';
 
 class ProjectPage extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ProjectPage extends React.Component {
       <div className='container project-page'>
         <div className='col-md-6 project-page-left'>
           {fetched ? <ProjectPageMain project={project} user={sessionOwner} match={this.props.match}/>
-            : <div>loading</div>
+            : <Spinner style={{marginTop: '100px'}}/>
           }
         </div>
         <div className='col-md-3 project-page-right'>

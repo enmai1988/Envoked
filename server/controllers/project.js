@@ -27,8 +27,8 @@ module.exports.create = (req, res) => {
   Project.create(req.body)
     .then(project => {
       if (!project) { throw project; }
-      let id = JSON.stringify(project.dataValues.id);
-      res.status(201).send(id);
+      let id = project.dataValues.id;
+      res.status(201).send(JSON.stringify(id));
     })
     .catch(err => {
       console.log('project creation:', err);

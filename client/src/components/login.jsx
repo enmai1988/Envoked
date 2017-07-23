@@ -2,8 +2,6 @@ import React from 'react';
 
 class Login extends React.Component {
   render() {
-    console.log('login: ', this.props);
-
     return (
       <div className='container'>
         <div id='login-dp'>
