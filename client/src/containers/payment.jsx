@@ -72,7 +72,7 @@ class Payment extends React.Component {
             <div id='card-element' className='field is-empty'></div>
             <span><span>Card</span></span>
           </label>
-          <button onClick={this.handlePaymentSubmit}>Pay</button>
+          <button onClick={this.handlePaymentSubmit}>Support this project</button>
           <div className='outcome'>
             <div className='error' role='alert'></div>
             <div className='success'>

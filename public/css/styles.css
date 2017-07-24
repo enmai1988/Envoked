@@ -57,7 +57,11 @@
 }
 .landing_page {
   height: 600px;
-  background-color: rgb(59, 62, 60);
+  background-image: url(/assets/demo/the-team-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*height: 100vh;*/
   text-align: center;
 }
 .project-main {
@@ -425,10 +429,10 @@
   }
 }
 #login_dropdown {
-  background-color: rgb(59, 62, 60) !important;
+  /*background-color: rgb(59, 62, 60) !important;*/
 }
 #nav_signup_btn {
-  background-color: rgb(59, 62, 60) !important;
+  /*background-color: rgb(59, 62, 60) !important;*/
 }
 /* Strip Payment CSS Start */
 .field {

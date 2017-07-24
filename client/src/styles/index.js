@@ -14,6 +14,7 @@ export const styles = {
     width: '100%',
     borderRadius: '0px',
     border: '0px',
+    borderBottom: '1px solid rgb(129, 123, 121)',
     left: '0px',
     display: 'block',
     position: 'fixed',
