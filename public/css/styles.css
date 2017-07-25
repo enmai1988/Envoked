@@ -4,26 +4,7 @@
 .fix {
   position: fixed;
 }
-.spinner {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid rgb(240, 95, 64);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 1s linear infinite;
-  left: 50%;
-  margin-left: -25px;
-  position: absolute;
-}
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-@@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+
 .container {
   width: 100%;
   padding: 0;
@@ -48,16 +29,9 @@
   background-color: #ee4b28;
   outline: none;
 }
-.create_project{
-  margin-top: 70px;
-  margin-left: -250px;
-  width: 500px;
-  left: 50%;
-  position: absolute;
-}
 .landing_page {
-  height: 600px;
-  background-image: url(/assets/demo/the-team-bg.jpg);
+  height: 500px;
+  background-image: url(/assets/the-team-bg.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -85,87 +59,11 @@
   text-align: center;
 }
 .project-miniview-content {
-  margin-top: 40px;
+  margin-top: 15px;
   margin-bottom: 40px;
   height: 100%;
 }
-.project-submission-container {
-  margin-top: 50px;
-  padding: 15px;
-}
-.project-submission-title {
-  text-align: center;
-  width: 100%;
-}
-.project-submission-main {
-  width: 55%;
-  margin-left: 10%;
-  padding: 15px;
-  height: 100%;
-}
-.project-submission-main span {
-  font-weight: bold;
-}
-.project-description {
-  white-space: pre-wrap;
-  font-size: 1.6rem;
-  padding-bottom: 35px;
-}
-.project-image-picker-box {
-  border-style: dashed;
-  border-radius: 5px;
-  border-color: rgba(59, 62, 60, 0.8);
-  text-align: center;
-}
-.project-image-picker-box.image-uploaded {
-  border: 0px;
-  cursor: pointer;
-}
-.project-image-picker-box img {
-  width: 100%;
-}
-.project-image-picker {
-  outline: none;
-  width: 100%;
-  display: block;
-  padding-top: 56.25%;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  opacity: 0;
-}
-.project-image-picker:focus {
-  outline: none;
-}
-.project-submission-entry {
-  width: 95%;
-  padding: 15px 0;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  background-color: rgba(238, 238, 238, 0.5);
-}
-.project-submission-input textarea {
-  resize: none;
-  border-radius: 5px;
-  border-color: rgb(136, 139, 138);
-  display: block;
-  overflow: auto;
-  width: 100%;
-  height: 64px;
-  transition: all 0.5s ease;
-}
-.project-submission-input textarea:focus {
-  outline: none;
-  height: 128px;
-}
-.project-submission-side {
-  width: 25%;
-  position: fixed;
-  margin-right: 11%;
-  right: 0;
-}
+
 .project-preview {
   padding: 15px;
   border-radius: 5px;
@@ -200,27 +98,6 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-}
-.project-submission-btn {
-  color: rgb(254, 254, 254);
-  background-color: rgb(240, 95, 64);
-  float: right;
-  width: 100px;
-  position: relative;
-  margin-top: 20px;
-  font-size: 18px;
-  display: block;
-  outline: none;
-  border-radius: 8px;
-}
-.project-submission-btn:focus {
-  color: rgb(254, 254, 254);
-  outline: none;
-}
-.project-submission-btn:hover {
-  color: rgb(254, 254, 254);
-  background-color: #ee4b28;
-  outline: none;
 }
 .thumbnails {
   text-align: center;
@@ -361,198 +238,6 @@
 .signup img {
   width: 28px;
 }
-.login_container {
-  margin-top: 60px;
-  width: 400px;
-  height: auto;
-  left: 50%;
-  margin-left: -200px;
-  position: relative;
-}
-#login-dp{
-  min-width: 250px;
-  padding: 14px 14px 0;
-  overflow:hidden;
-  background-color:rgba(255,255,255,0.8) !important;
-}
-#login-dp .help-block{
-  font-size:12px
-}
-#login-dp .bottom{
-  background-color:rgba(255,255,255,0.8);
-  border-top:1px solid #ddd;
-  clear:both;
-  padding:14px;
-}
-#login-dp .social-buttons{
-  margin:12px 0
-}
-#login-dp .social-buttons a{
-  width: 49%;
-}
-#login-dp .form-group {
-  margin-bottom: 10px;
-}
-.btn-fb{
-  margin-right: 2%;
-  color: #fff;
-  background-color:#3b5998;
-}
-.btn-fb:hover{
-  color: #fff;
-  background-color:#496ebc
-}
-.btn-google{
-  color: #fff;
-  background-color:rgb(222, 74, 50);
-}
-.btn-google:hover{
-  color: #fff;
-  background-color:rgb(240, 70, 55);
-}
-.btn-tw{
-  color: #fff;
-  background-color:#55acee;
-}
-.btn-tw:hover{
-  color: #fff;
-  background-color:#59b5fa;
-}
-@media(max-width:768px){
-  #login-dp{
-      background-color: inherit;
-      color: #fff;
-  }
-  #login-dp .bottom{
-      background-color: inherit;
-      border-top:0 none;
-  }
-}
-#login_dropdown {
-  /*background-color: rgb(59, 62, 60) !important;*/
-}
-#nav_signup_btn {
-  /*background-color: rgb(59, 62, 60) !important;*/
-}
-/* Strip Payment CSS Start */
-.field {
-  background: transparent;
-  font-weight: 300;
-  border: 0;
-  color: rgb(59, 62, 60);
-  outline: none;
-  cursor: text;
-  display: block;
-  width: 100%;
-  line-height: 32px;
-  padding-bottom: 3px;
-  transition: opacity 200ms ease-in-out;
-}
-.field::-webkit-input-placeholder { color: #8898AA; }
-.field::-moz-placeholder { color: #8898AA; }
-
-/* IE doesn't show placeholders when empty+focused */
-.field:-ms-input-placeholder { color: #424770; }
-
-.field.is-empty:not(.is-focused) {
-  opacity: 0;
-}
-.outcome {
-  float: left;
-  width: 100%;
-  padding-top: 8px;
-  min-height: 20px;
-  text-align: center;
-}
-.success, .error {
-  display: none;
-  font-size: 15px;
-}
-.success.visible, .error.visible {
-  display: inline;
-}
-.error {
-  color: #E4584C;
-}
-.success {
-  color: #34D08C;
-}
-.success .token {
-  font-weight: 500;
-  font-size: 15px;
-}
-.payment-body {
-  /*background: #424770;*/
-  background-color: rgb(230, 230, 230);
-  display: flex;
-  align-items: center;
-  min-height: 100%;
-}
-.payment-body form {
-  width: 90%;
-  margin: 20px auto;
-}
-.payment-body label {
-  height: 35px;
-  position: relative;
-  color: #8798AB;
-  display: block;
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-.payment-body label > span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  font-weight: 300;
-  line-height: 32px;
-  color: #8798AB;
-  border-bottom: 1px solid #586A82;
-  transition: border-bottom-color 200ms ease-in-out;
-  cursor: text;
-  pointer-events: none;
-}
-.payment-body label > span span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: 0% 50%;
-  transition: transform 200ms ease-in-out;
-  cursor: text;
-}
-.payment-body label .field.is-focused + span span,
-.payment-body label .field:not(.is-empty) + span span {
-  transform: scale(0.68) translateY(-36px);
-  cursor: default;
-}
-
-.payment-body label .field.is-focused + span {
-  border-bottom-color: #34D08C;
-}
-.payment-body button {
-  float: left;
-  display: block;
-  background: #34D08C;
-  color: white;
-  border-radius: 2px;
-  border: 0;
-  margin-top: 20px;
-  font-size: 19px;
-  font-weight: 400;
-  width: 100%;
-  height: 47px;
-  line-height: 45px;
-  outline: none;
-}
-.payment-body button:focus {
-  background: #24B47E;
-}
-.payment-body button:active {
-  background: #159570;
-}
-/* Strip Payment CSS End */
 .progressbar {
   background-color: #f3f3f3;
   border-radius: 10px;
