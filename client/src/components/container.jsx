@@ -12,7 +12,7 @@ class Container extends React.Component {
       <div className='container' style={{backgroundColor: 'rgb(252, 252, 252)'}}>
         <div className='row justify-content-center landing_page clearfix'>
           <div className='col-md-6 col-md-offset-3' style={{textAlign: 'center', marginTop: '200px'}}>
-            <h2 style={{fontSize: '64px'}}>Platform of ideas.</h2>
+            <h2 style={{fontSize: '60px'}}>Platform of ideas.</h2>
             <div className='col-md-2 col-md-offset-5' style={{border: '1px solid rgb(240, 95, 64)'}}></div>
           </div>
           <div className='col-md start_project_btn'>

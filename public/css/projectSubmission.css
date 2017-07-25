@@ -1,0 +1,98 @@
+.project-submission-container {
+  margin-top: 50px;
+  padding: 15px;
+}
+.project-submission-title {
+  text-align: center;
+  width: 100%;
+}
+.project-submission-main {
+  width: 55%;
+  margin-left: 10%;
+  padding: 15px;
+  height: 100%;
+}
+.project-submission-main span {
+  font-weight: bold;
+}
+.project-description {
+  white-space: pre-wrap;
+  font-size: 1.6rem;
+  padding-bottom: 35px;
+}
+.project-image-picker-box {
+  border-style: dashed;
+  border-radius: 5px;
+  border-color: rgba(59, 62, 60, 0.8);
+  text-align: center;
+}
+.project-image-picker-box.image-uploaded {
+  border: 0px;
+  cursor: pointer;
+}
+.project-image-picker-box img {
+  width: 100%;
+}
+.project-image-picker {
+  outline: none;
+  width: 100%;
+  display: block;
+  padding-top: 56.25%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+}
+.project-image-picker:focus {
+  outline: none;
+}
+.project-submission-entry {
+  width: 95%;
+  padding: 15px 0;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color: rgba(238, 238, 238, 0.5);
+}
+.project-submission-input textarea {
+  resize: none;
+  border-radius: 5px;
+  border-color: rgb(136, 139, 138);
+  display: block;
+  overflow: auto;
+  width: 100%;
+  height: 64px;
+  transition: all 0.5s ease;
+}
+.project-submission-input textarea:focus {
+  outline: none;
+  height: 128px;
+}
+.project-submission-side {
+  width: 25%;
+  position: fixed;
+  margin-right: 11%;
+  right: 0;
+}
+.project-submission-btn {
+  color: rgb(254, 254, 254);
+  background-color: rgb(240, 95, 64);
+  float: right;
+  width: 100px;
+  position: relative;
+  margin-top: 20px;
+  font-size: 18px;
+  display: block;
+  outline: none;
+  border-radius: 8px;
+}
+.project-submission-btn:focus {
+  color: rgb(254, 254, 254);
+  outline: none;
+}
+.project-submission-btn:hover {
+  color: rgb(254, 254, 254);
+  background-color: #ee4b28;
+  outline: none;
+}
