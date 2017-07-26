@@ -4,17 +4,16 @@
 .fix {
   position: fixed;
 }
-
+.no-margin {
+  margin-left: 0;
+  margin-right: 0;
+}
 .container {
   width: 100%;
   padding: 0;
 }
 .start_project_btn {
-  top: 50%;
-  width: 150px;
-  left: 50%;
-  margin-left: -75px;
-  position: absolute;
+  margin-top: 80px;
 }
 .get-started {
   color: rgb(254, 254, 254);
@@ -30,7 +29,7 @@
   outline: none;
 }
 .landing_page {
-  height: 500px;
+  height: 460px;
   background-image: url(/assets/the-team-bg.jpg);
   background-position: center;
   background-size: cover;
@@ -73,7 +72,7 @@
   overflow: scroll;
 }
 .project-content {
-  height: 45vh;
+  height: 40vh;
   padding: 0 15px;
   margin: 0;
   border-radius: 0;
@@ -114,7 +113,7 @@
   width: 100%;
 }
 .project-page {
-  margin-top: 60px;
+  margin-top: 15px;
 }
 .project-page-left {
   width: 50%;
