@@ -46,6 +46,7 @@ passport.use('google', new GoogleStrategy({
   clientSecret: config.Google.clientSecret,
   callbackURL: config.Google.callbackURL
 }, (accessToken, refreshToken, profile, done) => {
+  console.log(profile);
   User.findOrCreate({
     where: { email: profile.emails[0].value },
     defaults: {

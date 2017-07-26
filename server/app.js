@@ -24,5 +24,6 @@ app.use('/auth', routes.auth);
 app.use('/api/user', middleware.auth.verify, routes.user);
 app.use('/api/projects', routes.project);
 app.use('/api/payment', routes.payment);
+app.use('/api/interest', routes.interests);
 
 module.exports = app;

@@ -12,7 +12,7 @@ import CategorySelector from '../components/categorySelector.jsx';
 class ProjectSubmission extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(props);
 
     this.apikey = 'AjcTDrnNSKWZY48TkFUHPz';
     this.client = filestack.init(this.apikey);

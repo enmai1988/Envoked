@@ -1,12 +1,6 @@
-
-const { Project, User, Image } = require('../../db/');
-// const { Project, Image} = require('../../db/');
-const { pageres } = require('../middleware/');
-const url = require('url');
-const crypto = require('crypto');
-const _ = require('underscore');
-const fs = require('fs');
+const { Project, User } = require('../../db/');
 const path = require('path');
+const fs = require('fs');
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 const discovery = new DiscoveryV1({
   username: '0228a918-c532-46e4-aff1-0e44b47ecb04',
@@ -80,6 +74,11 @@ module.exports.deleteOne = (req, res) => {
 
 };
 
+module.exports.categoryLeader = (req, res) => {
+  Project.max('currentFunding', { where: { category: req.body.category } }).then(max => {
+    console.log(max);
+  });
+};
 
 // curl -X POST -u "0228a918-c532-46e4-aff1-0e44b47ecb04":"M3f66vdjClUu" -H "Content-Type: application/json" -d '{ "name":"my-first-environment", "description":"exploring environments", "size":0}' "https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-07-19"
 
