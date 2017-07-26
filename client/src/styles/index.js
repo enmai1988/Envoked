@@ -1,8 +1,8 @@
 export const styles = {
   nav: {
     title: {
-      color: 'white',
-      cursor: 'pointer'
+      color: 'rgb(59, 62, 60)',
+      cursor: 'pointer',
     },
     authButton: {
       backgroundColor: 'rgb(59, 62, 60)'
@@ -10,15 +10,17 @@ export const styles = {
   },
   header: {
     height: '32px',
-    backgroundColor: 'rgb(59, 62, 60)',
+    // backgroundColor: 'rgb(59, 62, 60)',
+    // background: 'transparent',
     width: '100%',
     borderRadius: '0px',
     border: '0px',
-    borderBottom: '1px solid rgb(129, 123, 121)',
+    // borderBottom: '1px solid rgb(129, 123, 121)',
     left: '0px',
     display: 'block',
-    position: 'fixed',
-    zIndex: 100
+    padding: '0 30px',
+    // position: 'fixed',
+    marginBottom: '0'
   },
   loginModal: {
     marginTop: '5%'

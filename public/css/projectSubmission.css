@@ -71,7 +71,7 @@
 }
 .project-submission-side {
   width: 25%;
-  position: fixed;
+  position: absolute;
   margin-right: 11%;
   right: 0;
 }

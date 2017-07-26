@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileContent from '../containers/profileContent.jsx';
 
 const ProfilePage = ({ user }) => (
-  <div className='container profile-container'>
+  <div className='container profile-container no-margin'>
     <div className='row profile-row'>
       <div className='col-md-6 col-md-offset-3 profile-top'>
         <div className='col-md'>
@@ -10,7 +10,7 @@ const ProfilePage = ({ user }) => (
         </div>
       </div>
     </div>
-    <div className='row profile-row'>
+    <div className='row profile-row no-margin'>
       <ProfileContent />
     </div>
   </div>
