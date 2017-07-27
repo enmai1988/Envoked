@@ -1,0 +1,21 @@
+.contact-list {
+  padding-left: 0;
+}
+.contact-list-entry {
+  list-style: none;
+  height: 40px;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.contact-list-entry:hover {
+  background-color: rgba(126, 126, 126, 0.1);
+}
+.contact-list-entry img {
+  width: 32px;
+  height: 32px;
+}
+.contact-list-entry span {
+  vertical-align: middle;
+  display: inline-block;
+  font-weight: bolder;
+}

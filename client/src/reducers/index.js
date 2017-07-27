@@ -4,6 +4,7 @@ import projectPageReducer from './projectPageReducer';
 import newProjectReducer from './newProjectReducer';
 import formReducer from './formReducer';
 import tabsReducer from './tabsReducer';
+import contactReducer from './contactReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   projectPage: projectPageReducer,
   projectCreation: newProjectReducer,
   formControl: formReducer,
-  tabs: tabsReducer
+  tabs: tabsReducer,
+  contacts: contactReducer
 });

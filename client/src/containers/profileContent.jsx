@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../actions/projectActions.js';
 import { selectTab } from '../actions/tabsActions.js';
