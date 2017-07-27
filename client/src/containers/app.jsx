@@ -13,7 +13,7 @@ import Signup from '../components/signup.jsx';
 import Login from '../components/login.jsx';
 import ProjectSubmission from './projectSubmission.jsx';
 import PrivateRoute from '../components/privateRoute.jsx';
-import Sidebar from '../components/sidebar.jsx';
+import Sidebar from './sidebar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -74,7 +74,10 @@ class App extends React.Component {
             />
             <Route path='/auth/signup' component={Signup} />
           </Switch>
-          <Sidebar/>
+          {this.props.user.fetched ?
+            <Sidebar user={this.props.user.fetchedUser}/> :
+            <div></div>
+          }
           {/* <Footer /> */}
         </div>
       </Router>

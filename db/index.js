@@ -14,7 +14,6 @@ const User = db.define('user', {
     allowNull: false,
     primaryKey: true
   },
-  slug: { type: Sequelize.TEXT, unique: true },
   email: { type: Sequelize.TEXT, unique: true },
   firstName: Sequelize.TEXT,
   lastName: Sequelize.TEXT,
@@ -65,6 +64,8 @@ const Funding = db.define('funding', {
 });
 
 User.hasMany(Project, { foreignKey: 'userId'});
+
+User.belongsToMany(User, { as: 'contacts', through: 'Contacts' });
 
 Project.belongsTo(User);
 
