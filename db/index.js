@@ -30,7 +30,7 @@ const Project = db.define('project', {
   },
   companyName: Sequelize.TEXT,
   appName: Sequelize.TEXT,
-  slug: { type: Sequelize.TEXT, unique: true },
+  slug: { type: Sequelize.TEXT },
   blurb: Sequelize.TEXT,
   logo: Sequelize.TEXT,
   imageURL: Sequelize.TEXT,

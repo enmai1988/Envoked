@@ -2,9 +2,9 @@ const { User } = require('../../db/');
 const Promise = require('bluebird');
 
 module.exports.getAll = (req, res) => {
-  let option = {};
+  let option = { order: [['firstName', 'ASC']] };
   if (req.query.keyword !== '') {
-    option = { where: { firstName: { $iLike: `${req.query.keyword}%` } } };
+    option = { where: { firstName: { $iLike: `${req.query.keyword}%` } }, order: [['firstName', 'ASC']] };
   }
   console.log('Search contacts with: ', option);
   User.findOne({ where: { id: req.user.id } })
@@ -24,8 +24,8 @@ module.exports.getAll = (req, res) => {
 
 module.exports.create = (req, res) => {
   Promise.all([
-    User.findOne({ where: { id: req.body.requester.id } }),
-    User.findOne({ where: { id: req.body.accepter.id } })
+    User.findOne({ where: { id: req.body.userId } }),
+    User.findOne({ where: { id: req.body.contactId } })
   ]).spread((requester, accepter) => {
     return Promise.all([
       requester.addContacts(accepter),

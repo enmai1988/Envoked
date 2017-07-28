@@ -1,5 +1,5 @@
 const { Project, User } = require('../../db/');
-const url = require('url');
+const Promise = require('bluebird');
 
 module.exports.getAll = (req, res) => {
   let option = { include: [ { model: User } ]};
@@ -24,18 +24,22 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  Project.findOrCreate({
-    where: { userId: req.body.userId, slug: req.body.slug },
-    defaults: req.body
-  }).spread((project, created) => {
-    if (!project) { throw project; }
-    res.sendStatus(created ? 201 : 200);
-  }).catch(err => {
-    console.log('project creation:', err);
-    res.sendStatus(500);
-  });
-  // Project.create(projectInfo)
-
+  User.findById(req.body.userId)
+    .then(user => {
+      return user.getProjects({ where: {slug: req.body.slug} });
+    })
+    .then(projects => {
+      if (projects.length) { return res.sendStatus(302); }
+      return Project.create(req.body)
+        .then(result => {
+          if (!result) { throw result; }
+          res.sendStatus(201);
+        });
+    })
+    .catch(err => {
+      console.log('failed to create project: ', err);
+      res.sendStatus(500);
+    });
 };
 
 module.exports.getOne = (req, res) => {

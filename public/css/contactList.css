@@ -10,12 +10,17 @@
 .contact-list-entry:hover {
   background-color: rgba(126, 126, 126, 0.1);
 }
-.contact-list-entry img {
+.contact-icon div{
   width: 32px;
   height: 32px;
+  /*background: rgba(46, 45, 45, 0.8);*/
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  padding-top: 2px;
 }
-.contact-list-entry span {
+.contact-info div {
+  margin-top: 4px;
   vertical-align: middle;
   display: inline-block;
-  font-weight: bolder;
 }
