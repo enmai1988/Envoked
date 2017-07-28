@@ -78,7 +78,7 @@ class App extends React.Component {
             <Sidebar user={this.props.user.fetchedUser}/> :
             <div></div>
           }
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     );
