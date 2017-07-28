@@ -46,21 +46,38 @@ passport.use('google', new GoogleStrategy({
   clientSecret: config.Google.clientSecret,
   callbackURL: config.Google.callbackURL
 }, (accessToken, refreshToken, profile, done) => {
-  User.findOrCreate({
-    where: { email: profile.emails[0].value },
-    defaults: {
-      firstName: profile.name.givenName,
-      lastName: profile.name.familyName,
-      avatar: profile.photos[0].value,
-      email: profile.emails[0].value
-    }
-  }).spread(user => {
-    if (!user) { throw user; }
-    done(null, user);
-  }).catch(err => {
-    console.log('passport google: ', err);
-    done(null, false, { message: 'user not found' });
-  });
+  User.findOne({ where: { email: profile.emails[0].value } })
+    .then(result => {
+      if (result) { return done(null, result); }
+      return User.create({
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        avatar: profile.photos[0].value,
+        email: profile.emails[0].value
+      }).then(user => {
+        if (!user) { throw user; }
+        done(null, user);
+      });
+    })
+    .catch(err => {
+      console.log('passport google: ', err);
+      done(null, false);
+    });
+  // User.findOrCreate({
+  //   where: { email: profile.emails[0].value },
+  //   defaults: {
+  //     firstName: profile.name.givenName,
+  //     lastName: profile.name.familyName,
+  //     avatar: profile.photos[0].value,
+  //     email: profile.emails[0].value
+  //   }
+  // }).then(result => {
+  //   if (!result || !result.length) { throw result; }
+  //   done(null, result[0]);
+  // }).catch(err => {
+  //   console.log('passport google: ', err);
+  //   done(null, false, { message: 'user not found' });
+  // });
 }));
 
 passport.use('facebook', new FacebookStrategy({
@@ -69,22 +86,23 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name', 'picture']
 }, (accessToken, refreshToken, profile, done) => {
-  console.log('facebook profile: ', profile);
-  User.findOrCreate({
-    where: { email: profile.emails[0].value },
-    defaults: {
-      firstName: profile.name.givenName,
-      lastName: profile.name.familyName,
-      avatar: profile.photos[0].value,
-      email: profile.emails[0].value
-    }
-  }).spread(user => {
-    if (!user) { throw user; }
-    done(null, user);
-  }).catch(err => {
-    console.log('passport google: ', err);
-    done(null, false, { message: 'user not found' });
-  });
+  User.findOne({ where: { email: profile.emails[0].value } })
+    .then(result => {
+      if (result) { return done(null, result); }
+      return User.create({
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        avatar: profile.photos[0].value,
+        email: profile.emails[0].value
+      }).then(user => {
+        if (!user) { throw user; }
+        done(null, user);
+      });
+    })
+    .catch(err => {
+      console.log('passport google: ', err);
+      done(null, false);
+    });
 }));
 
 module.exports = passport;

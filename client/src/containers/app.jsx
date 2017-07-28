@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUser } from '../actions/userActions.js';
 import { fetchProjects } from '../actions/projectActions.js';
-import { styles } from '../styles';
+import { fetchNotifications } from '../actions/notificationActions.js';
 import Header from '../components/header.jsx';
 import Container from '../components/container.jsx';
 import ProjectPage from './projectPage.jsx';
@@ -25,6 +25,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchNotifications();
   }
 
   toggleSidebar(e) {
@@ -46,7 +47,12 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div id='wrapper' className={`container${sidebarToggle}`}>
-          <Header user={this.props.user} toggleSidebar={this.toggleSidebar} menu={burgerMenu}/>
+          <Header
+            user={this.props.user}
+            toggleSidebar={this.toggleSidebar}
+            menu={burgerMenu}
+            notifications={this.props.notifications.content}
+          />
           <Switch>
             <Route exact path='/' render={props =>
               <Container
@@ -57,7 +63,7 @@ class App extends React.Component {
             <Route path='/projects/:userId/:project' render={props =>
               <ProjectPage {...props}/>
             }/>
-            <Route path='/myprofile' render={props =>
+            <Route path='/myProfile' render={props =>
               <ProfilePage {...props} user={this.props.user.fetchedUser}/>
             }/>
             <Route path='/auth/login' component={props =>
@@ -74,22 +80,23 @@ class App extends React.Component {
             />
             <Route path='/auth/signup' component={Signup} />
           </Switch>
-          {this.props.user.fetched ?
+          {this.props.user.isLoggedIn ?
             <Sidebar user={this.props.user.fetchedUser}/> :
-            <div></div>
+            null
           }
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     );
   }
 }
 
-const mapStateToProps = state => ({ user: state.user, projects: state.projects });
+const mapStateToProps = state => ({ user: state.user, projects: state.projects, notifications: state.notifications });
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: () => dispatch(fetchUser()),
-  fetchProjects: (option) => dispatch(fetchProjects(option))
+  fetchProjects: option => dispatch(fetchProjects(option)),
+  fetchNotifications: option => dispatch(fetchNotifications(option))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
