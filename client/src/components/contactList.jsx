@@ -1,6 +1,5 @@
 import React from 'react';
 import css from '../../../public/css/contactList.css';
-
 import ContactListEntry from '../components/contactListEntry.jsx';
 
 const ContactList = ({ contacts, handleVideo }) => (

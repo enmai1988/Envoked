@@ -60,17 +60,28 @@ const addSlugToUsers = array => {
   });
 };
 
+// db.sync({force: true})
+//   .then(() => {
+//     return User.bulkCreate(users);
+//   })
+//   .then(() => {
+//     return Project.bulkCreate(compileProjects(projects.projects));
+//   })
+//   .then(() => {
+//     return Interest.bulkCreate(interests);
+//   })
+//   .then(() => db.close());
+
 db.sync({force: true})
   .then(() => {
-    return User.bulkCreate(users);
-  })
-  .then(() => {
-    return Project.bulkCreate(compileProjects(projects.projects));
-  })
-  .then(() => {
-    return Interest.bulkCreate(interests);
-  })
-  // .then(() => {
-  //   return Contact.bulkCreate(createFakeContacts(10));
-  // })
-  .then(() => db.close());
+    User.bulkCreate(users)
+      .then(() => {
+        Project.bulkCreate(compileProjects(projects.projects))
+          .then(() => {
+            Interest.bulkCreate(interests)
+              .then(() => {
+                db.close();
+              });
+          });
+      });
+  });

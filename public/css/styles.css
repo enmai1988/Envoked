@@ -125,9 +125,6 @@
   border-radius: 5px;
 }
 /* Profile Start */
-.profile-container {
-  margin-top: 50px;
-}
 .profile-top {
   padding: 15px;
   height: 328px;;
@@ -247,4 +244,10 @@
   border-radius: 10px;
   background-color: rgb(240, 95, 64);
   height: 100%
+}
+.popover-content {
+  padding: 0;
+}
+.popover.bottom .arrow:after {
+  border-bottom-color: rgb(247,247,247);
 }
