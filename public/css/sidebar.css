@@ -19,6 +19,10 @@
 }
 .sidebar-main {
   background: rgba(126, 126, 126, 0.2);
+<<<<<<< HEAD
+=======
+  height: 100vh;
+>>>>>>> origin
   width: 100%;
   margin: 0px;
   padding: 15px 0;

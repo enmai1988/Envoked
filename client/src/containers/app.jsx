@@ -33,6 +33,11 @@ class App extends React.Component {
     this.setState({ showSidebar: !this.state.showSidebar });
   }
 
+  toggleSidebar(e) {
+    e.preventDefault();
+    this.setState({ showSidebar: !this.state.showSidebar });
+  }
+
   handleProjectFetching(origin) {
     this.props.fetchProjects({ params: { origin } });
   }
