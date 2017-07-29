@@ -47,7 +47,7 @@ class Payment extends React.Component {
       if (result.error) {
         errorElement.textContent = result.error.message;
         errorElement.classList.add('visible');
-        console.log("Result Token: ",result);
+        //console.log("Result Token: ",result);
       } else {
         console.log("Result Token: ",result.token);
         successElement.querySelector('.token').textContent = result.token.id;
