@@ -46,18 +46,6 @@ class Payment extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-    // this.stripe.charge.create({
-    //   amount: result.amount,
-    //   currency: result.currency,
-    //   source: result.token.id,
-    //   description: result.description
-    // }, function (err, charge) {
-    //   if (err) {
-    //     console.log('payment rejected!');
-    //   } else {
-    //     console.log('payment accepted!');
-    //   }
-    // });
   }
 
   validatePayment(result) {
