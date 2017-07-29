@@ -5,26 +5,18 @@ import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { convertToSlug } from '../../../helpers/util';
-import filestack from 'filestack-js';
+import FileUpload from '../components/fileUpload.jsx';
 import ProjectFormEntry from '../components/projectFormEntry.jsx';
 import ProjectPageMain from '../components/projectPageMain.jsx';
 import CategorySelector from '../components/categorySelector.jsx';
 
-class ProjectSubmission extends React.Component {
+class ProjectEditor extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
 
-    this.apikey = 'AjcTDrnNSKWZY48TkFUHPz';
-    this.client = filestack.init(this.apikey);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
-    this.handleFileUpload = this.handleFileUpload.bind(this);
-  }
-
-  componentDidMount() {
-    const apikey = 'AjcTDrnNSKWZY48TkFUHPz';
-    this.client = filestack.init(apikey);
   }
 
   handleFileUpload(e) {
@@ -85,18 +77,7 @@ class ProjectSubmission extends React.Component {
             <div className='col-md-3'>
               <span>Project image</span>
             </div>
-            <div className='col-md-9' onClick={this.handleFileUpload}>
-              {this.props.form.imageURL ?
-                <div className='project-image-picker-box image-uploaded'>
-                  <img src={this.props.form.imageURL}></img>
-                </div>
-                :
-                <div className='project-image-picker-box'>
-                  <span className='center'>This is first thing people will see</span>
-                  <input type='button' className='project-image-picker'></input>
-                </div>
-              }
-            </div>
+            <FileUpload updateInput={this.props.updateInput} imageURL={this.props.form.imageURL}/>
           </div>
           {entries.map((entry, index) =>
             <ProjectFormEntry entry={entry} handleInputChange={this.handleInputChange} key={index} inputValue={this.props.form[entry.name]}/>
@@ -106,7 +87,6 @@ class ProjectSubmission extends React.Component {
           <CategorySelector handleInputChange={this.handleInputChange}/>
         </div>
         <div className='col-md-4 project-submission-side clearfix'>
-          <ProjectPageMain project={this.props.form} user={this.props.user} match={this.props.match}/>
           <button type='button' className='btn project-submission-btn' onClick={this.handleSave}>Save</button>
         </div>
       </div>
@@ -121,4 +101,4 @@ const mapDispatchToProps = dispatch => ({
   submitForm: (form, endpoint) => dispatch(submitForm(form, endpoint))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectSubmission));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectEditor));

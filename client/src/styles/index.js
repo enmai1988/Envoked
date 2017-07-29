@@ -88,3 +88,25 @@ export const notificationListEntryStyle = {
   verticalAlign: 'middle',
   borderBottom: '1px solid rgb(232, 232, 232)'
 };
+
+export const projectPageMainStyle = {
+  header: {
+    paddingBottom: '10px',
+    marginBottom: '40px'
+  },
+  addContact: {
+    div: {
+      border: '1px solid transparent',
+      borderRadius: '15px',
+      textAlign: 'center',
+      padding: '0px 2px',
+      width: '105px',
+      height: '30px',
+      backgroundColor: 'rgb(240, 90, 64)',
+      cursor: 'pointer',
+      ':hover': { backgroundColor: '#ee4b28' }
+    },
+    plus: {color: 'rgb(255,255,255)', fontSize: '12px'},
+    text: {fontWeight: '600', color: 'rgb(255,255,255)', fontSize: '17px'}
+  }
+};

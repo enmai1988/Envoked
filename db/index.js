@@ -70,7 +70,7 @@ const Notification = db.define('notification', {
     allowNull: false,
     primaryKey: true
   },
-  text: Sequelize.TEXT,
+  type: Sequelize.TEXT,
   status: {
     type: Sequelize.TEXT,
     defaultValue: 'unread'

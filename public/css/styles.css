@@ -112,9 +112,6 @@
 .thumbnails img {
   width: 100%;
 }
-.project-page {
-  margin-top: 15px;
-}
 .project-page-left {
   width: 50%;
   margin-left: 12.5%;
@@ -127,14 +124,14 @@
 /* Profile Start */
 .profile-top {
   padding: 15px;
-  height: 328px;;
+  height: 250px;;
 }
 .profile-top span {
   display: block;
   font-size: 36px;
   font-weight: 400;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 .profile-tabs-container {
   margin-bottom: 30px;

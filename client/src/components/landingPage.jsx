@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProjectEntry from '../components/projectEntry.jsx';
 
-class Container extends React.Component {
+class LandingPage extends React.Component {
   componentDidMount() {
     this.props.handleProjectFetching('landing page');
   }
@@ -35,4 +35,4 @@ class Container extends React.Component {
   }
 }
 
-export default Container;
+export default LandingPage;
