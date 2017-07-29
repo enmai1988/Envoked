@@ -32,10 +32,13 @@ class Payment extends React.Component {
 
   handlePaymentSubmit(e) {
     e.preventDefault();
-    let name = document.getElementById('cardholder-name').value;
-    let amount = document.getElementById('payment-amount').value;
-    console.log('Name on Card: ',name);
-    console.log('Amount Charged: ',amount);
+    this.stripe.createToken(this.card).then(result => {
+      result.name = document.getElementById('cardholder-name').value;
+      result.amount = document.getElementById('payment-amount').value;
+      result.currency = 'usd';
+      result.description = 'Charge for TechStarte';
+      console.log("Result:", result);
+    });
   }
 
   render() {
