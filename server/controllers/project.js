@@ -1,22 +1,22 @@
 const { Project, User } = require('../../db/');
 const path = require('path');
 const fs = require('fs');
-// const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
-// const discovery = new DiscoveryV1({
-//   username: '0228a918-c532-46e4-aff1-0e44b47ecb04',
-//   password: 'M3f66vdjClUu',
-//   version: 'v1',
-//   version_date: '2017-07-19'
-// });
+const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+const discovery = new DiscoveryV1({
+  username: '0228a918-c532-46e4-aff1-0e44b47ecb04',
+  password: 'M3f66vdjClUu',
+  version: 'v1',
+  version_date: '2017-07-19'
+});
 
-// var file = path.join(__dirname, '/test-doc2.html');
-// file = fs.readFileSync(file);
+var file = path.join(__dirname, '/test-doc2.html'); 
+file = fs.readFileSync(file);
 
-// discovery.addDocument(('9f85920a-44e6-4591-a34e-2bcf260e7b9e', '00c84fed-2bf8-4fc8-a616-fd607caae686', file),
-// function(error, data) {
-//   console.log('WATSON DATA: ', data);
-// });
-
+discovery.addDocument(('9f85920a-44e6-4591-a34e-2bcf260e7b9e', '00c84fed-2bf8-4fc8-a616-fd607caae686', file),
+function(error, data) {
+  console.log('WATSON DATA: ', data);
+});
+  
 module.exports.getAll = (req, res) => {
   let option = { include: [ { model: User } ]};
   let origin = req.query.origin;
