@@ -36,8 +36,23 @@ class Payment extends React.Component {
       result.name = document.getElementById('cardholder-name').value;
       result.amount = document.getElementById('payment-amount').value;
       result.currency = 'usd';
-      result.description = 'Charge for TechStarte';
-      console.log("Result:", result);
+      result.description = 'Charge for TechStarter';
+      //console.log("Result:", result);
+
+      let successElement = document.querySelector('.success');
+      let errorElement = document.querySelector('.error');
+      successElement.classList.remove('visible');
+      errorElement.classList.remove('visible');
+
+      if (result.error) {
+        errorElement.textContent = result.error.message;
+        errorElement.classList.add('visible');
+        console.log("Result Token: ",result);
+      } else {
+        console.log("Result Token: ",result.token);
+        successElement.querySelector('.token').textContent = result.token.id;
+        successElement.classList.add('visible');
+      }
     });
   }
 
