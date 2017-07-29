@@ -17,7 +17,7 @@ module.exports.charge = (req, res) => {
     capture: true,
   })
     .then(charge => {
-      console.log('charge: ', charge);
+      //console.log('charge: ', charge);
       res.sendStatus(200);
     });
 };
