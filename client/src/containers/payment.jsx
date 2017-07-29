@@ -4,11 +4,12 @@ import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
 import axios from 'axios';
+//var stripe = require("stripe")("pk_test_01qGTTxV9m6rilCgqGcYzcXn");
 
 class Payment extends React.Component {
   constructor(props) {
     super(props);
-    this.stripe = Stripe('pk_test_sMvTrVbdTKzUNCSvhAtOH9wS');
+    this.stripe = Stripe('pk_test_01qGTTxV9m6rilCgqGcYzcXn');
 
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this);
   }
@@ -32,6 +33,49 @@ class Payment extends React.Component {
 
   sendPayment(result) {
     console.log('SendPayment results:', result);
+    axios.post('/api/payment', {
+      token: result.token,
+      amount: result.amount,
+      currency: result.currency,
+      source: result.token.id,
+      description: result.description
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    // this.stripe.charge.create({
+    //   amount: result.amount,
+    //   currency: result.currency,
+    //   source: result.token.id,
+    //   description: result.description
+    // }, function (err, charge) {
+    //   if (err) {
+    //     console.log('payment rejected!');
+    //   } else {
+    //     console.log('payment accepted!');
+    //   }
+    // });
+  }
+
+  validatePayment(result) {
+    let successElement = document.querySelector('.success');
+    let errorElement = document.querySelector('.error');
+    successElement.classList.remove('visible');
+    errorElement.classList.remove('visible');
+
+    if (result.token) {
+      successElement.querySelector('.token').textContent = result.token.id;
+      successElement.classList.add('visible');
+      this.sendPayment(result);
+      //console.log("Result Token: ", result.token.id);
+    } else if (result.error) {
+      errorElement.textContent = result.error.message;
+      errorElement.classList.add('visible');
+      //console.log("Result Token: ", result);
+    }
   }
 
   handlePaymentSubmit(e) {
@@ -41,23 +85,25 @@ class Payment extends React.Component {
       result.amount = document.getElementById('payment-amount').value;
       result.currency = 'usd';
       result.description = 'Charge for TechStarter';
+
+      this.validatePayment(result);
       //console.log("Result:", result);
 
-      let successElement = document.querySelector('.success');
-      let errorElement = document.querySelector('.error');
-      successElement.classList.remove('visible');
-      errorElement.classList.remove('visible');
+      // let successElement = document.querySelector('.success');
+      // let errorElement = document.querySelector('.error');
+      // successElement.classList.remove('visible');
+      // errorElement.classList.remove('visible');
 
-      if (result.error) {
-        errorElement.textContent = result.error.message;
-        errorElement.classList.add('visible');
-        //console.log("Result Token: ",result);
-      } else {
-        //console.log("Result Token: ",result.token);
-        successElement.querySelector('.token').textContent = result.token.id;
-        successElement.classList.add('visible');
-        this.sendPayment(result);
-      }
+      // if (result.error) {
+      //   errorElement.textContent = result.error.message;
+      //   errorElement.classList.add('visible');
+      //   //console.log("Result Token: ",result);
+      // } else {
+      //   //console.log("Result Token: ",result.token);
+      //   successElement.querySelector('.token').textContent = result.token.id;
+      //   successElement.classList.add('visible');
+      //   this.sendPayment(result);
+      // }
     });
   }
 
