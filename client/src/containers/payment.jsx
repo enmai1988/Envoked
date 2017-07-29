@@ -29,31 +29,13 @@ class Payment extends React.Component {
     });
   }
 
-  validatePayment(result) {
-    let successElement = document.querySelector('.success');
-    let errorElement = document.querySelector('.error');
-    successElement.classList.remove('visible');
-    errorElement.classList.remove('visible');
-
-    if (result.token) {
-      successElement.querySelector('.token').textContent = result.token.id;
-      successElement.classList.add('visible');
-    } else if (result.error) {
-      errorElement.textContent = result.error.message;
-      errorElement.classList.add('visible');
-    }
-  }
 
   handlePaymentSubmit(e) {
     e.preventDefault();
-    let form = document.querySelector('form');
-
-    this.stripe.createToken(this.card).then(result => {
-      result.name = form.querySelector('input[name=cardholder-name]').value;
-      result.amount = form.querySelector('input[name=payment-amount]').value;
-      console.log(result);
-      this.validatePayment(result);
-    });
+    let name = document.getElementById('cardholder-name').value;
+    let amount = document.getElementById('payment-amount').value;
+    console.log('Name on Card: ',name);
+    console.log('Amount Charged: ',amount);
   }
 
   render() {
@@ -61,11 +43,11 @@ class Payment extends React.Component {
       <div className='payment-body'>
         <form>
           <label>
-            <input name='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
+            <input id='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
             <span><span>Name</span></span>
           </label>
           <label>
-            <input name='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
+            <input id='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
             <span><span>Amount</span></span>
           </label>
           <label>
