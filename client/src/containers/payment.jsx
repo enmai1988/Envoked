@@ -6,9 +6,9 @@ import { styles } from '../styles';
 import axios from 'axios';
 
 // force https address for stripe payments
-if (location.protocol === 'http:') {
-  location.href = location.href.replace(/^http:/, 'https:');
-}
+// if (location.protocol ==='http:') {
+//   location.href = location.href.replace(/^http:/, 'https:');
+// }
 
 class Payment extends React.Component {
   constructor(props) {
