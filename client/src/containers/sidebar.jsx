@@ -32,7 +32,6 @@ class Sidebar extends React.Component {
 
   updateInnerHeight() {
     this.setState({ height: window.innerHeight });
-
   }
 
   fetchContacts(keyword = '') {
@@ -77,7 +76,6 @@ class Sidebar extends React.Component {
   trackRemoved(track) {
     track.detach().forEach(element => element.remove());
   }
-
 
   render() {
     return (
