@@ -1,4 +1,5 @@
 import React from 'react';
+import css from '../../../public/css/payment.css';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';

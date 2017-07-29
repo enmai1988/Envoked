@@ -1,25 +1,4 @@
 export const styles = {
-  nav: {
-    title: {
-      color: 'white',
-      cursor: 'pointer'
-    },
-    authButton: {
-      backgroundColor: 'rgb(59, 62, 60)'
-    }
-  },
-  header: {
-    height: '32px',
-    backgroundColor: 'rgb(59, 62, 60)',
-    width: '100%',
-    borderRadius: '0px',
-    border: '0px',
-    borderBottom: '1px solid rgb(129, 123, 121)',
-    left: '0px',
-    display: 'block',
-    position: 'fixed',
-    zIndex: 100
-  },
   loginModal: {
     marginTop: '5%'
   },
@@ -28,10 +7,6 @@ export const styles = {
   },
   searchDiv: {
     width: '200px'
-  },
-  showcase: {
-    height: '1650px',
-    borderRadius: '0px'
   },
   footer: {
     button: {
@@ -67,4 +42,49 @@ export const styles = {
       empty: 'is-empty',
     },
   }
+};
+
+export const headerStyle = {
+  height: '32px',
+  width: '100%',
+  borderRadius: '0px',
+  border: '0px',
+  left: '0px',
+  display: 'block',
+  padding: '0 30px',
+  marginBottom: '0',
+  zIndex: 1000
+};
+
+export const navStyle = {
+  title: {
+    color: 'rgb(59, 62, 60)',
+    cursor: 'pointer',
+  }
+};
+
+export const popoverStyle = {
+  maxWidth: '420px',
+  height: 'auto',
+  paddingTop: '0px'
+};
+
+export const notificationStyle = {
+  margin: '0',
+  padding: '0',
+  width: '400px',
+  height: '100%'
+};
+
+export const notificationListEntryStyle = {
+  ':hover': {
+    backgroundColor: 'rgba(232, 232, 232, 0.5)'
+  },
+  cursor: 'pointer',
+  listStyle: 'none',
+  width: '100%',
+  height: '62px',
+  padding: '8px 14px',
+  verticalAlign: 'middle',
+  borderBottom: '1px solid rgb(232, 232, 232)'
 };

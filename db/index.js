@@ -14,7 +14,6 @@ const User = db.define('user', {
     allowNull: false,
     primaryKey: true
   },
-  slug: { type: Sequelize.TEXT, unique: true },
   email: { type: Sequelize.TEXT, unique: true },
   firstName: Sequelize.TEXT,
   lastName: Sequelize.TEXT,
@@ -31,7 +30,7 @@ const Project = db.define('project', {
   },
   companyName: Sequelize.TEXT,
   appName: Sequelize.TEXT,
-  slug: { type: Sequelize.TEXT, unique: true },
+  slug: { type: Sequelize.TEXT },
   blurb: Sequelize.TEXT,
   logo: Sequelize.TEXT,
   imageURL: Sequelize.TEXT,
@@ -64,13 +63,28 @@ const Funding = db.define('funding', {
   amount: Sequelize.DECIMAL(10, 2)
 });
 
+const Notification = db.define('notification', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  text: Sequelize.TEXT,
+  status: {
+    type: Sequelize.TEXT,
+    defaultValue: 'unread'
+  },
+  viewedAt: Sequelize.DATE
+});
+
 User.hasMany(Project, { foreignKey: 'userId'});
+
+User.belongsToMany(User, { as: 'contacts', through: 'Contacts' });
 
 Project.belongsTo(User);
 
 Project.hasMany(Funding, { foreignKey: 'projectId' });
-
-//Project.hasMany(Image, { foreignKey: 'projectId' });
 
 Funding.belongsTo(User);
 
@@ -80,10 +94,14 @@ Interest.belongsToMany(User, { through: 'UserInterest' });
 
 Interest.belongsToMany(Project, { through: 'ProjectInterest' });
 
+Notification.belongsTo(User, { as: 'originator' });
+
+Notification.belongsTo(User, { as: 'recipient' });
+
 // User.hasMany(Interest);
 
 // User.hasMany(Funding);
 
 // Project.hasMany(Interest, { foreignKey: 'projectId' });
 
-module.exports = { db, User, Project, Interest, Funding };
+module.exports = { db, User, Project, Interest, Funding, Notification };

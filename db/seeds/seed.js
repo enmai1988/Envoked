@@ -41,6 +41,18 @@ const compileProjects = (array) => {
   return res;
 };
 
+const createFakeContacts = n => {
+  let res = [];
+  for (let i = 0; i < n; i++) {
+    let obj = {};
+    obj.userId = 1001;
+    obj.contactId = Math.floor(Math.random() * 999) + 1;
+    res.push(obj);
+  }
+
+  return res;
+};
+
 const addSlugToUsers = array => {
   return array.map(el => {
     el.slug = convertToSlug(`${el.firstName} ${el.lastName}`);
@@ -48,14 +60,28 @@ const addSlugToUsers = array => {
   });
 };
 
+// db.sync({force: true})
+//   .then(() => {
+//     return User.bulkCreate(users);
+//   })
+//   .then(() => {
+//     return Project.bulkCreate(compileProjects(projects.projects));
+//   })
+//   .then(() => {
+//     return Interest.bulkCreate(interests);
+//   })
+//   .then(() => db.close());
+
 db.sync({force: true})
   .then(() => {
-    return User.bulkCreate(addSlugToUsers(users));
-  })
-  .then(() => {
-    return Project.bulkCreate(compileProjects(projects.projects));
-  })
-  .then(() => {
-    return Interest.bulkCreate(interests);
-  })
-  .then(() => db.close());
+    User.bulkCreate(users)
+      .then(() => {
+        Project.bulkCreate(compileProjects(projects.projects))
+          .then(() => {
+            Interest.bulkCreate(interests)
+              .then(() => {
+                db.close();
+              });
+          });
+      });
+  });

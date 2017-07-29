@@ -10,13 +10,12 @@ export const submitForm = (form, endpoint) => {
     dispatch({ type: FORM_SUBMISSION_PENDING });
     return axios.post(endpoint, form)
       .then(response => {
-        console.log(response);
         dispatch({ type: 'PROJECT_CREATED' });
         dispatch({ type: FORM_SUBMISSION_FULFILLED });
         return response.status === 201 ? true : false;
       })
       .catch(err => {
-        dispatch({ type: FORM_SUBMISSION_REJECTED });
+        dispatch({ type: FORM_SUBMISSION_REJECTED, payload: 'An error has occured' });
       });
   };
 };

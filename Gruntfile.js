@@ -1,4 +1,4 @@
-const config = require('config')['knex'];
+const config = require('config')['sequelize'];
 
 module.exports = function(grunt) {
 

@@ -5,15 +5,31 @@ import { fetchProject } from '../actions/projectPageActions.js';
 import ProjectPageMain from '../components/projectPageMain.jsx';
 import Payment from './payment.jsx';
 import Spinner from '../components/spinner.jsx';
+import axios from 'axios';
 
 class ProjectPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.sendContactRequest = this.sendContactRequest.bind(this);
   }
+
   componentDidMount() {
     let userId = this.props.match.params.userId;
     let project = this.props.match.params.project;
     this.props.fetchProject(`${userId}/${project}`);
+  }
+
+  sendContactRequest(e) {
+    console.log('send request');
+    e.preventDefault();
+    axios.post('/api/notifications', { id: this.props.projectPage.content.user.id })
+      .then(response => {
+        console.log('add contact: ', response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -23,14 +39,25 @@ class ProjectPage extends React.Component {
 
     return (
       <div className='container project-page'>
-        <div className='col-md-6 project-page-left'>
-          {fetched ? <ProjectPageMain project={project} user={sessionOwner} match={this.props.match}/>
-            : <Spinner style={{marginTop: '100px'}}/>
-          }
-        </div>
-        <div className='col-md-3 project-page-right'>
-          <Payment />
-        </div>
+        {fetched ?
+          <div>
+            <div className='col-md-6 project-page-left'>
+              <ProjectPageMain
+                project={project}
+                user={sessionOwner}
+                match={this.props.match}
+              />
+            </div>
+            <div className='col-md-3 project-page-right'>
+              <div className='row col-md'>
+                <span>{`${project.user.firstName} ${project.user.lastName}`}</span>
+                <button onClick={this.sendContactRequest}>add contact</button>
+              </div>
+              <Payment />
+            </div>
+          </div> :
+          <Spinner style={{marginTop: '150px'}}/>
+        }
       </div>
     );
   }
