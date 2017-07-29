@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProjects } from '../actions/projectActions.js';
 import { selectTab } from '../actions/tabsActions.js';
@@ -68,4 +69,4 @@ const mapDispatchToProps = dispatch => ({
   selectTab: (tabName) => dispatch(selectTab(tabName))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileContent));

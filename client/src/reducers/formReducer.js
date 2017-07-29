@@ -5,19 +5,19 @@ import {
 } from '../constants';
 
 const initState = {
-  pending: false,
-  fulfilled: false,
+  initiated: false,
+  created: false,
   error: null
 };
 
 const formReducer = (state = initState, action) => {
   switch (action.type) {
   case FORM_SUBMISSION_PENDING:
-    return { ...state, pending: true, fulfilled: false };
+    return { ...state, initiated: true, created: false };
   case FORM_SUBMISSION_FULFILLED:
-    return { ...state, pending: false, fulfilled: true };
+    return { ...state, initiated: false, created: true };
   case FORM_SUBMISSION_REJECTED:
-    return { ...state, pending: false, fulfilled: false, error: action.payload };
+    return { ...state, initiated: false, created: false, error: action.payload };
   default:
     return state;
   }

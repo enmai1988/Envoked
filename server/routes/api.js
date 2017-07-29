@@ -2,7 +2,6 @@
 const express = require('express');
 const middleware = require('../middleware');
 const router = express.Router();
-const service = require('../../service');
 
 router.route('/')
   .get((req, res) => {
@@ -17,8 +16,5 @@ router.route('/projects/:userId/:project')
 
 router.route('/myprofile')
   .get(middleware.auth.verify, (req, res) => res.render('index.ejs'));
-
-router.route('/videocall')
-  .get(middleware.auth.verify, service.twilio.createVideoRoom);
 
 module.exports = router;

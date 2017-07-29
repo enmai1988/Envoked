@@ -1,9 +1,8 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import ProfileContent from '../containers/profileContent.jsx';
 
 const ProfilePage = ({ user }) => (
-  <div className='container profile-container no-margin'>
+  <div className='container profile-container'>
     <div className='row profile-row'>
       <div className='col-md-6 col-md-offset-3 profile-top'>
         <div className='col-md'>
@@ -11,10 +10,10 @@ const ProfilePage = ({ user }) => (
         </div>
       </div>
     </div>
-    <div className='row profile-row no-margin'>
+    <div className='row profile-row'>
       <ProfileContent />
     </div>
   </div>
 );
 
-export default withRouter(ProfilePage);
+export default ProfilePage;

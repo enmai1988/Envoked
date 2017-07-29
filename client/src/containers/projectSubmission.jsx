@@ -1,5 +1,4 @@
 import React from 'react';
-import css from '../../../public/css/projectSubmission.css';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
@@ -51,12 +50,14 @@ class ProjectSubmission extends React.Component {
     form.slug = convertToSlug(form.appName);
     this.props.submitForm(form, '/api/projects')
       .then(created => {
-        if (this.props.formControl.error) { throw 'error'; }
-        if (!this.props.formControl.fulfilled && !created) { return alert('existing project'); }
+        if (!created) {
+          alert('existing project');
+          return;
+        }
         this.redirectToProject(form.userId, form.slug);
       })
       .catch(err => {
-        console.log('project submission failed');
+        console.log('project submission failed: ', err);
       });
   }
 

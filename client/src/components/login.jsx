@@ -1,5 +1,4 @@
 import React from 'react';
-import css from '../../../public/css/login.css';
 
 class Login extends React.Component {
   render() {
