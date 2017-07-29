@@ -1,8 +1,8 @@
 const Interest = require('../../db/').Interest;
-//const discovery = require('../../service/').discovery;
-//const config = require('config')['watson'];
+const discovery = require('../../service/').discovery;
+const config = require('config')['watson'];
 
-// use getInterest if Watson
+// use getInterest if Watson 
 
 // module.exports.getInterest = (req, res) => {
 //   Interest.findOne({ where: { id: req.params.id } })
