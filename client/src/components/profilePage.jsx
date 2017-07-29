@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import ProfileContent from '../containers/profileContent.jsx';
 
 const ProfilePage = ({ user }) => (
@@ -16,4 +17,4 @@ const ProfilePage = ({ user }) => (
   </div>
 );
 
-export default ProfilePage;
+export default withRouter(ProfilePage);

@@ -49,6 +49,9 @@ class App extends React.Component {
       sidebarToggle = ' toggled';
       burgerMenu = 'menu change';
     }
+
+    const profilePage = props => (<ProfilePage {...props} user={this.props.user.fetchedUser}/>);
+
     return (
       <Router history={history}>
         <div id='wrapper' className={`container${sidebarToggle}`}>
