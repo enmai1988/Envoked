@@ -8,4 +8,16 @@ module.exports.charge = (req, res) => {
   let source = req.body.source;
   let description = req.body.description || 'test';
   let currency = req.body.currency || 'usd';
+
+  stripe.charges.create({
+    amount,
+    currency,
+    description,
+    source,
+    capture: true,
+  })
+    .then(charge => {
+      console.log('charge: ', charge);
+      res.sendStatus(200);
+    });
 };
