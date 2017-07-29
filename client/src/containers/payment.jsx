@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
+import axios from 'axios';
 
 class Payment extends React.Component {
   constructor(props) {
@@ -29,6 +30,9 @@ class Payment extends React.Component {
     });
   }
 
+  sendPayment(result) {
+    console.log('SendPayment results:', result);
+  }
 
   handlePaymentSubmit(e) {
     e.preventDefault();
@@ -49,9 +53,10 @@ class Payment extends React.Component {
         errorElement.classList.add('visible');
         //console.log("Result Token: ",result);
       } else {
-        console.log("Result Token: ",result.token);
+        //console.log("Result Token: ",result.token);
         successElement.querySelector('.token').textContent = result.token.id;
         successElement.classList.add('visible');
+        this.sendPayment(result);
       }
     });
   }
@@ -65,7 +70,7 @@ class Payment extends React.Component {
             <span><span>Name</span></span>
           </label>
           <label>
-            <input id='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
+            <input id='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01' />
             <span><span>Amount</span></span>
           </label>
           <label>
