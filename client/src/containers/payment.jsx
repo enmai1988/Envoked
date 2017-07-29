@@ -88,22 +88,6 @@ class Payment extends React.Component {
 
       this.validatePayment(result);
       //console.log("Result:", result);
-
-      // let successElement = document.querySelector('.success');
-      // let errorElement = document.querySelector('.error');
-      // successElement.classList.remove('visible');
-      // errorElement.classList.remove('visible');
-
-      // if (result.error) {
-      //   errorElement.textContent = result.error.message;
-      //   errorElement.classList.add('visible');
-      //   //console.log("Result Token: ",result);
-      // } else {
-      //   //console.log("Result Token: ",result.token);
-      //   successElement.querySelector('.token').textContent = result.token.id;
-      //   successElement.classList.add('visible');
-      //   this.sendPayment(result);
-      // }
     });
   }
 
