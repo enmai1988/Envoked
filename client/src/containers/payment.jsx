@@ -4,7 +4,11 @@ import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
 import axios from 'axios';
-//var stripe = require("stripe")("pk_test_01qGTTxV9m6rilCgqGcYzcXn");
+
+// force https address for stripe payments
+if (location.protocol === 'http:') {
+  location.href = location.href.replace(/^http:/, 'https:');
+}
 
 class Payment extends React.Component {
   constructor(props) {
