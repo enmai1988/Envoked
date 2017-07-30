@@ -27,7 +27,6 @@
     "express": "^4.15.3",
     "express-session": "^1.15.4",
     "filestack-js": "^0.7.1",
-    "global": "^4.3.2",
     "grunt-pg": "https://github.com/watsoncj/grunt-pg.git",
     "knex-repository": "^0.3.0",
     "morgan": "^1.8.2",

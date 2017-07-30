@@ -4,11 +4,7 @@ import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
 import axios from 'axios';
-
-// force https address for stripe payments
-// if (location.protocol ==='http:') {
-//   location.href = location.href.replace(/^http:/, 'https:');
-// }
+//var stripe = require("stripe")("pk_test_01qGTTxV9m6rilCgqGcYzcXn");
 
 class Payment extends React.Component {
   constructor(props) {
@@ -50,6 +46,18 @@ class Payment extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+    // this.stripe.charge.create({
+    //   amount: result.amount,
+    //   currency: result.currency,
+    //   source: result.token.id,
+    //   description: result.description
+    // }, function (err, charge) {
+    //   if (err) {
+    //     console.log('payment rejected!');
+    //   } else {
+    //     console.log('payment accepted!');
+    //   }
+    // });
   }
 
   validatePayment(result) {
