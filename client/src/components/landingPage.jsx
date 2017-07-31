@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProjectEntry from '../components/projectEntry.jsx';
 
-class Container extends React.Component {
+class LandingPage extends React.Component {
   componentDidMount() {
     this.props.handleProjectFetching('landing page');
   }
@@ -10,12 +10,12 @@ class Container extends React.Component {
   render() {
     return (
       <div className='container' style={{backgroundColor: 'rgb(252, 252, 252)'}}>
-        <div className='row justify-content-center landing_page clearfix'>
-          <div className='col-md-6 col-md-offset-3' style={{textAlign: 'center', marginTop: '200px'}}>
-            <h2 style={{fontSize: '64px'}}>Platform of ideas.</h2>
-            <div className='col-md-2 col-md-offset-5' style={{border: '1px solid rgb(240, 95, 64)'}}></div>
+        <div className='row justify-content-center landing_page no-margin'>
+          <div className='col-md-6 col-md-offset-3' style={{textAlign: 'center', marginTop: '140px'}}>
+            <h2 style={{fontSize: '60px'}}>Platform of ideas.</h2>
+            <div className='row col-md-2 col-md-offset-5' style={{border: '1px solid rgb(240, 95, 64)'}}></div>
           </div>
-          <div className='col-md start_project_btn'>
+          <div className='row col-md-6 col-md-offset-3 start_project_btn'>
             <Link to='/create'>
               <button className='get-started'>GET STARTED!</button>
             </Link>
@@ -35,4 +35,4 @@ class Container extends React.Component {
   }
 }
 
-export default Container;
+export default LandingPage;

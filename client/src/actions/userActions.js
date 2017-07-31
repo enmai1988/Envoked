@@ -5,17 +5,13 @@ export const fetchUser = () => {
   return dispatch => {
     dispatch({ type: FETCH_USER_PENDING });
     return axios.get('/auth')
-      .then(response => {
-        dispatch({
-          type: FETCH_USER_FULFILLED,
-          payload: response.data
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: FETCH_USER_REJECTED,
-          payload: err
-        });
-      });
+      .then(response => dispatch({
+        type: FETCH_USER_FULFILLED,
+        payload: response.data
+      }))
+      .catch(err => dispatch({
+        type: FETCH_USER_REJECTED,
+        payload: err
+      }));
   };
 };

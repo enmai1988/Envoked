@@ -1,2 +1,4 @@
-//module.exports.discovery = require('./watson.js');
-module.exports.stripe = require('./stripe.js');
+module.exports.discovery = require('./watson');
+module.exports.stripe = require('./stripe');
+module.exports.twilio = require('./twilio');
+module.exports.server = require('./socket');
