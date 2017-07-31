@@ -102,18 +102,20 @@ Notification.belongsTo(User, { as: 'originator' });
 
 Notification.belongsTo(User, { as: 'recipient' });
 
-db.sync()
-  .then(() => {
-    User.bulkCreate(users)
-      .then(() => {
-        Project.bulkCreate(compileProjects(projects.projects))
-          .then(() => {
-            Interest.bulkCreate(interests);
-              // .then(() => {
-              //   db.close();
-              // });
-          });
-      });
-  });
+db.sync();
+
+// db.sync()
+//   .then(() => {
+//     User.bulkCreate(users)
+//       .then(() => {
+//         Project.bulkCreate(compileProjects(projects.projects))
+//           .then(() => {
+//             Interest.bulkCreate(interests)
+//               .then(() => {
+//                 db.close();
+//               });
+//           });
+//       });
+//   });
 
 module.exports = { db, User, Project, Interest, Funding, Notification };
