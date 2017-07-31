@@ -6,13 +6,9 @@ NOTE: 1. run 'createdb techstarter to create database'
       5. then run same command with bulkcreate uncommented and sync commented, this will populate database.
       6. run database with: psql techstarter.
 ************************************************/
-const { db, User, Project, Interest } = require('../');
 const { convertToSlug } = require('../../helpers/util');
-const users = require('../users.json');
-const projects = require('../projects.json');
-const interests = require('../interests.json');
 
-const compileProjects = (array) => {
+module.exports.compileProjects = array => {
   let res = [];
   array.forEach(el => {
     let obj = {};
@@ -72,16 +68,16 @@ const addSlugToUsers = array => {
 //   })
 //   .then(() => db.close());
 
-db.sync({force: true})
-  .then(() => {
-    User.bulkCreate(users)
-      .then(() => {
-        Project.bulkCreate(compileProjects(projects.projects))
-          .then(() => {
-            Interest.bulkCreate(interests)
-              .then(() => {
-                db.close();
-              });
-          });
-      });
-  });
+// db.sync({force: true})
+//   .then(() => {
+//     User.bulkCreate(users)
+//       .then(() => {
+//         Project.bulkCreate(compileProjects(projects.projects))
+//           .then(() => {
+//             Interest.bulkCreate(interests)
+//               .then(() => {
+//                 db.close();
+//               });
+//           });
+//       });
+//   });
