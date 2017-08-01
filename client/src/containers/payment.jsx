@@ -30,6 +30,10 @@ class Payment extends React.Component {
     });
   }
 
+  sendPayment(result) {
+    console.log('SendPayment Result:', result);
+  }
+
   validatePayment(result) {
     let successElement = document.querySelector('.success');
     let errorElement = document.querySelector('.error');
@@ -39,12 +43,12 @@ class Payment extends React.Component {
     if (result.token) {
       successElement.querySelector('.token').textContent = result.token.id;
       successElement.classList.add('visible');
-
-      console.log("Result Token: ", result.token.id);
+      this.sendPayment(result);
+      //console.log("Result Token: ", result.token.id);
     } else if (result.error) {
       errorElement.textContent = result.error.message;
       errorElement.classList.add('visible');
-      console.log("Result Token: ", result);
+      //console.log("Result Token: ", result);
     }
   }
 
