@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProject } from '../actions/projectPageActions.js';
 import { isContact } from '../actions/isContactActions.js';
+import { Button, Modal } from 'react-bootstrap';
 import ProjectPageMain from '../components/projectPageMain.jsx';
 import Payment from './payment.jsx';
 import Spinner from '../components/spinner.jsx';
@@ -10,15 +11,26 @@ import Spinner from '../components/spinner.jsx';
 class ProjectPage extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = { showModal: false };
     this.userId = this.props.match.params.userId;
     this.project = this.props.match.params.project;
   }
 
   componentDidMount() {
-    this.props.fetchProject(`${this.userId}/${this.project}`);
+    let userId = this.props.match.params.userId;
+    let project = this.props.match.params.project;
+    this.props.fetchProject(`${userId}/${project}`);
 
-    this.props.checkIfContact(this.userId);
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+  }
+
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open() {
+    this.setState({ showModal: true });
   }
 
   render() {
@@ -38,23 +50,25 @@ class ProjectPage extends React.Component {
             /> :
             <Spinner style={{ marginTop: '150px' }} />
         }
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#paymentModal">Fund This Project!</button>
 
-        <div id="paymentModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Payment</h4>
-              </div>
+        <div>
+          <Button bsStyle="primary" bsSize="large" onClick={this.open}>
+            Fund This Project!
+          </Button>
+
+          <Modal show={this.state.showModal} onHide={this.close}>
+            <Modal.Header closeButton>
+              <Modal.Title>Fund This Project</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <div>
                 <Payment />
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.close}>Close</Button>
+            </Modal.Footer>
+          </Modal>
         </div>
 
       </div>
