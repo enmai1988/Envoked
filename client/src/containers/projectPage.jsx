@@ -36,9 +36,13 @@ class ProjectPage extends React.Component {
               isContact={this.props.isContact.isContact}
               sendContactRequest={this.props.sendContactRequest}
             /> :
-            <Spinner style={{marginTop: '150px'}}/>
+            <Spinner style={{ marginTop: '150px' }} />
         }
+        <div className='col-md-3 project-page-right'>
+          <Payment />
+        </div>
       </div>
+
     );
   }
 }

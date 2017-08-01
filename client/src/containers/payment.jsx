@@ -5,6 +5,11 @@ import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
 
+// force https address for stripe payments
+// if (location.protocol === 'http:') {
+//   location.href = location.href.replace(/^http:/, 'https:')
+// }
+
 class Payment extends React.Component {
   constructor(props) {
     super(props);
@@ -30,11 +35,6 @@ class Payment extends React.Component {
     });
   }
 
-  // force https address for stripe payments
-  if (location.protocol ==='http:') {
-    location.href = location.href.replace(/^http:/, 'https:');
-  }
-
   sendPayment(result) {
     console.log('SendPayment Result:', result);
     axios.post('/api/payment', {
@@ -42,7 +42,7 @@ class Payment extends React.Component {
       amount: result.amount,
       currency: result.currency,
       source: result.token.id,
-      description: result.description,
+      description: result.description
     })
       .then(function (response) {
         console.log(response);
