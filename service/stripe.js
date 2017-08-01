@@ -4,10 +4,6 @@ const Sequelize = require('sequelize');
 const { Project, User, Funding } = require('../db');
 
 module.exports.charge = (req, res) => {
-  //console.log('incoming payment request: ', req.body);
-  //let temp = req.headers.referer.split('http://localhost:3000/projects/');
-  //let temp2 = temp[1].split('/');
-
   let projectId = req.body.projectId;
   let projectFunded = req.body.projectFunded;
 
@@ -26,6 +22,12 @@ module.exports.charge = (req, res) => {
     capture: true
   })
     .then(charge => {
-      console.log(charge);
+      let status = charge.status;
+      let chargeAmount = charge.amount;
+      console.log('projectId: ', projectId);
+      console.log('PROJECTFunded: ', projectFunded);
+      console.log('USERID: ', userId);
+      console.log('STATUS: ', status);
+      console.log('AMOUNT: ', chargeAmount);
     });
 };
