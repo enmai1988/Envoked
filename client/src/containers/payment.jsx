@@ -30,6 +30,11 @@ class Payment extends React.Component {
     });
   }
 
+  // force https address for stripe payments
+  if (location.protocol ==='http:') {
+    location.href = location.href.replace(/^http:/, 'https:');
+  }
+
   sendPayment(result) {
     console.log('SendPayment Result:', result);
     axios.post('/api/payment', {
@@ -38,7 +43,13 @@ class Payment extends React.Component {
       currency: result.currency,
       source: result.token.id,
       description: result.description,
-    });
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   validatePayment(result) {
