@@ -36,6 +36,20 @@ module.exports.charge = (req, res) => {
         console.log('TOTAL: ', projectTotal);
         res.status(200).send('Charge Successful!');
 
+        // Update currentFunding for projectId in Projects Table
+        Project.update({
+          currentFunding: projectTotal
+        },
+        {
+          where: { id: projectId }
+        })
+          .then(function () {
+            console.log("Project updated successfully!");
+          })
+          .catch(function (err) {
+            console.log("Project update failed!");
+          });
+
         // Send back error startus if charge is fails
       } else {
         res.status(201).send('Charge Failed!');
