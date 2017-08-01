@@ -1,20 +1,20 @@
 import React from 'react';
-import css from '../../../public/css/payment.css';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
+import axios from 'axios';
 
 // force https address for stripe payments
-// if (location.protocol === 'http:') {
-//   location.href = location.href.replace(/^http:/, 'https:')
+// if (location.protocol ==='http:') {
+//   location.href = location.href.replace(/^http:/, 'https:');
 // }
 
 class Payment extends React.Component {
   constructor(props) {
     super(props);
-    this.stripe = Stripe('pk_test_sMvTrVbdTKzUNCSvhAtOH9wS');
-
+    this.stripe = Stripe('pk_test_01qGTTxV9m6rilCgqGcYzcXn');
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this);
   }
 
@@ -36,13 +36,15 @@ class Payment extends React.Component {
   }
 
   sendPayment(result) {
-    console.log('SendPayment Result:', result);
+    //console.log('SendPayment Result:', result);
     axios.post('/api/payment', {
       token: result.token,
       amount: result.amount,
       currency: result.currency,
       source: result.token.id,
-      description: result.description
+      description: result.description,
+      projectId: this.props.projectPage.content.id,
+      projectFunded: this.props.projectPage.content.currentFunding
     })
       .then(function (response) {
         console.log(response);
@@ -79,7 +81,7 @@ class Payment extends React.Component {
       result.description = 'Charge for TechStarter';
 
       this.validatePayment(result);
-      console.log("Result:", result);
+      //console.log("Result:", result);
     });
   }
 
@@ -88,11 +90,11 @@ class Payment extends React.Component {
       <div className='payment-body'>
         <form>
           <label>
-            <input name='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
+            <input id='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
             <span><span>Name</span></span>
           </label>
           <label>
-            <input name='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
+            <input id='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01' />
             <span><span>Amount</span></span>
           </label>
           <label>
@@ -112,4 +114,6 @@ class Payment extends React.Component {
   }
 }
 
-export default Payment;
+const mapStateToProps = state => ({ projectPage: state.projectPage });
+
+export default withRouter(connect(mapStateToProps)(Payment));
