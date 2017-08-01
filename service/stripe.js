@@ -50,6 +50,19 @@ module.exports.charge = (req, res) => {
             console.log("Project update failed!");
           });
 
+        // Insert a new entry to Funding table
+        Funding.create({
+          projectId: projectId,
+          userId: userId,
+          amount: projectTotal
+        })
+          .then(function () {
+            console.log("Funding updated successfully!");
+          })
+          .catch(function (err) {
+            console.log("Funding update failed!");
+          });
+
         // Send back error startus if charge is fails
       } else {
         res.status(201).send('Charge Failed!');
