@@ -32,6 +32,13 @@ class Payment extends React.Component {
 
   sendPayment(result) {
     console.log('SendPayment Result:', result);
+    axios.post('/api/payment', {
+      token: result.token,
+      amount: result.amount,
+      currency: result.currency,
+      source: result.token.id,
+      description: result.description,
+    });
   }
 
   validatePayment(result) {
