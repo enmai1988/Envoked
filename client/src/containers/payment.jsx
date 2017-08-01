@@ -30,30 +30,15 @@ class Payment extends React.Component {
     });
   }
 
-  validatePayment(result) {
-    let successElement = document.querySelector('.success');
-    let errorElement = document.querySelector('.error');
-    successElement.classList.remove('visible');
-    errorElement.classList.remove('visible');
-
-    if (result.token) {
-      successElement.querySelector('.token').textContent = result.token.id;
-      successElement.classList.add('visible');
-    } else if (result.error) {
-      errorElement.textContent = result.error.message;
-      errorElement.classList.add('visible');
-    }
-  }
-
   handlePaymentSubmit(e) {
     e.preventDefault();
-    let form = document.querySelector('form');
-
     this.stripe.createToken(this.card).then(result => {
-      result.name = form.querySelector('input[name=cardholder-name]').value;
-      result.amount = form.querySelector('input[name=payment-amount]').value;
-      console.log(result);
-      this.validatePayment(result);
+      result.name = document.getElementById('cardholder-name').value;
+      result.amount = document.getElementById('payment-amount').value;
+      result.currency = 'usd';
+      result.description = 'Charge for TechStarter';
+
+      //console.log("Result:", result);
     });
   }
 
