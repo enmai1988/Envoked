@@ -29,5 +29,16 @@ module.exports.charge = (req, res) => {
       console.log('USERID: ', userId);
       console.log('STATUS: ', status);
       console.log('AMOUNT: ', chargeAmount);
+
+      // Send back success startus if charge is successful
+      if (status === 'succeeded') {
+        let projectTotal = parseFloat(projectFunded) + amount;
+        console.log('TOTAL: ', projectTotal);
+        res.status(200).send('Charge Successful!');
+
+        // Send back error startus if charge is fails
+      } else {
+        res.status(201).send('Charge Failed!');
+      }
     });
 };
