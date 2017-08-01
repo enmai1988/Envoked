@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
+import css from '../../../public/css/payment.css';
 import axios from 'axios';
 
 // force https address for stripe payments

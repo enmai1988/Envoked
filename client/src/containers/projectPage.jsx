@@ -57,17 +57,11 @@ class ProjectPage extends React.Component {
           </Button>
 
           <Modal show={this.state.showModal} onHide={this.close}>
-            <Modal.Header closeButton>
-              <Modal.Title>Fund This Project</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <Modal.Body closeButton>
               <div>
                 <Payment />
               </div>
             </Modal.Body>
-            <Modal.Footer>
-              <Button onClick={this.close}>Close</Button>
-            </Modal.Footer>
           </Modal>
         </div>
 
