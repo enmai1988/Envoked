@@ -2,7 +2,8 @@ const color = require('colors');
 const app = require('../server/app');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const { User, Notification } = require('../db');
+const Promise = require('bluebird');
+const { User, Notification, Contact } = require('../db');
 
 io.on('connection', socket => {
   const storage = {};
@@ -12,17 +13,48 @@ io.on('connection', socket => {
   console.log('a user has connected'.blue);
 
   socket.on('contact request', data => {
-    data.originatorId = id;
-    data.text = '';
-    Notification.create(data)
-      .then(result => {
-        console.log('contact request: '.yellow, result);
-        if (!result) { throw result; }
+    let notificationObj = {
+      originatorId: id,
+      recipientId: data.recipientId,
+      type: 'contact request'
+    };
+
+    Notification.create(notificationObj)
+      .then(() => {
+        return Promise.all([
+          Contact.create({
+            userId: id,
+            contactsId: data.recipientId,
+            status: 'pending'
+          }),
+          Contact.create({
+            userId: data.recipientId,
+            contactsId: id,
+            status: 'pending'
+          })
+        ]);
+      })
+      .then(() => {
         io.to(data.recipientId).emit('new notification');
       })
       .catch(err => {
-        io.to(id).emit('failed to send request');
+        console.log('error creating notification', err);
+        io.to(id).emit('failed to fulfill contact requset');
       });
+  });
+
+  socket.on('mark notifications as read', notifications => {
+    console.log('updating notifications to read'.yellow);
+    Promise.each(notifications, notification => {
+      Notification.findById(notification.id)
+        .then(result => {
+          result.update({status: 'read'});
+        });
+    }).then(() => {
+      io.to(id).emit('marked notifications as read');
+    }).catch(err => {
+      console.log('err when updating notifications'.red, err);
+    });
   });
 
   socket.on('disconnect', () => {

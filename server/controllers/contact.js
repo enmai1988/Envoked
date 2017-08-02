@@ -1,23 +1,34 @@
-const { User } = require('../../db/');
+const { User, Contact } = require('../../db');
 const Promise = require('bluebird');
+const color = require('colors');
 
 module.exports.getAll = (req, res) => {
-  let option = { order: [['firstName', 'ASC']] };
+  let option = {
+    where: { userId: req.user.id, status: 'contact' },
+    include: [{
+      model: User,
+      as: 'contacts',
+      order: [['firstName', 'ASC']]
+    }],
+  };
   if (req.query.keyword !== '') {
-    option = { where: { firstName: { $iLike: `${req.query.keyword}%` } }, order: [['firstName', 'ASC']] };
+    option = {
+      where: { status: 'contact' },
+      include: [{
+        model: User,
+        as: 'contacts',
+        where: { firstName: { $iLike: `${req.query.keyword}%` } },
+        order: [['firstName', 'ASC']]
+      }]
+    };
   }
-  console.log('Search contacts with: ', option);
-  User.findOne({ where: { id: req.user.id } })
-    .then(user => {
-      if (!user) { throw user; }
-      return user.getContacts(option);
-    })
-    .then(contacts => {
-      if (!contacts) { throw contacts; }
-      res.send(contacts);
+  console.log('Search contacts with: '.yellow, option);
+  Contact.findAll(option)
+    .then(result => {
+      res.send(result);
     })
     .catch(err => {
-      console.log('failed to get contacts: ', err);
+      console.log('error getting all contacts: '.red, err);
       res.sendStatus(500);
     });
 };
@@ -42,9 +53,34 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.getOne = (req, res) => {
+  if (req.user.id === Number(req.params.id)) {
+    return res.send('self');
+  }
 
+  Contact.findOne({ where: { userId: req.user.id, contactsId: req.params.id } })
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => {
+      console.log('error getting one contact: '.red, err);
+      res.sendStatus(500);
+    });
 };
 
 module.exports.update = (req, res) => {
-
+  console.log('contact update: '.yellow, req.body);
+  Promise.all([
+    Contact.findOne({ where: { userId: req.params.id } }),
+    Contact.findOne({ where: { userId: req.user.id } })
+  ]).spread((result1, result2) => {
+    return Promise.all([
+      result1.update(req.body),
+      result2.update(req.body)
+    ]);
+  }).then(() => {
+    res.sendStatus(200);
+  }).catch(err => {
+    console.log('error when updating contacts: '.red, err);
+    res.sendStatus(500);
+  });
 };

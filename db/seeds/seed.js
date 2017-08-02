@@ -58,18 +58,6 @@ const addSlugToUsers = array => {
 
 // db.sync({force: true})
 //   .then(() => {
-//     return User.bulkCreate(users);
-//   })
-//   .then(() => {
-//     return Project.bulkCreate(compileProjects(projects.projects));
-//   })
-//   .then(() => {
-//     return Interest.bulkCreate(interests);
-//   })
-//   .then(() => db.close());
-
-// db.sync({force: true})
-//   .then(() => {
 //     User.bulkCreate(users)
 //       .then(() => {
 //         Project.bulkCreate(compileProjects(projects.projects))

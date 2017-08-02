@@ -24,6 +24,7 @@ class ProfileContent extends React.Component {
   handleTabSelect(e, key) {
     let origin;
     if (e) {
+      e.preventDefault();
       this.props.selectTab(e.target.name);
       key = e.target.name;
     }

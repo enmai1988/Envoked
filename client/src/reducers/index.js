@@ -6,6 +6,7 @@ import formReducer from './formReducer';
 import tabsReducer from './tabsReducer';
 import contactReducer from './contactReducer';
 import notificationReducer from './notificationReducer';
+import isContactReducer from './isContactReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   formControl: formReducer,
   tabs: tabsReducer,
   contacts: contactReducer,
-  notifications: notificationReducer
+  notifications: notificationReducer,
+  isContact: isContactReducer
 });

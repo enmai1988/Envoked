@@ -77,16 +77,26 @@ export const notificationStyle = {
 };
 
 export const notificationListEntryStyle = {
-  ':hover': {
-    backgroundColor: 'rgba(232, 232, 232, 0.5)'
+  li: {
+    listStyle: 'none',
+    width: '100%',
+    height: '62px',
+    padding: '8px 14px',
+    verticalAlign: 'middle',
+    borderBottom: '1px solid rgb(232, 232, 232)'
   },
-  cursor: 'pointer',
-  listStyle: 'none',
-  width: '100%',
-  height: '62px',
-  padding: '8px 14px',
-  verticalAlign: 'middle',
-  borderBottom: '1px solid rgb(232, 232, 232)'
+  accept: {
+    color: 'rgb(81,118,184)',
+    backgroundColor: 'transparent',
+    border: 'none',
+    backgroundRepeat: 'no-repeat'
+  },
+  decline: {
+    color: 'rgb(215,96,85)',
+    backgroundColor: 'transparent',
+    border: 'none',
+    backgroundRepeat: 'no-repeat'
+  }
 };
 
 export const projectPageMainStyle = {
@@ -106,7 +116,8 @@ export const projectPageMainStyle = {
       cursor: 'pointer',
       ':hover': { backgroundColor: '#ee4b28' }
     },
-    plus: {color: 'rgb(255,255,255)', fontSize: '12px'},
-    text: {fontWeight: '600', color: 'rgb(255,255,255)', fontSize: '17px'}
-  }
+    text: {color: 'rgb(255,255,255)', fontSize: '12px'},
+    plus: {fontWeight: '600', color: 'rgb(255,255,255)', fontSize: '17px'},
+  },
+  connected: {color: 'rgb(255,255,255)', fontSize: '12px', marginTop: '5px', display: 'block'}
 };

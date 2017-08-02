@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
-    "start": "nodemon server",
+    "start": "NODE_ENV=production nodemon server",
     "test": "NODE_ENV=test grunt test",
-    "server-dev": "nodemon server",
+    "server-dev": "NODE_ENV=development nodemon server",
     "build": "webpack --watch",
     "seed": "node db/seeds/seed.js"
   },
@@ -39,6 +39,7 @@
     "passport-linkedin": "^1.0.0",
     "passport-local": "^1.0.0",
     "pg": "^7.0.2",
+    "radium": "^0.19.4",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
     "react-bootstrap": "^0.31.1",
@@ -62,6 +63,7 @@
     "stripe": "^4.23.1",
     "style-loader": "^0.18.2",
     "twilio": "^3.5.0",
+    "twilio-video": "^1.2.0",
     "underscore": "^1.8.3",
     "watson-developer-cloud": "^2.34.0"
   },

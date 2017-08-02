@@ -1,4 +1,4 @@
-const User = require('../../db/').User;
+const { User, Contact } = require('../../db/');
 
 module.exports.getAll = (req, res) => {
 

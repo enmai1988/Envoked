@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions/userActions.js';
 import { fetchProjects } from '../actions/projectActions.js';
 import { fetchNotifications } from '../actions/notificationActions.js';
-import Header from '../components/header.jsx';
+import Header from './header.jsx';
 import LandingPage from '../components/landingPage.jsx';
 import ProjectPage from './projectPage.jsx';
 import ProfilePage from '../components/profilePage.jsx';
@@ -24,6 +24,7 @@ class App extends React.Component {
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.initSocket = this.initSocket.bind(this);
     this.sendContactRequest = this.sendContactRequest.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,10 @@ class App extends React.Component {
     this.socket.on('new notification', () => {
       this.props.fetchNotifications();
     });
+
+    this.socket.on('marked notifications as read', () => {
+      this.props.fetchNotifications();
+    });
   }
 
   sendContactRequest(e, id) {
@@ -55,9 +60,9 @@ class App extends React.Component {
     socket.emit('contact request', { recipientId: id });
   }
 
-  toggleSidebar(e) {
+  markNotificationAsRead(e, notifications) {
     e.preventDefault();
-    this.setState({ showSidebar: !this.state.showSidebar });
+    this.socket.emit('mark notifications as read', notifications);
   }
 
   toggleSidebar(e) {
@@ -87,6 +92,7 @@ class App extends React.Component {
             toggleSidebar={this.toggleSidebar}
             menu={burgerMenu}
             notifications={this.props.notifications.content}
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <Switch>
             <Route exact path='/' render={props =>
@@ -96,7 +102,11 @@ class App extends React.Component {
                 handleProjectFetching={this.handleProjectFetching}/>
             }/>
             <Route path='/projects/:userId/:project' render={props =>
-              <ProjectPage {...props} sendContactRequest={this.sendContactRequest}/>
+              <ProjectPage
+                {...props}
+                sendContactRequest={this.sendContactRequest}
+                user={this.props.user}
+              />
             }/>
             <Route path='/myProfile' render={props =>
               <ProfilePage {...props} user={this.props.user.fetchedUser}/>

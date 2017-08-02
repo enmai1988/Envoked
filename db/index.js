@@ -82,9 +82,24 @@ const Notification = db.define('notification', {
   viewedAt: Sequelize.DATE
 });
 
+const Contact = db.define('contact', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+  status: {
+    type: Sequelize.TEXT,
+    defaultValue: 'pending'
+  }
+});
+
 User.hasMany(Project, { foreignKey: 'userId'});
 
-User.belongsToMany(User, { as: 'contacts', through: 'Contacts' });
+User.hasMany(Contact);
+
+Contact.belongsTo(User, { as: 'contacts'} );
 
 Project.belongsTo(User);
 
@@ -118,4 +133,4 @@ db.sync();
 //       });
 //   });
 
-module.exports = { db, User, Project, Interest, Funding, Notification };
+module.exports = { db, User, Project, Interest, Funding, Notification, Contact };

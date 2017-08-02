@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_CONTACT_PENDING, FETCH_CONTACT_FULFILLED, FETCH_CONTACT_REJECTED } from '../constants';
 
-export const fetchContacts = (option = {}) => {
+export const fetchContacts = (option = { params: { keyword: '' } }) => {
   return dispatch => {
     dispatch({ type: FETCH_CONTACT_PENDING });
     return axios.get('/api/contacts', option)
