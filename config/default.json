@@ -3,8 +3,8 @@
     "client": "postgresql",
     "connection": {
       "database": "techstarter",
-      "user": "",
-      "password": "",
+      "user": "karinadalca",
+      "password": "1234",
       "host": "localhost",
       "port": 5432
     },
