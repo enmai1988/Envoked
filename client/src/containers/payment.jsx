@@ -36,8 +36,19 @@ class Payment extends React.Component {
     });
   }
 
+  showCharge(response) {
+    let successElement = document.querySelector('.success');
+    successElement.classList.remove('visible');
+
+    if (response.data) {
+      successElement.textContent = response.data;
+      successElement.classList.add('visible');
+    }
+  }
+
   sendPayment(result) {
     //console.log('SendPayment Result:', result);
+    var that = this;
     axios.post('/api/payment', {
       token: result.token,
       amount: result.amount,
@@ -48,7 +59,7 @@ class Payment extends React.Component {
       projectFunded: this.props.projectPage.content.currentFunding
     })
       .then(function (response) {
-        console.log(response);
+        that.showCharge(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -56,20 +67,13 @@ class Payment extends React.Component {
   }
 
   validatePayment(result) {
-    let successElement = document.querySelector('.success');
     let errorElement = document.querySelector('.error');
-    successElement.classList.remove('visible');
     errorElement.classList.remove('visible');
-
     if (result.token) {
-      successElement.querySelector('.token').textContent = result.token.id;
-      successElement.classList.add('visible');
       this.sendPayment(result);
-      //console.log("Result Token: ", result.token.id);
     } else if (result.error) {
       errorElement.textContent = result.error.message;
       errorElement.classList.add('visible');
-      //console.log("Result Token: ", result);
     }
   }
 
@@ -82,7 +86,6 @@ class Payment extends React.Component {
       result.description = 'Charge for TechStarter';
 
       this.validatePayment(result);
-      //console.log("Result:", result);
     });
   }
 
@@ -105,9 +108,7 @@ class Payment extends React.Component {
           <button onClick={this.handlePaymentSubmit}>Support this project</button>
           <div className='outcome'>
             <div className='error' role='alert'></div>
-            <div className='success'>
-              Success! Your Stripe token is <span className="token"></span>
-            </div>
+            <div className='success'></div>
           </div>
         </form>
       </div>
