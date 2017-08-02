@@ -25,10 +25,10 @@ module.exports.charge = (req, res) => {
       let result = 'BlUE';
 
       stripe.charges.create({
-        amount: stripeAmount,
+        amount: amount,
         currency,
         description,
-        source,
+        //source,
         capture: true
       })
         .then(charge => {
@@ -68,42 +68,20 @@ module.exports.charge = (req, res) => {
                     console.log('THIS IS THE END', result);
                     res.status(200).send(result);
                   });
-                // .catch(function (err) {
-                //   console.log('Funding update failed!');
-                //   result = result + 'Funding update failed, ';
-                // });
                 return;
               });
-            // .catch(function (err) {
-            //   console.log('Project update failed!');
-            //   result + 'Project update failed, ';
-            // });
-
-            // // Insert a new entry to Funding table
-            // Funding.create({
-            //   projectId: projectId,
-            //   userId: userId,
-            //   amount: projectTotal
-            // })
-            //   .then(function () {
-            //     console.log("Funding updated successfully!");
-            //     result + "Funding updated successfully, ";
-            //     return Promise.resolve(result);
-            //   })
-            //   .catch(function (err) {
-            //     console.log("Funding update failed!");
-            //     return result + "Funding update failed, ";
-            //   });
-
           } else {
             // Send back error startus if charge is fails
             result = 'Charge Failed!';
             return Promise.resolve(result);
-            //res.status(201).send('Charge Failed!');
             return;
           }
           return;
+        })
+        .catch(err => {
+          res.status(200).send('Charge Failed!');
         });
+
     }
   }
 };
