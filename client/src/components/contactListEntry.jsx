@@ -1,8 +1,8 @@
 import React from 'react';
 import { strColor } from '../../../helpers/util';
 
-const ContactListEntry = ({ contact, handleVideo }) => (
-  <li className='contact-list-entry' onClick={handleVideo}>
+const ContactListEntry = ({ contact, startVideoChat }) => (
+  <li className='contact-list-entry' onClick={e => startVideoChat(e, contact)}>
     <div className='row no-margin'>
       <div className='col-md-2 contact-icon'>
         <div style={{background: strColor(`${contact.contacts.firstName[0]}`)}}>

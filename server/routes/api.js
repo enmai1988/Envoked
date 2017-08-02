@@ -18,7 +18,4 @@ router.route('/projects/:userId/:project')
 router.route('/myprofile')
   .get(middleware.auth.verify, (req, res) => res.render('index.ejs'));
 
-router.route('/videocall')
-  .get(middleware.auth.verify, service.twilio.createVideoRoom);
-
 module.exports = router;

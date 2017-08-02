@@ -1,10 +1,10 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const ProjectController = require('../controllers').Interest;
+const InterestController = require('../controllers').Interest;
 
 router.route('/')
-  .get(ProjectController.getAll)
+  .get(InterestController.getAll)
 ;
 
-module.exports = router;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+module.exports = router;

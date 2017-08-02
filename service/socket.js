@@ -3,6 +3,7 @@ const app = require('../server/app');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const Promise = require('bluebird');
+const Twilio = require('./twilio');
 const { User, Notification, Contact } = require('../db');
 
 io.on('connection', socket => {
@@ -35,26 +36,54 @@ io.on('connection', socket => {
         ]);
       })
       .then(() => {
-        io.to(data.recipientId).emit('new notification');
+        io.to(data.recipientId).emit('update notification');
       })
       .catch(err => {
         console.log('error creating notification', err);
-        io.to(id).emit('failed to fulfill contact requset');
+        io.to(id).emit('request failed');
       });
   });
 
-  socket.on('mark notifications as read', notifications => {
+  socket.on('mark notifications as read', notification => {
     console.log('updating notifications to read'.yellow);
-    Promise.each(notifications, notification => {
-      Notification.findById(notification.id)
-        .then(result => {
-          result.update({status: 'read'});
-        });
-    }).then(() => {
-      io.to(id).emit('marked notifications as read');
+    Notification.findById(notification.id)
+      .then(result => result.update({ status: 'read' }))
+      .then(() => io.to(id).emit('update notification'))
+      .catch(err => {
+        console.log('update notification: '.red, err);
+        io.to(id).emit('error updating notification');
+      });
+  });
+
+  socket.on('start video chat', data => {
+    console.log('start video chat'.yellow, data);
+    let notificationObj = {
+      originatorId: id,
+      recipientId: data.invitee.id,
+      type: 'video chat request'
+    };
+
+    Promise.all([
+      Notification.create(notificationObj),
+      Twilio.getVideoToken(data.inviter)
+    ]).spread((notification, videoChatInfo) => {
+      io.to(data.invitee.id).emit('update notification');
+      io.to(data.invitee.id).emit('video chat request', { inviter: data.inviter, invitee: data.invitee });
+      io.to(id).emit('video chat token', videoChatInfo);
     }).catch(err => {
-      console.log('err when updating notifications'.red, err);
+      console.log('failed to create notification'.red, err);
+      io.to(id).emit('request failed');
     });
+  });
+
+  socket.on('accept video chat request', user => {
+    Promise.resolve(Twilio.getVideoToken(user))
+      .then(videoChatInfo => {
+        io.to(id).emit('join video chat', videoChatInfo);
+      })
+      .catch(err => {
+
+      });
   });
 
   socket.on('disconnect', () => {
