@@ -22,50 +22,43 @@ module.exports.charge = (req, res) => {
       let source = req.body.source;
       let description = req.body.description || 'test';
       let currency = req.body.currency || 'usd';
-      let result = 'BlUE';
+      let result = '';
 
       stripe.charges.create({
-        amount: amount,
+        amount: stripeAmount,
         currency,
         description,
-        //source,
+        source,
         capture: true
       })
         .then(charge => {
           let status = charge.status;
           let chargeAmount = charge.amount;
-          let result = '';
 
           // Send back success startus if charge is successful
           if (status === 'succeeded') {
 
             let projectTotal = parseFloat(projectFunded) + amount;
-            result += 'Charge Successful, ';
-            console.log('Charge Sucks', result);
+
             // Update currentFunding for projectId in Projects Table
             Project.update({
               currentFunding: projectTotal
             }, { where: { id: projectId } })
               .then(function () {
                 console.log('Project updated successfully!');
-                result = result + 'Project updated successfully, ';
-
               })
               .then(function () {
-                console.log('After project update', result);
                 Funding.create({
                   projectId: projectId,
                   userId: userId,
                   amount: projectTotal
                 })
                   .then(function () {
-                    //console.log("Funding updated successfully!");
-                    result = result + 'Funding updated successfully.';
-                    console.log(result);
+                    console.log('Funding updated successfully!');
+                    result = 'Charge Successful!';
                     return;
                   })
                   .then(() => {
-                    console.log('THIS IS THE END', result);
                     res.status(200).send(result);
                   });
                 return;
