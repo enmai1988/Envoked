@@ -1,15 +1,21 @@
 import React from 'react';
-import css from '../../../public/css/payment.css';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { updateInput } from '../actions/inputActions.js';
 import { submitForm } from '../actions/formActions.js';
 import { styles } from '../styles';
+import css from '../../../public/css/payment.css';
+import axios from 'axios';
+
+// force https address for stripe payments
+// if (location.protocol ==='http:') {
+//   location.href = location.href.replace(/^http:/, 'https:');
+// }
 
 class Payment extends React.Component {
   constructor(props) {
     super(props);
-    this.stripe = Stripe('pk_test_sMvTrVbdTKzUNCSvhAtOH9wS');
-
+    this.stripe = Stripe('pk_test_01qGTTxV9m6rilCgqGcYzcXn');
     this.handlePaymentSubmit = this.handlePaymentSubmit.bind(this);
   }
 
@@ -30,15 +36,41 @@ class Payment extends React.Component {
     });
   }
 
-  validatePayment(result) {
+  showCharge(response) {
     let successElement = document.querySelector('.success');
-    let errorElement = document.querySelector('.error');
     successElement.classList.remove('visible');
-    errorElement.classList.remove('visible');
 
-    if (result.token) {
-      successElement.querySelector('.token').textContent = result.token.id;
+    if (response.data) {
+      successElement.textContent = response.data;
       successElement.classList.add('visible');
+    }
+  }
+
+  sendPayment(result) {
+    //console.log('SendPayment Result:', result);
+    var that = this;
+    axios.post('/api/payment', {
+      token: result.token,
+      amount: result.amount,
+      currency: result.currency,
+      source: result.token.id,
+      description: result.description,
+      projectId: this.props.projectPage.content.id,
+      projectFunded: this.props.projectPage.content.currentFunding
+    })
+      .then(function (response) {
+        that.showCharge(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  validatePayment(result) {
+    let errorElement = document.querySelector('.error');
+    errorElement.classList.remove('visible');
+    if (result.token) {
+      this.sendPayment(result);
     } else if (result.error) {
       errorElement.textContent = result.error.message;
       errorElement.classList.add('visible');
@@ -47,12 +79,12 @@ class Payment extends React.Component {
 
   handlePaymentSubmit(e) {
     e.preventDefault();
-    let form = document.querySelector('form');
-
     this.stripe.createToken(this.card).then(result => {
-      result.name = form.querySelector('input[name=cardholder-name]').value;
-      result.amount = form.querySelector('input[name=payment-amount]').value;
-      console.log(result);
+      result.name = document.getElementById('cardholder-name').value;
+      result.amount = document.getElementById('payment-amount').value;
+      result.currency = 'usd';
+      result.description = 'Charge for TechStarter';
+
       this.validatePayment(result);
     });
   }
@@ -62,11 +94,11 @@ class Payment extends React.Component {
       <div className='payment-body'>
         <form>
           <label>
-            <input name='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
+            <input id='cardholder-name' className='field is-empty' placeholder='Jane Doe' />
             <span><span>Name</span></span>
           </label>
           <label>
-            <input name='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01'/>
+            <input id='payment-amount' className='field is-empty' placeholder='$0.00' type='number' min='0' step='0.01' />
             <span><span>Amount</span></span>
           </label>
           <label>
@@ -76,9 +108,7 @@ class Payment extends React.Component {
           <button onClick={this.handlePaymentSubmit}>Support this project</button>
           <div className='outcome'>
             <div className='error' role='alert'></div>
-            <div className='success'>
-              Success! Your Stripe token is <span className="token"></span>
-            </div>
+            <div className='success'></div>
           </div>
         </form>
       </div>
@@ -86,4 +116,6 @@ class Payment extends React.Component {
   }
 }
 
-export default Payment;
+const mapStateToProps = state => ({ projectPage: state.projectPage });
+
+export default withRouter(connect(mapStateToProps)(Payment));

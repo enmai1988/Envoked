@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProject } from '../actions/projectPageActions.js';
 import { isContact } from '../actions/isContactActions.js';
+import { Button, Modal } from 'react-bootstrap';
 import ProjectPageMain from '../components/projectPageMain.jsx';
 import Payment from './payment.jsx';
 import Spinner from '../components/spinner.jsx';
@@ -10,15 +11,26 @@ import Spinner from '../components/spinner.jsx';
 class ProjectPage extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = { showModal: false };
     this.userId = this.props.match.params.userId;
     this.project = this.props.match.params.project;
   }
 
   componentDidMount() {
-    this.props.fetchProject(`${this.userId}/${this.project}`);
+    let userId = this.props.match.params.userId;
+    let project = this.props.match.params.project;
+    this.props.fetchProject(`${userId}/${project}`);
 
-    this.props.checkIfContact(this.userId);
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+  }
+
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open() {
+    this.setState({ showModal: true });
   }
 
   render() {
@@ -36,8 +48,23 @@ class ProjectPage extends React.Component {
               isContact={this.props.isContact.isContact}
               sendContactRequest={this.props.sendContactRequest}
             /> :
-            <Spinner style={{marginTop: '150px'}}/>
+            <Spinner style={{ marginTop: '150px' }} />
         }
+
+        <div>
+          <Button bsStyle="primary" bsSize="large" onClick={this.open}>
+            Fund This Project!
+          </Button>
+
+          <Modal show={this.state.showModal} onHide={this.close}>
+            <Modal.Body>
+              <div>
+                <Payment />
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
+
       </div>
     );
   }
