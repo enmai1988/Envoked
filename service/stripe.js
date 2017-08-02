@@ -34,46 +34,75 @@ module.exports.charge = (req, res) => {
         .then(charge => {
           let status = charge.status;
           let chargeAmount = charge.amount;
-          console.log('projectId: ', projectId);
-          console.log('PROJECTFunded: ', projectFunded);
-          console.log('USERID: ', userId);
-          console.log('STATUS: ', status);
-          console.log('AMOUNT: ', chargeAmount);
+          let result = '';
 
           // Send back success startus if charge is successful
           if (status === 'succeeded') {
-            let projectTotal = parseFloat(projectFunded) + amount;
-            console.log('TOTAL: ', projectTotal);
-            res.status(200).send('Charge Successful!');
 
+            let projectTotal = parseFloat(projectFunded) + amount;
+            result += 'Charge Successful, ';
+            console.log('Charge Sucks', result);
             // Update currentFunding for projectId in Projects Table
             Project.update({
               currentFunding: projectTotal
             }, { where: { id: projectId } })
               .then(function () {
-                console.log("Project updated successfully!");
-              })
-              .catch(function (err) {
-                console.log("Project update failed!");
-              });
+                console.log('Project updated successfully!');
+                result = result + 'Project updated successfully, ';
 
-            // Insert a new entry to Funding table
-            Funding.create({
-              projectId: projectId,
-              userId: userId,
-              amount: projectTotal
-            })
+              })
               .then(function () {
-                console.log("Funding updated successfully!");
-              })
-              .catch(function (err) {
-                console.log("Funding update failed!");
+                console.log('After project update', result);
+                Funding.create({
+                  projectId: projectId,
+                  userId: userId,
+                  amount: projectTotal
+                })
+                  .then(function () {
+                    //console.log("Funding updated successfully!");
+                    result = result + 'Funding updated successfully.';
+                    console.log(result);
+                    return;
+                  })
+                  .then(() => {
+                    console.log('THIS IS THE END', result);
+                    res.status(200).send(result);
+                  });
+                // .catch(function (err) {
+                //   console.log('Funding update failed!');
+                //   result = result + 'Funding update failed, ';
+                // });
+                return;
               });
+            // .catch(function (err) {
+            //   console.log('Project update failed!');
+            //   result + 'Project update failed, ';
+            // });
 
-            // Send back error startus if charge is fails
+            // // Insert a new entry to Funding table
+            // Funding.create({
+            //   projectId: projectId,
+            //   userId: userId,
+            //   amount: projectTotal
+            // })
+            //   .then(function () {
+            //     console.log("Funding updated successfully!");
+            //     result + "Funding updated successfully, ";
+            //     return Promise.resolve(result);
+            //   })
+            //   .catch(function (err) {
+            //     console.log("Funding update failed!");
+            //     return result + "Funding update failed, ";
+            //   });
+
           } else {
-            res.status(201).send('Charge Failed!');
+            // Send back error startus if charge is fails
+            result = 'Charge Failed!';
+            return Promise.resolve(result);
+            //res.status(201).send('Charge Failed!');
+            return;
           }
+          return;
         });
     }
   }
