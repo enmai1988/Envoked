@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchContacts } from '../actions/contactActions.js';
 import { Link } from 'react-router-dom';
 import { debounce } from 'underscore';
+import { Modal, Button } from 'react-bootstrap';
 import ContactList from '../components/contactList.jsx';
 import Video from 'twilio-video';
 import axios from 'axios';
@@ -11,7 +12,10 @@ import axios from 'axios';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { height: window.innerHeight };
+    this.state = {
+      height: window.innerHeight,
+      showModal: false
+    };
 
     this.updateInnerHeight = this.updateInnerHeight.bind(this);
     this.fetchContacts = this.fetchContacts.bind(this);
@@ -19,6 +23,8 @@ class Sidebar extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleVideo = this.handleVideo.bind(this);
     this.handleVideoConnect = this.handleVideoConnect.bind(this);
+    this.handleVideoDisconnect = this.handleVideoDisconnect.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +49,8 @@ class Sidebar extends React.Component {
   }
 
   handleVideo(e) {
+    this.setState({ showModal: true });
+
     axios.get('/videocall')
       .then(response => {
         return Video.connect(response.data.token, {name: response.data.identity});
@@ -51,6 +59,7 @@ class Sidebar extends React.Component {
         console.log(room);
         room.participants.forEach(this.handleVideoConnect);
         room.on('participantConnected', this.handleVideoConnect);
+        room.once('disconnected', error => room.participants.forEach(this.handleVideoDisconnect));
       })
       .catch(err => {
         console.log(err);
@@ -58,6 +67,7 @@ class Sidebar extends React.Component {
   }
 
   handleVideoConnect(participant) {
+    console.log('handleVideoConnect: ', participant);
     const div = document.createElement('div');
     div.id = participant.sid;
     div.innerText = participant.identity;
@@ -66,7 +76,14 @@ class Sidebar extends React.Component {
     participant.tracks.forEach(track => this.trackAdded(div, track));
     participant.on('trackRemoved', this.trackRemoved);
 
-    document.getElementById('wrapper').appendChild(div);
+    document.getElementById('video-chat').appendChild(div);
+  }
+
+  handleVideoDisconnect() {
+    console.log('Participant "%s" disconnected', participant.identity);
+
+    participant.tracks.forEach(trackRemoved);
+    document.getElementById(participant.sid).remove();
   }
 
   trackAdded(div, track) {
@@ -75,6 +92,10 @@ class Sidebar extends React.Component {
 
   trackRemoved(track) {
     track.detach().forEach(element => element.remove());
+  }
+
+  hideModal() {
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -95,6 +116,19 @@ class Sidebar extends React.Component {
             <a href='/auth/logout' style={{color: 'white', textDecoration: 'none'}}>Logout</a>
           </div>
         </div>
+        <Modal show={this.state.showModal} onHide={this.hideModal}>
+          <Modal.Header>
+            <Modal.Title>Video Chat</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div id='video-chat' style={{width: '100%', height: '100%'}}>
+
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.hideModal}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
