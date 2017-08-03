@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../actions/userActions.js';
 import { fetchProjects } from '../actions/projectActions.js';
 import { fetchNotifications } from '../actions/notificationActions.js';
+import { updateVieoChatInfo } from '../actions/videoChatActions.js';
 import Header from './header.jsx';
 import LandingPage from '../components/landingPage.jsx';
 import ProjectPage from './projectPage.jsx';
@@ -14,17 +15,26 @@ import Login from '../components/login.jsx';
 import ProjectEditor from './projectEditor.jsx';
 import PrivateRoute from '../components/privateRoute.jsx';
 import Sidebar from './sidebar.jsx';
+import VideoChat from '../components/videoChat.jsx';
 import io from 'socket.io-client';
+import TwilioVideo from 'twilio-video';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showSidebar: false };
+    this.state = {
+      showSidebar: false,
+      showVideoChat: false
+    };
+
     this.handleProjectFetching = this.handleProjectFetching.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.initSocket = this.initSocket.bind(this);
     this.sendContactRequest = this.sendContactRequest.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
+    this.startVideoChat = this.startVideoChat.bind(this);
+    this.accepVideoChatRequest = this.accepVideoChatRequest.bind(this);
+    this.disconnectVideoChat = this.disconnectVideoChat.bind(this);
   }
 
   componentDidMount() {
@@ -44,12 +54,15 @@ class App extends React.Component {
   initSocket(id) {
     this.socket = io({ query: { id } });
 
-    this.socket.on('new notification', () => {
-      this.props.fetchNotifications();
+    this.socket.on('update notification', this.props.fetchNotifications);
+
+    this.socket.on('video chat token', videoChatInfo => {
+      this.videoChatInfo = videoChatInfo;
+      this.initVideoChatRoom(videoChatInfo);
     });
 
-    this.socket.on('marked notifications as read', () => {
-      this.props.fetchNotifications();
+    this.socket.on('video chat request', data => {
+      this.props.updateVieoChatInfo(data);
     });
   }
 
@@ -60,8 +73,7 @@ class App extends React.Component {
     socket.emit('contact request', { recipientId: id });
   }
 
-  markNotificationAsRead(e, notifications) {
-    e.preventDefault();
+  markNotificationAsRead(notifications) {
     this.socket.emit('mark notifications as read', notifications);
   }
 
@@ -74,6 +86,112 @@ class App extends React.Component {
     this.props.fetchProjects({ params: { origin } });
   }
 
+  startVideoChat(e, invitee) {
+    this.setState({ showVideoChat: true });
+    this.socket.emit('start video chat', {
+      inviter: this.props.user.fetchedUser,
+      invitee: invitee.contacts
+    });
+  }
+
+  initVideoChatRoom(chatInfo) {
+    TwilioVideo.connect(chatInfo.token, { name: this.props.user.fetchedUser.id })
+      .then(room => {
+        room.on('participantConnected', participant => {
+          console.log('Participant "%s" connected', participant.identity);
+
+          participant.on('trackAdded', track => {
+            document.getElementById('participant-window').appendChild(track.attach());
+          });
+
+          participant.on('trackRemoved', track => {
+            track.detach().forEach(el => el.remove());
+          });
+        });
+
+        room.on('participantDisconnected', participant => {
+          console.log('Participant disconnected', participant.identity);
+
+          participant.tracks.forEach(track => {
+            track.detach().forEach(el => el.remove());
+          });
+        });
+
+        room.on('disconnected', room => {
+          room.localParticipant.tracks.forEach(track => {
+            track.detach().forEach(el => el.remove());
+          });
+        });
+
+        this.room = room;
+        this.createLocalTracks();
+      })
+      .catch(err => {
+        console.log('failed to init video chat room: ', err);
+      });
+  }
+
+  createLocalTracks() {
+    return TwilioVideo.createLocalTracks({ video: { width: 120 }, audio: true })
+      .then(localTracks => {
+        localTracks.forEach(track => {
+          document.getElementById('self-window').appendChild(track.attach());
+        });
+      });
+  }
+
+  accepVideoChatRequest(notification) {
+    this.markNotificationAsRead(notification);
+    this.setState({ showVideoChat: true });
+    this.socket.emit('accept video chat request', this.props.user.fetchedUser);
+
+    this.socket.on('join video chat', data => {
+      TwilioVideo.connect(data.token, { name: this.props.videoChatInfo.inviter.id })
+        .then(room => {
+          room.participants.forEach(participant => {
+            participant.on('trackAdded', track => {
+              document.getElementById('participant-window').appendChild(track.attach());
+            });
+
+            participant.on('trackRemoved', track => {
+              track.detach().forEach(el => el.remove());
+            });
+          });
+
+          room.on('participantConnected', participant => {
+            console.log('Participant "%s" connected', participant.identity);
+
+            participant.on('trackAdded', track => {
+              document.getElementById('participant-window').appendChild(track.attach());
+            });
+
+            participant.on('trackRemoved', track => {
+              track.detach().forEach(el => el.remove());
+            });
+          });
+
+          room.on('participantDisconnected', participant => {
+            console.log('Participant disconnected', participant.identity);
+          });
+
+          room.on('disconnected', room => {
+            room.localParticipant.tracks.forEach(track => {
+              track.detach().forEach(el => el.remove());
+            });
+          });
+          
+          this.room = room;
+
+          this.createLocalTracks();
+        });
+    });
+  }
+
+  disconnectVideoChat() {
+    this.room.disconnect();
+    this.setState({ showVideoChat: false });
+  }
+
   render() {
     let sidebarToggle = '';
     let burgerMenu = 'menu';
@@ -81,8 +199,6 @@ class App extends React.Component {
       sidebarToggle = ' toggled';
       burgerMenu = 'menu change';
     }
-
-    const profilePage = props => (<ProfilePage {...props} user={this.props.user.fetchedUser}/>);
 
     return (
       <Router history={history}>
@@ -93,6 +209,7 @@ class App extends React.Component {
             menu={burgerMenu}
             notifications={this.props.notifications.content}
             markNotificationAsRead={this.markNotificationAsRead}
+            accepVideoChatRequest={this.accepVideoChatRequest}
           />
           <Switch>
             <Route exact path='/' render={props =>
@@ -125,10 +242,12 @@ class App extends React.Component {
             />
             <Route path='/auth/signup' component={Signup} />
           </Switch>
-          {this.props.user.isLoggedIn ?
-            <Sidebar user={this.props.user.fetchedUser}/> :
-            null
+          {
+            this.props.user.isLoggedIn ?
+              <Sidebar user={this.props.user.fetchedUser} startVideoChat={this.startVideoChat}/> :
+              null
           }
+          <VideoChat showVideoChat={this.state.showVideoChat} disconnectVideoChat={this.disconnectVideoChat}/>
           {/* <Footer /> */}
         </div>
       </Router>
@@ -136,12 +255,13 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.user, projects: state.projects, notifications: state.notifications });
+const mapStateToProps = state => ({ user: state.user, projects: state.projects, notifications: state.notifications, videoChatInfo: state.videoChatInfo });
 
 const mapDispatchToProps = dispatch => ({
   fetchUser: () => dispatch(fetchUser()),
   fetchProjects: option => dispatch(fetchProjects(option)),
-  fetchNotifications: option => dispatch(fetchNotifications(option))
+  fetchNotifications: option => dispatch(fetchNotifications(option)),
+  updateVieoChatInfo: info => dispatch(updateVieoChatInfo(info))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

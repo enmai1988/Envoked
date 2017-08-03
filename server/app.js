@@ -26,6 +26,7 @@ app.use('/api/notifications', routes.notification);
 app.use('/api/payment', routes.payment);
 app.use('/api/interest', routes.interests);
 app.use('/api/projects', routes.project);
+app.use('/api/twilio', middleware.auth.verify, routes.twilio);
 app.use('/api/user', middleware.auth.verify, routes.user);
 
 module.exports = app;

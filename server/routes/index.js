@@ -6,3 +6,4 @@ module.exports.payment = require('./payment');
 module.exports.interests = require('./interests');
 module.exports.contact = require('./contact');
 module.exports.notification = require('./notification');
+module.exports.twilio = require('./twilio');

@@ -7,6 +7,7 @@ import tabsReducer from './tabsReducer';
 import contactReducer from './contactReducer';
 import notificationReducer from './notificationReducer';
 import isContactReducer from './isContactReducer';
+import videoChatReducer from './videoChatReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
@@ -18,5 +19,6 @@ export default combineReducers({
   tabs: tabsReducer,
   contacts: contactReducer,
   notifications: notificationReducer,
-  isContact: isContactReducer
+  isContact: isContactReducer,
+  videoChatInfo: videoChatReducer
 });

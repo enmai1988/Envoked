@@ -121,3 +121,18 @@ export const projectPageMainStyle = {
   },
   connected: {color: 'rgb(255,255,255)', fontSize: '12px', marginTop: '5px', display: 'block'}
 };
+
+export const videoChatCancel = {
+  position: 'absolute',
+  top: '-5px',
+  right: '5px',
+  transition: 'all 200ms',
+  fontSize: '30px',
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  color: 'rgb(252, 252, 252)',
+  ':hover': {
+    cursor: 'pointer',
+    color: 'rgb(240, 90, 64)'
+  }
+};

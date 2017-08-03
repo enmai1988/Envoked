@@ -2,7 +2,7 @@ const { User, Notification } = require('../../db/');
 const Promise = require('bluebird');
 
 module.exports.getAll = (req, res) => {
-  Notification.findAll({ where: { recipientId: req.user.id }, include: [{ model: User, as: 'originator' }] })
+  Notification.findAll({ where: { recipientId: req.user.id, status: 'unread' }, include: [{ model: User, as: 'originator' }] })
     .then(results => {
       if (!results) { throw results; }
       res.send(results);

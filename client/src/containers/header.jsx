@@ -12,17 +12,17 @@ import NotificationList from '../components/notificationList.jsx';
 
 class Header extends React.Component {
   render() {
-    let { user, toggleSidebar, menu, notifications, markNotificationAsRead } = this.props;
+    let { user, toggleSidebar, menu, notifications, markNotificationAsRead, accepVideoChatRequest } = this.props;
     let display = null;
     let leftMenu = null;
-
-    const unreadMessages = notifications.filter(el => el.status === 'unread');
 
     const popoverNotification = (
       <Popover id='popover-positioned-bottom' title='Messages' style={popoverStyle}>
         <NotificationList
           notifications={notifications}
           fetchContacts={this.props.fetchContacts}
+          markNotificationAsRead={markNotificationAsRead}
+          accepVideoChatRequest={accepVideoChatRequest}
         />
       </Popover>
     );
@@ -43,8 +43,8 @@ class Header extends React.Component {
           <LinkContainer to='/myProfile'>
             <NavItem>My projects</NavItem>
           </LinkContainer>
-          <OverlayTrigger trigger='click' placement='bottom' overlay={popoverNotification} onClick={e => markNotificationAsRead(e, unreadMessages)}>
-            <NavItem>My messages <span className='badge'>{unreadMessages.length}</span></NavItem>
+          <OverlayTrigger rootClose={true} trigger='click' placement='bottom' overlay={popoverNotification}>
+            <NavItem>My messages <span className='badge'>{notifications.length}</span></NavItem>
           </OverlayTrigger>
         </Nav>
       );
