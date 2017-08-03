@@ -8,8 +8,8 @@ const VideoChat = ({ showVideoChat, disconnectVideoChat }) => (
       <Modal.Title>Video Chat</Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      <div id='video-chat-container' className='col-md'>
-        <div id='participant-window'>
+      <div id='video-chat-container' className='col-md-12'>
+        <div id='participant-window' style={{width: '640px', height: '320px', background: 'rgb(236,236,236)'}}>
           <div id='self-window'></div>
         </div>
       </div>

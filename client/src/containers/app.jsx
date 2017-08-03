@@ -35,8 +35,6 @@ class App extends React.Component {
     this.startVideoChat = this.startVideoChat.bind(this);
     this.accepVideoChatRequest = this.accepVideoChatRequest.bind(this);
     this.disconnectVideoChat = this.disconnectVideoChat.bind(this);
-    this.trackAdded = this.trackAdded.bind(this);
-    this.trackRemoved = this.trackRemoved.bind(this);
   }
 
   componentDidMount() {
@@ -99,37 +97,34 @@ class App extends React.Component {
   initVideoChatRoom(chatInfo) {
     TwilioVideo.connect(chatInfo.token, { name: this.props.user.fetchedUser.id })
       .then(room => {
-        room.participants.forEach(this.participantConnected);
-        room.on('participantConnected', this.participantConnected);
+        // room.participants.forEach(this.participantConnected);
+        room.on('participantConnected', participant => {
+          console.log('Participant "%s" connected', participant.identity);
+          console.log('participant: ', participant);
+          console.log('participant tracks: ', participant.tracks);
+          console.log('participant video: ', participant.videoTrack);
 
-        room.on('participantDisconnected', this.participantDisconnected);
-        room.once('disconnected', error => room.participants.forEach(this.participantDisconnected));
+          participant.on('trackAdded', track => {
+            document.getElementById('participant-window').appendChild(track.attach());
+          });
+        });
+
+        room.on('participantDisconnected', participant => {
+          console.log('Participant disconnected', participant.identity);
+
+          participant.tracks.forEach(track => {
+            track.detach().forEach(el => el.remove());
+          });
+          document.getElementById('participant-window').remove();
+        });
+
+        // room.once('disconnected', error => room.participants.forEach(this.participantDisconnected));
+        this.room = room;
         this.createLocalTracks();
       })
       .catch(err => {
         console.log('failed to init video chat room: ', err);
       });
-  }
-
-  participantConnected(participant) {
-    console.log('Participant "%s" connected', participant.identity);
-
-    const div = document.createElement('div');
-    div.id = participant.sid;
-    div.innerText = participant.identity;
-
-    participant.on('trackAdded', track => this.trackAdded(div, track));
-    participant.tracks.forEach(track => this.trackAdded(div, track));
-    participant.on('trackRemoved', this.trackRemoved);
-
-    document.getElementById('video-chat-container').appendChild(div);
-  }
-
-  participantDisconnected(participant) {
-    console.log('Participant disconnected', participant.identity);
-
-    participant.tracks.forEach(this.trackRemoved);
-    document.getElementById(participant.sid).remove();
   }
 
   createLocalTracks() {
@@ -141,30 +136,61 @@ class App extends React.Component {
       });
   }
 
-  trackAdded(div, track) {
-    div.appendChild(track.attach());
-  }
-
-  trackRemoved(track) {
-    track.detach().forEach(element => element.remove());
-  }
-
   accepVideoChatRequest(notification) {
     this.markNotificationAsRead(notification);
     this.setState({ showVideoChat: true });
     this.socket.emit('accept video chat request', this.props.user.fetchedUser);
 
     this.socket.on('join video chat', data => {
-      TwilioVideo.connect(data.token, { name: this.props.videoChatInfo.inviter.id })
+      TwilioVideo.createLocalTracks({ video: {width: 640}, audio: true })
+        .then(tracks => {
+          console.log('invitee tracks: ', tracks);
+          tracks.forEach(track => {
+            document.getElementById('self-window').appendChild(track.attach());
+          });
+          console.log('inviter id: ', this.props.videoChatInfo.inviter.id);
+          return TwilioVideo.connect(data.token, { name: this.props.videoChatInfo.inviter.id, tracks: tracks });
+        })
         .then(room => {
-          console.log('join video chat: ', room);
+          console.log('connected to room: ', room.name);
+          room.on('participantConnected', participant => {
+            participant.on('trackAdded', track => {
+              document.getElementById('participant-window').appendChild(track.attach());
+            });
+
+            // participant.tracks.forEach(track => {
+            //   console.log('participant track: ', track);
+            //   document.getElementById('participant-window').appendChild(track.attach());
+            // });
+          });
+
+          room.on('participantDisconnected', participant => {
+            console.log('Participant disconnected', participant.identity);
+
+            participant.tracks.forEach(track => {
+              track.detach().forEach(el => el.remove());
+            });
+            document.getElementById('participant-window').remove();
+          });
+
+          this.room = room;
+
           this.createLocalTracks();
         });
+      // TwilioVideo.connect(data.token, { name: this.props.videoChatInfo.inviter.id })
+      //   .then(room => {
+      //     this.room = room;
+      //
+      //     this.createLocalTracks()
+      //       .then(tracks => {
+      //         TwilioVideo.connect()
+      //       })
+      //   });
     });
   }
 
   disconnectVideoChat() {
-
+    this.room.disconnect();
     this.setState({ showVideoChat: false });
   }
 
