@@ -1,23 +1,18 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import css from '../../../public/css/videochat.css';
+import Radium from 'radium';
+import { videoChatCancel } from '../styles';
+import { Modal } from 'react-bootstrap';
 import Video from 'twilio-video';
 
 const VideoChat = ({ showVideoChat, disconnectVideoChat }) => (
-  <Modal show={showVideoChat} autoFocus={true} bsSize='large'>
-    <Modal.Header>
-      <Modal.Title>Video Chat</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <div id='video-chat-container' className='col-md-12'>
-        <div id='participant-window' style={{width: '640px', height: '320px', background: 'rgb(236,236,236)'}}>
-          <div id='self-window'></div>
-        </div>
-      </div>
-    </Modal.Body>
-    <Modal.Footer>
-      <Button onClick={disconnectVideoChat}>Close</Button>
-    </Modal.Footer>
+  <Modal show={showVideoChat} autoFocus={true} dialogClassName='video-chat'>
+    <div id='participant-window' style={{width: '640px', height: '480px', backgroundColor: 'rgb(34, 34, 34)', position: 'absolute'}}></div>
+    <div id='self-window' style={{position: 'relative', top: '0%', right: '0%'}}></div>
+    <a onClick={disconnectVideoChat} style={videoChatCancel}>
+      &times;
+    </a>
   </Modal>
 );
 
-export default VideoChat;
+export default Radium(VideoChat);

@@ -1,0 +1,7 @@
+.video-chat {
+  width: 640px;
+  height: 480px;
+  left: 50%;
+  margin-left: -320px;
+  background-color: transparent;
+}
