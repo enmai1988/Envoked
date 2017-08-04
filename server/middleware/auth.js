@@ -9,13 +9,8 @@ if (process.env.REDISTOGO_URL) {
   let rtg = url.parse(process.env.REDISTOGO_URL);
   client = redis.createClient(rtg.port, rtg.hostname);
   client.auth(rtg.auth.split(':')[1]);
-  options = { client };
 } else {
-  client = redis.createClient();
-  options = {
-    client: client,
-    url: config.host
-  };
+  client = redis.createClient(6379, config.host);
 }
 
 
@@ -29,7 +24,7 @@ module.exports.verify = (req, res, next) => {
 };
 
 module.exports.session = session({
-  store: new RedisStore(options),
+  store: new RedisStore({ client }),
   secret: '55iW',
   resave: false,
   saveUninitialized: false
