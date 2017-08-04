@@ -3,7 +3,7 @@ const config = require('config')['sequelize'];
 const users = require('./users.json');
 const projects = require('./projects.json');
 const interests = require('./interests.json');
-const { compileProjects } = require('./seeds/seed');
+// const { compileProjects } = require('./seeds/seed');
 
 let db;
 if (process.env.DATABASE_URL) {
@@ -122,15 +122,15 @@ Notification.belongsTo(User, { as: 'originator' });
 
 Notification.belongsTo(User, { as: 'recipient' });
 
-db.sync({force: true})
-  .then(() => {
-    User.bulkCreate(users)
-      .then(() => {
-        Project.bulkCreate(compileProjects(projects.projects))
-          .then(() => {
-            Interest.bulkCreate(interests);
-          });
-      });
-  });
+// db.sync({force: true})
+//   .then(() => {
+//     User.bulkCreate(users)
+//       .then(() => {
+//         Project.bulkCreate(compileProjects(projects.projects))
+//           .then(() => {
+//             Interest.bulkCreate(interests);
+//           });
+//       });
+//   });
 
 module.exports = { db, User, Project, Interest, Funding, Notification, Contact };
