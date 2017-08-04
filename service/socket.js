@@ -44,6 +44,23 @@ io.on('connection', socket => {
       });
   });
 
+  socket.on('contact request decision', data => {
+    Promise.all([
+      Contact.findOne({ where: { status: 'pending', userId: data.userId } }),
+      Contact.findOne({ where: { status: 'pending', userId: data.contactsId } })
+    ]).spread((contact1, contact2) => {
+      return Promise.all([
+        contact1.update({ status: data.status }),
+        contact2.update({ status: data.status })
+      ]);
+    }).then(() => {
+      io.to(id).emit('update contact');
+      io.to(data.contactsId).emit('update contact');
+    }).catch(err => {
+      console.log('err creating contact'.red, err);
+    });
+  });
+
   socket.on('mark notifications as read', notification => {
     console.log('updating notifications to read'.yellow);
     Notification.findById(notification.id)

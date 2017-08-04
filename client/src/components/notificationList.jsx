@@ -4,34 +4,6 @@ import { notificationStyle, notificationListEntryStyle } from '../styles';
 import axios from 'axios';
 
 class NotificationList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.acceptContactReq = this.acceptContactReq.bind(this);
-    this.declineContactReq = this.declineContactReq.bind(this);
-  }
-
-  acceptContactReq(e, notification) {
-    axios.put(`/api/contacts/${e.target.value}`, { status: 'contact' })
-      .then(response => {
-        this.props.fetchContacts();
-        this.props.markNotificationAsRead(notification);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  declineContactReq(e, notification) {
-    axios.put(`/api/contacts/${e.target.value}`, { status: 'denied' })
-      .then(response => {
-        this.props.fetchContacts();
-        this.props.markNotificationAsRead(notification);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   render() {
     return (
       <ul style={notificationStyle}>
@@ -44,15 +16,15 @@ class NotificationList extends React.Component {
                 </div>
                 <div style={{float: 'left', marginLeft: '10px'}}>
                   <button
-                    value={notification.originator.id}
-                    onClick={e => this.acceptContactReq(e, notification)}
+                    value='contact'
+                    onClick={e => this.props.contactRequestDecision(e, notification)}
                     style={notificationListEntryStyle.accept}
                   >
                     Accept
                   </button>
                   <button
-                    value={notification.originator.id}
-                    onClick={e => this.declineContactReq(e, notification)}
+                    value='decline'
+                    onClick={e => this.props.contactRequestDecision(e, notification)}
                     style={notificationListEntryStyle.decline}
                   >
                     Decline
@@ -67,8 +39,8 @@ class NotificationList extends React.Component {
                   {`Video chat request from ${notification.originator.firstName} ${notification.originator.lastName}`}
                 </div>
                 <div style={{float: 'left', marginLeft: '10px'}}>
-                  <button value={notification.originator.id} onClick={() => this.props.accepVideoChatRequest(notification)} style={notificationListEntryStyle.accept}>Accept</button>
-                  <button value={notification.originator.id} style={notificationListEntryStyle.decline}>Decline</button>
+                  <button value='accept' onClick={e => this.props.videoChatRequestDecision(e, notification)} style={notificationListEntryStyle.accept}>Accept</button>
+                  <button value='decline' onClick={e => this.props.videoChatRequestDecision(e, notification)} style={notificationListEntryStyle.decline}>Decline</button>
                 </div>
               </li>
             );
