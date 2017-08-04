@@ -124,15 +124,15 @@ Notification.belongsTo(User, { as: 'recipient' });
 
 // db.sync();
 
-db.sync({force: true})
-  .then(() => {
-    User.bulkCreate(users)
-      .then(() => {
-        Project.bulkCreate(compileProjects(projects.projects))
-          .then(() => {
-            Interest.bulkCreate(interests);
-          });
-      });
-  });
+// db.sync({force: true})
+//   .then(() => {
+//     User.bulkCreate(users)
+//       .then(() => {
+//         Project.bulkCreate(compileProjects(projects.projects))
+//           .then(() => {
+//             Interest.bulkCreate(interests);
+//           });
+//       });
+//   });
 
 module.exports = { db, User, Project, Interest, Funding, Notification, Contact };
