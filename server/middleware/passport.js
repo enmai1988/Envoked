@@ -88,7 +88,7 @@ passport.use('facebook', new FacebookStrategy({
       });
     })
     .catch(err => {
-      console.log('passport google: ', err);
+      console.log('passport facebook: ', err);
       done(null, false);
     });
 }));
