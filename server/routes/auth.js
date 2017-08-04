@@ -55,20 +55,10 @@ router.get('/facebook', middleware.passport.authenticate('facebook', {
 }));
 
 router.get('/facebook/callback', middleware.passport.authenticate('facebook', {
-  successRedirect: '/',
-  failureRedirect: '/auth/login',
-  failureFlash: true
-}));
-
-router.get('/linkedin', middleware.passport.authenticate('linkedin', {
-  scope: ['profile']
+  failureRedirect: '/auth/login'
 }), (req, res) => {
+  console.log('facebook auth: ', req.url);
   res.redirect('/');
 });
-
-router.get('/linkedin/callback', middleware.passport.authenticate('linkedin', {
-  successRedirect: '/profile',
-  failureRedirect: '/auth/login'
-}));
 
 module.exports = router;

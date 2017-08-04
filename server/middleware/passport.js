@@ -5,6 +5,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const LinkedinStrategy = require('passport-linkedin').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const config = require('config')['passport'];
+const color = require('colors');
 const { User } = require('../../db/');
 
 passport.serializeUser((profile, done) => {
@@ -55,6 +56,7 @@ passport.use('google', new GoogleStrategy({
         avatar: profile.photos[0].value,
         email: profile.emails[0].value
       }).then(user => {
+        console.log('google auth: '.yellow, user);
         if (!user) { throw user; }
         done(null, user);
       });
@@ -80,6 +82,7 @@ passport.use('facebook', new FacebookStrategy({
         avatar: profile.photos[0].value,
         email: profile.emails[0].value
       }).then(user => {
+        console.log('facebook auth: '.yellow, user);
         if (!user) { throw user; }
         done(null, user);
       });
