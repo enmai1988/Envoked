@@ -82,7 +82,7 @@ class App extends React.Component {
 
   sendContactRequest(e, id) {
     e.preventDefault();
-    console.log(id);
+    console.log('send contact req to id: ', id);
     const socket = this.socket;
     socket.emit('contact request', { recipientId: id });
   }

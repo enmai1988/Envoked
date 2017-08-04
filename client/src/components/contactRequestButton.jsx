@@ -12,7 +12,7 @@ const ContactRequestButton = ({ sendContactRequest, isContact, match }) => {
     );
   } else if (isContact === false) {
     button = (
-      <Button bsStyle='danger' bsSize="xsmall" onClick={sendContactRequest}>Add to contact</Button>
+      <Button bsStyle='danger' bsSize="xsmall" onClick={e => sendContactRequest(e, match.params.userId)}>Add to contact</Button>
     );
   }
 
