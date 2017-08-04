@@ -5,6 +5,7 @@ import { fetchUser } from '../actions/userActions.js';
 import { fetchProjects } from '../actions/projectActions.js';
 import { fetchNotifications } from '../actions/notificationActions.js';
 import { updateVieoChatInfo } from '../actions/videoChatActions.js';
+import { fetchContacts } from '../actions/contactActions.js';
 import Header from './header.jsx';
 import LandingPage from '../components/landingPage.jsx';
 import ProjectPage from './projectPage.jsx';
@@ -31,9 +32,10 @@ class App extends React.Component {
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.initSocket = this.initSocket.bind(this);
     this.sendContactRequest = this.sendContactRequest.bind(this);
+    this.contactRequestDecision = this.contactRequestDecision.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.startVideoChat = this.startVideoChat.bind(this);
-    this.accepVideoChatRequest = this.accepVideoChatRequest.bind(this);
+    this.videoChatRequestDecision = this.videoChatRequestDecision.bind(this);
     this.disconnectVideoChat = this.disconnectVideoChat.bind(this);
   }
 
@@ -51,10 +53,22 @@ class App extends React.Component {
       });
   }
 
+  contactRequestDecision(e, notification) {
+    this.socket.emit('contact request decision', {
+      contactsId: notification.originatorId,
+      userId: notification.recipientId,
+      status: e.target.value
+    });
+
+    this.markNotificationAsRead(notification);
+  }
+
   initSocket(id) {
     this.socket = io({ query: { id } });
 
     this.socket.on('update notification', this.props.fetchNotifications);
+
+    this.socket.on('update contact', this.props.fetchContacts);
 
     this.socket.on('video chat token', videoChatInfo => {
       this.videoChatInfo = videoChatInfo;
@@ -68,7 +82,7 @@ class App extends React.Component {
 
   sendContactRequest(e, id) {
     e.preventDefault();
-    console.log(id);
+    console.log('send contact req to id: ', id);
     const socket = this.socket;
     socket.emit('contact request', { recipientId: id });
   }
@@ -140,8 +154,11 @@ class App extends React.Component {
       });
   }
 
-  accepVideoChatRequest(notification) {
+  videoChatRequestDecision(e, notification) {
     this.markNotificationAsRead(notification);
+    if (e.target.value === 'decline') {
+      return;
+    }
     this.setState({ showVideoChat: true });
     this.socket.emit('accept video chat request', this.props.user.fetchedUser);
 
@@ -179,7 +196,7 @@ class App extends React.Component {
               track.detach().forEach(el => el.remove());
             });
           });
-          
+
           this.room = room;
 
           this.createLocalTracks();
@@ -208,8 +225,8 @@ class App extends React.Component {
             toggleSidebar={this.toggleSidebar}
             menu={burgerMenu}
             notifications={this.props.notifications.content}
-            markNotificationAsRead={this.markNotificationAsRead}
-            accepVideoChatRequest={this.accepVideoChatRequest}
+            contactRequestDecision={this.contactRequestDecision}
+            videoChatRequestDecision={this.videoChatRequestDecision}
           />
           <Switch>
             <Route exact path='/' render={props =>
@@ -261,7 +278,8 @@ const mapDispatchToProps = dispatch => ({
   fetchUser: () => dispatch(fetchUser()),
   fetchProjects: option => dispatch(fetchProjects(option)),
   fetchNotifications: option => dispatch(fetchNotifications(option)),
-  updateVieoChatInfo: info => dispatch(updateVieoChatInfo(info))
+  updateVieoChatInfo: info => dispatch(updateVieoChatInfo(info)),
+  fetchContacts: (option) => dispatch(fetchContacts(option))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

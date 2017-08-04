@@ -1,20 +1,28 @@
-const calculatePercentage = (valueA, valueB) => {
+'use strict';
+
+var calculatePercentage = function calculatePercentage(valueA, valueB) {
   valueA = Number(valueA) || 0;
-  let res = Math.round(valueA / valueB * 100);
-  if (res < 0) { res = 0; }
+  var res = Math.round(valueA / valueB * 100);
+  if (res < 0) {
+    res = 0;
+  }
 
   return res <= 100 ? res : 100;
 };
 
-const convertToSlug = str => {
-  let hyphenated = str.split(/[^A-Za-z0-9]/g).filter(el => el !== '').map(el => el.toLowerCase()).join('-');
+var convertToSlug = function convertToSlug(str) {
+  var hyphenated = str.split(/[^A-Za-z0-9]/g).filter(function (el) {
+    return el !== '';
+  }).map(function (el) {
+    return el.toLowerCase();
+  }).join('-');
 
   return hyphenated;
 };
 
-const strColor = (str) => {
-  let s = str.toLowerCase();
-  let color = {
+var strColor = function strColor(str) {
+  var s = str.toLowerCase();
+  var color = {
     a: '#652e04',
     b: '#24c8c6',
     c: '#5e4807',
@@ -46,4 +54,4 @@ const strColor = (str) => {
   return color[s];
 };
 
-module.exports = { calculatePercentage, convertToSlug, strColor };
+module.exports = { calculatePercentage: calculatePercentage, convertToSlug: convertToSlug, strColor: strColor };

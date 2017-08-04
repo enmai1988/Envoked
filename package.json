@@ -2,8 +2,8 @@
   "name": "TechStarter",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
-    "start": "NODE_ENV=production nodemon server",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.babel.js --progress && node ./db/seeds/seed.js",
+    "start": "NODE_ENV=production node server",
     "test": "NODE_ENV=test grunt test",
     "server-dev": "NODE_ENV=development nodemon server",
     "build": "webpack --watch",
@@ -65,9 +65,7 @@
     "twilio": "^3.5.0",
     "twilio-video": "^1.2.0",
     "underscore": "^1.8.3",
-    "watson-developer-cloud": "^2.34.0"
-  },
-  "devDependencies": {
+    "watson-developer-cloud": "^2.34.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-preset-latest": "^6.24.1",

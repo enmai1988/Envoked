@@ -5,11 +5,16 @@ const projects = require('./projects.json');
 const interests = require('./interests.json');
 const { compileProjects } = require('./seeds/seed');
 
-const db = new Sequelize(config.connection.database, config.connection.user, config.connection.password, {
-  host: config.connection.host,
-  dialect: 'postgres',
-  pool: config.pool
-});
+let db;
+if (process.env.DATABASE_URL) {
+  db = new Sequelize(process.env.DATABASE_URL);
+} else {
+  db = new Sequelize(config.connection.database, config.connection.user, config.connection.password, {
+    host: config.connection.host,
+    dialect: 'postgres',
+    pool: config.pool
+  });
+}
 
 const User = db.define('user', {
   id: {
@@ -117,20 +122,17 @@ Notification.belongsTo(User, { as: 'originator' });
 
 Notification.belongsTo(User, { as: 'recipient' });
 
-db.sync();
+// db.sync();
 
-// db.sync()
-//   .then(() => {
-//     User.bulkCreate(users)
-//       .then(() => {
-//         Project.bulkCreate(compileProjects(projects.projects))
-//           .then(() => {
-//             Interest.bulkCreate(interests)
-//               .then(() => {
-//                 db.close();
-//               });
-//           });
-//       });
-//   });
+db.sync({force: true})
+  .then(() => {
+    User.bulkCreate(users)
+      .then(() => {
+        Project.bulkCreate(compileProjects(projects.projects))
+          .then(() => {
+            Interest.bulkCreate(interests);
+          });
+      });
+  });
 
 module.exports = { db, User, Project, Interest, Funding, Notification, Contact };

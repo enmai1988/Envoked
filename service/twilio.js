@@ -1,10 +1,10 @@
 const color = require('colors');
 const config = require('config')['twilio'];
 const Twilio = require('twilio');
-const client = new Twilio(config.apiKeySid, config.apiKeySecret, { accountSid: config.accountSid });
-const ACCOUNT_SID = config.accountSid;
-const API_KEY_SID = config.apiKeySid;
-const API_KEY_SECRET = config.apiKeySecret;
+const client = new Twilio(process.env.TWILIO_APIKEYSID || config.apiKeySid, process.env.TWILIO_APIKEYSECRET || config.apiKeySecret, { accountSid: process.env.TWILIO_ACCOUNTSID || config.accountSid });
+const ACCOUNT_SID = process.env.TWILIO_ACCOUNTSID || config.accountSid;
+const API_KEY_SID = process.env.TWILIO_APIKEYSID || config.apiKeySid;
+const API_KEY_SECRET = process.env.TWILIO_APIKEYSECRET || config.apiKeySecret;
 const AccessToken = Twilio.jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 const ConversationsGrant = AccessToken.ConversationsGrant;

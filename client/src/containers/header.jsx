@@ -3,7 +3,6 @@ import Radium from 'radium';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem, NavDropdown, OverlayTrigger, Button, Popover } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { fetchContacts } from '../actions/contactActions.js';
 import { popoverStyle, headerStyle, navStyle } from '../styles';
 import HamburgerMenu from '../components/hamburgerMenu.jsx';
 import Search from '../components/search.jsx';
@@ -12,7 +11,7 @@ import NotificationList from '../components/notificationList.jsx';
 
 class Header extends React.Component {
   render() {
-    let { user, toggleSidebar, menu, notifications, markNotificationAsRead, accepVideoChatRequest } = this.props;
+    let { user, toggleSidebar, menu, notifications, videoChatRequestDecision, contactRequestDecision } = this.props;
     let display = null;
     let leftMenu = null;
 
@@ -21,8 +20,8 @@ class Header extends React.Component {
         <NotificationList
           notifications={notifications}
           fetchContacts={this.props.fetchContacts}
-          markNotificationAsRead={markNotificationAsRead}
-          accepVideoChatRequest={accepVideoChatRequest}
+          contactRequestDecision={contactRequestDecision}
+          videoChatRequestDecision={videoChatRequestDecision}
         />
       </Popover>
     );
@@ -84,8 +83,4 @@ class Header extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: (option) => dispatch(fetchContacts(option))
-});
-
-export default connect(null, mapDispatchToProps)(Radium(Header));
+export default Radium(Header);

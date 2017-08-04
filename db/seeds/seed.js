@@ -7,6 +7,10 @@ NOTE: 1. run 'createdb techstarter to create database'
       6. run database with: psql techstarter.
 ************************************************/
 const { convertToSlug } = require('../../helpers/util');
+const users = require('../users.json');
+const projects = require('../projects.json');
+const interests = require('../interests.json');
+const { db, User, Project, Interest, Funding, Notification, Contact } = require('../');
 
 module.exports.compileProjects = array => {
   let res = [];

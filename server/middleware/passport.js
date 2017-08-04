@@ -5,6 +5,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const LinkedinStrategy = require('passport-linkedin').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const config = require('config')['passport'];
+const color = require('colors');
 const { User } = require('../../db/');
 
 passport.serializeUser((profile, done) => {
@@ -42,9 +43,9 @@ passport.use('local-login', new LocalStrategy({
 }));
 
 passport.use('google', new GoogleStrategy({
-  clientID: config.Google.clientID,
-  clientSecret: config.Google.clientSecret,
-  callbackURL: config.Google.callbackURL
+  clientID: process.env.GOOGLE_CLIENTID || config.Google.clientID,
+  clientSecret: process.env.GOOGLE_CLIENTSECRET || config.Google.clientSecret,
+  callbackURL: process.env.GOOGLE_CALLBACKURL || config.Google.callbackURL
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ where: { email: profile.emails[0].value } })
     .then(result => {
@@ -55,6 +56,7 @@ passport.use('google', new GoogleStrategy({
         avatar: profile.photos[0].value,
         email: profile.emails[0].value
       }).then(user => {
+        console.log('google auth: '.yellow, user);
         if (!user) { throw user; }
         done(null, user);
       });
@@ -66,11 +68,12 @@ passport.use('google', new GoogleStrategy({
 }));
 
 passport.use('facebook', new FacebookStrategy({
-  clientID: config.Facebook.clientID,
-  clientSecret: config.Facebook.clientSecret,
-  callbackURL: config.Facebook.callbackURL,
+  clientID: process.env.FB_CLIENTID || config.Facebook.clientID,
+  clientSecret: process.env.FB_CLIENTSECRET || config.Facebook.clientSecret,
+  callbackURL: process.env.FB_CALLBACKURL || config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name', 'picture']
 }, (accessToken, refreshToken, profile, done) => {
+  console.log('fb profile: '.blue, profile);
   User.findOne({ where: { email: profile.emails[0].value } })
     .then(result => {
       if (result) { return done(null, result); }
@@ -80,12 +83,13 @@ passport.use('facebook', new FacebookStrategy({
         avatar: profile.photos[0].value,
         email: profile.emails[0].value
       }).then(user => {
+        console.log('facebook auth: '.yellow, user);
         if (!user) { throw user; }
         done(null, user);
       });
     })
     .catch(err => {
-      console.log('passport google: ', err);
+      console.log('passport facebook: ', err);
       done(null, false);
     });
 }));

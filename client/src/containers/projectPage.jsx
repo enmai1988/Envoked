@@ -14,15 +14,13 @@ class ProjectPage extends React.Component {
     this.state = { showModal: false };
     this.userId = this.props.match.params.userId;
     this.project = this.props.match.params.project;
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
   }
 
   componentDidMount() {
-    let userId = this.props.match.params.userId;
-    let project = this.props.match.params.project;
-    this.props.fetchProject(`${userId}/${project}`);
-
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
+    this.props.fetchProject(`${this.userId}/${this.project}`);
+    this.props.checkIfContact(this.userId);
   }
 
   close() {
@@ -64,7 +62,6 @@ class ProjectPage extends React.Component {
             </Modal.Body>
           </Modal>
         </div>
-
       </div>
     );
   }
