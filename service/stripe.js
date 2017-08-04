@@ -1,5 +1,5 @@
 const config = require('config')['stripe'];
-const stripe = require('stripe')(config.secret_key);
+const stripe = require('stripe')(process.env.STRIPE_SECRETKEY || config.secret_key);
 const Sequelize = require('sequelize');
 const { Project, User, Funding } = require('../db');
 
