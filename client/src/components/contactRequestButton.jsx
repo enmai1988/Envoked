@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import { Button } from 'react-bootstrap';
 import { projectPageMainStyle } from '../styles';
 
 const ContactRequestButton = ({ sendContactRequest, isContact, match }) => {
@@ -7,19 +8,11 @@ const ContactRequestButton = ({ sendContactRequest, isContact, match }) => {
 
   if (isContact) {
     button = (
-      <div style={projectPageMainStyle.addContact.div}>
-        <span style={projectPageMainStyle.connected}>
-          Connected
-        </span>
-      </div>
+      <Button bsStyle='danger' bsSize="xsmall">Connected</Button>
     );
   } else if (isContact === false) {
     button = (
-      <div style={projectPageMainStyle.addContact.div} onClick={e => sendContactRequest(e, match.params.userId)}>
-        <span style={projectPageMainStyle.addContact.text}>
-          <span style={projectPageMainStyle.addContact.plus}>+</span> Add contact
-        </span>
-      </div>
+      <Button bsStyle='danger' bsSize="xsmall">Add to contact</Button>
     );
   }
 
@@ -30,4 +23,4 @@ const ContactRequestButton = ({ sendContactRequest, isContact, match }) => {
   );
 };
 
-export default Radium(ContactRequestButton);
+export default ContactRequestButton;

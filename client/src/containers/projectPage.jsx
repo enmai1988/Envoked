@@ -20,9 +20,7 @@ class ProjectPage extends React.Component {
 
   componentDidMount() {
     this.props.fetchProject(`${this.userId}/${this.project}`);
-    if (this.props.user.isLoggedIn) {
-      this.props.checkIfContact(this.userId, this.props.user.fetchedUser.id);
-    }
+    this.props.checkIfContact(this.userId);
   }
 
   close() {
