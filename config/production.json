@@ -1,0 +1,55 @@
+{
+  "sequelize": {
+    "connection": {
+      "database": "techstarter",
+      "user": "user",
+      "password": "mimo",
+      "host": "postgres",
+      "port": 5432
+    },
+    "pool": {
+      "min": 2,
+      "max": 10
+    }
+  },
+
+  "redis": {
+    "host": "redis"
+  },
+
+  "passport": {
+    "Google": {
+      "clientID": "949503381509-a5h0v7olqi3spo0132kei38kriffja7k.apps.googleusercontent.com",
+      "clientSecret": "JrW-yBRDdIDtDmcjRvmTFVZu",
+      "callbackURL": "http://tech-starter.us/auth/google/callback"
+    },
+
+    "Facebook": {
+      "clientID": "1303162446469588",
+      "clientSecret": "3bdc67e1bcc005ec3c302d99734e4732",
+      "callbackURL": "http://165.227.11.119/auth/facebook/callback"
+    },
+
+    "Twitter": {
+      "consumerKey": "FILL_ME_IN",
+      "consumerSecret": "FILL_ME_IN",
+      "callbackURL": "http://FILL_ME_IN/auth/twitter/callback"
+    }
+  },
+
+  "watson": {
+    "username": "enmai1988@gmail.com",
+    "password": "Ws2gu248m%22"
+  },
+
+  "twilio": {
+    "accountSid": "AC99f66886dd5dcb2ad94bcd62b4e10278",
+    "authtoken": "e01dd28f8ff3217637b4ed46d7d4d6f0",
+    "apiKeySid": "SK28afbcbe8f06a8473f58cce833e3f3d9",
+    "apiKeySecret": "RkrqJqXZNrVPJmPneHtLK7zMACAOBGsx"
+  },
+
+  "stripe": {
+    "secret_key": "sk_test_VtuZ5HuAE1pPsTjJQZvv3Pst"
+  }
+}
