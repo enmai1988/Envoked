@@ -14,15 +14,17 @@ class ProjectPage extends React.Component {
     this.state = { showModal: false };
     this.userId = this.props.match.params.userId;
     this.project = this.props.match.params.project;
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
   }
 
   componentDidMount() {
-    let userId = this.props.match.params.userId;
-    let project = this.props.match.params.project;
-    this.props.fetchProject(`${userId}/${project}`);
-
-    this.close = this.close.bind(this);
-    this.open = this.open.bind(this);
+    // let userId = this.props.match.params.userId;
+    // let project = this.props.match.params.project;
+    this.props.fetchProject(`${this.userId}/${this.project}`);
+    if (this.props.user.isLoggedIn) {
+      this.props.checkIfContact(this.userId, this.props.user.fetchedUser.id);
+    }
   }
 
   close() {
@@ -64,7 +66,6 @@ class ProjectPage extends React.Component {
             </Modal.Body>
           </Modal>
         </div>
-
       </div>
     );
   }

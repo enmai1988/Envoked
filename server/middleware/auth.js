@@ -1,5 +1,6 @@
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const config = require('config')['redis'];
 const redisClient = require('redis').createClient();
 
 module.exports.verify = (req, res, next) => {
@@ -12,7 +13,7 @@ module.exports.verify = (req, res, next) => {
 module.exports.session = session({
   store: new RedisStore({
     client: redisClient,
-    host: 'localhost',
+    host: config.host,
     port: 6379
   }),
   secret: '55iW',
