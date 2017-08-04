@@ -5,11 +5,16 @@ const projects = require('./projects.json');
 const interests = require('./interests.json');
 const { compileProjects } = require('./seeds/seed');
 
-const db = new Sequelize(config.connection.database, config.connection.user, config.connection.password, {
-  host: config.connection.host,
-  dialect: 'postgres',
-  pool: config.pool
-});
+let db;
+if (process.env.DATABASE_URL) {
+  db = new Sequelize(process.env.DATABASE_URL);
+} else {
+  db = new Sequelize(config.connection.database, config.connection.user, config.connection.password, {
+    host: config.connection.host,
+    dialect: 'postgres',
+    pool: config.pool
+  });
+}
 
 const User = db.define('user', {
   id: {

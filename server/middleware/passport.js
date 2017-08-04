@@ -43,9 +43,9 @@ passport.use('local-login', new LocalStrategy({
 }));
 
 passport.use('google', new GoogleStrategy({
-  clientID: config.Google.clientID,
-  clientSecret: config.Google.clientSecret,
-  callbackURL: config.Google.callbackURL
+  clientID: process.env.GOOGLE_CLIENTID || config.Google.clientID,
+  clientSecret: process.env.GOOGLE_CLIENTSECRET || config.Google.clientSecret,
+  callbackURL: process.env.GOOGLE_CALLBACKURL || config.Google.callbackURL
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ where: { email: profile.emails[0].value } })
     .then(result => {
@@ -68,9 +68,9 @@ passport.use('google', new GoogleStrategy({
 }));
 
 passport.use('facebook', new FacebookStrategy({
-  clientID: config.Facebook.clientID,
-  clientSecret: config.Facebook.clientSecret,
-  callbackURL: config.Facebook.callbackURL,
+  clientID: process.env.FB_CLIENTID || config.Facebook.clientID,
+  clientSecret: process.env.FB_CLIENTSECRET || config.Facebook.clientSecret,
+  callbackURL: process.env.FB_CALLBACKURL || config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name', 'picture']
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ where: { email: profile.emails[0].value } })
