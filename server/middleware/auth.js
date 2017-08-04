@@ -1,4 +1,5 @@
 const session = require('express-session');
+const url = require('url');
 const RedisStore = require('connect-redis')(session);
 const config = require('config')['redis'];
 const redis = require('redis');
