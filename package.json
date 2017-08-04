@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "heroku-postbuild": "webpack -p --config ./webpack.config.babel.js --progress && node ./db/seeds/seed.js",
-    "start": "node server",
+    "start": "NODE_ENV=production node server",
     "test": "NODE_ENV=test grunt test",
     "server-dev": "NODE_ENV=development nodemon server",
     "build": "webpack --watch",
