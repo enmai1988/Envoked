@@ -12,7 +12,7 @@ const projects = require('../projects.json');
 const interests = require('../interests.json');
 const { db, User, Project, Interest, Funding, Notification, Contact } = require('../');
 
-module.exports.compileProjects = array => {
+const compileProjects = array => {
   let res = [];
   array.forEach(el => {
     let obj = {};
@@ -60,16 +60,16 @@ const addSlugToUsers = array => {
   });
 };
 
-// db.sync({force: true})
-//   .then(() => {
-//     User.bulkCreate(users)
-//       .then(() => {
-//         Project.bulkCreate(compileProjects(projects.projects))
-//           .then(() => {
-//             Interest.bulkCreate(interests)
-//               .then(() => {
-//                 db.close();
-//               });
-//           });
-//       });
-//   });
+db.sync({force: true})
+  .then(() => {
+    User.bulkCreate(users)
+      .then(() => {
+        Project.bulkCreate(compileProjects(projects.projects))
+          .then(() => {
+            Interest.bulkCreate(interests)
+              .then(() => {
+                db.close();
+              });
+          });
+      });
+  });

@@ -46,8 +46,8 @@ io.on('connection', socket => {
 
   socket.on('contact request decision', data => {
     Promise.all([
-      Contact.findOne({ where: { status: 'pending', userId: data.userId } }),
-      Contact.findOne({ where: { status: 'pending', userId: data.contactsId } })
+      Contact.findOne({ where: { status: 'pending', userId: data.userId, contactsId: data.contactsId } }),
+      Contact.findOne({ where: { status: 'pending', userId: data.contactsId, contactsId: data.userId } })
     ]).spread((contact1, contact2) => {
       return Promise.all([
         contact1.update({ status: data.status }),
