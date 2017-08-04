@@ -73,6 +73,7 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: process.env.FB_CALLBACKURL || config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name', 'picture']
 }, (accessToken, refreshToken, profile, done) => {
+  console.log('fb profile: '.blue, profile);
   User.findOne({ where: { email: profile.emails[0].value } })
     .then(result => {
       if (result) { return done(null, result); }
