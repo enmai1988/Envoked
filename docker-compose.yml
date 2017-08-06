@@ -18,5 +18,5 @@ services:
     image: postgres:9.6.3
     environment:
      POSTGRES_USER: user
-     POSTGRES_PASSWORD: mimo
+     POSTGRES_PASSWORD: password
      POSTGRES_DB: techstarter

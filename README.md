@@ -4,10 +4,9 @@ The project description
 
 ## Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- Eric Mai
+- David Gould
+- Karina Dalca
 
 ## Roadmap
 
@@ -51,12 +50,12 @@ Yarn is a replacement for npm. It's faster and *guarantees* consistency -- as yo
 ### Install Project Dependencies
 
 ```
-yarn global add grunt-cli knex eslint
+yarn global add grunt-cli eslint
 ```
 
 ## App Configuration
 
-Override settings `config/default.json` in any environment by making a copy of `config/ENV.example.json` and naming it `config/ENV.json` and setting the appropriate variable. 
+Override settings `config/default.json` in any environment by making a copy of `config/ENV.example.json` and naming it `config/ENV.json` and setting the appropriate variable.
 
 For environments that require use of environment variables, you can supply variables as defined in `config/custom-environment-variables.json`.
 
@@ -79,21 +78,19 @@ Other environments, specify like so: `NODE_ENV=test grunt pgcreatedb:default`
 
 In terminal, from the root directory:
 
-To migrate to the latest version, run:
-
-`knex migrate:latest --env NODE_ENV`
-
-To rollback a version, run:
-
-`knex migrate:rollback --env NODE_ENV`
-
 To populate the database with seed data, run:
 
-`knex seed:run --env NODE_ENV`
-
-Note: `--env NODE_ENV` may be omitted for development. For example, `knex migrate:latest` will run all migrations in the development environment, while `knex migrate:latest --env test` will migrate in the test environment.
+`yarn run seed`
 
 ## Running the App
+
+### With Docker:
+
+Ensure Docker is installed and running
+
+From root directory: `docker-compose up`
+
+### Without Docker:
 
 To run webpack build: `yarn run build`
 
@@ -102,5 +99,3 @@ To run server: `yarn run start`
 To run tests: `yarn run test`
 
 To run your redis server for the session store `redis-server`
-
-
