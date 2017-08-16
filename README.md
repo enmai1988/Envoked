@@ -1,6 +1,6 @@
-# Project Name
+# Envoked
 
-The project description
+A crowdfunding app to support startups make their ideas a reality
 
 ## Team
 
