@@ -2,7 +2,7 @@
   "sequelize": {
     "client": "postgresql",
     "connection": {
-      "database": "techstarter",
+      "database": "envoked",
       "user": "",
       "password": "",
       "host": "localhost",

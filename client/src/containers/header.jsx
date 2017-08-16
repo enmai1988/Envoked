@@ -72,7 +72,7 @@ class Header extends React.Component {
         <Navbar.Header>
           <Navbar.Brand>
             <LinkContainer to='/' style={navStyle.title}>
-              <div>Tech Starter</div>
+              <div>Envoked</div>
             </LinkContainer>
           </Navbar.Brand>
         </Navbar.Header>

@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   web:
-    image: enmai1988/techstarter:latest
+    image: enmai1988/envoked:latest
     depends_on:
       - redis
       - postgres
@@ -19,4 +19,4 @@ services:
     environment:
      POSTGRES_USER: user
      POSTGRES_PASSWORD: password
-     POSTGRES_DB: techstarter
+     POSTGRES_DB: envoked
