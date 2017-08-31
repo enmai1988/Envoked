@@ -43,18 +43,18 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <div id="sidebar-wrapper">
-        <div className='row col-md sidebar-top no-margin'>
+      <div id="sidebar-wrapper" className='ui grid'>
+        <div className='row sidebar-top'>
           <input type="text"
             className="form-control"
             placeholder="Search contacts"
             onChange={this.handleSearch}
           ></input>
         </div>
-        <div className='row col-md sidebar-main no-margin' style={{height: `${this.state.height - 80}px`}}>
+        <div className='row sidebar-main' style={{height: `${this.state.height - 80}px`}}>
           <ContactList contacts={this.props.contacts.content} startVideoChat={this.props.startVideoChat}/>
         </div>
-        <div className='row col-md sidebar-bottom no-margin'>
+        <div className='row sidebar-bottom'>
           <div>
             <a href='/auth/logout' style={{color: 'white', textDecoration: 'none'}}>Logout</a>
           </div>

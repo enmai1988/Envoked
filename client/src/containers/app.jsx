@@ -211,23 +211,25 @@ class App extends React.Component {
 
   render() {
     let sidebarToggle = '';
-    let burgerMenu = 'menu';
+    let burgerMenu = 'burger_menu';
     if (this.state.showSidebar) {
       sidebarToggle = ' toggled';
-      burgerMenu = 'menu change';
+      burgerMenu = 'burger_menu change';
     }
 
     return (
-      <Router history={history}>
-        <div id='wrapper' className={`container${sidebarToggle}`}>
-          <Header
-            user={this.props.user}
-            toggleSidebar={this.toggleSidebar}
-            menu={burgerMenu}
-            notifications={this.props.notifications.content}
-            contactRequestDecision={this.contactRequestDecision}
-            videoChatRequestDecision={this.videoChatRequestDecision}
-          />
+      <Router>
+        <div id='wrapper' className={`ui grid${sidebarToggle}`}>
+          <div className='row'>
+            <Header
+              user={this.props.user}
+              toggleSidebar={this.toggleSidebar}
+              menu={burgerMenu}
+              notifications={this.props.notifications.content}
+              contactRequestDecision={this.contactRequestDecision}
+              videoChatRequestDecision={this.videoChatRequestDecision}
+            />
+          </div>
           <Switch>
             <Route exact path='/' render={props =>
               <LandingPage

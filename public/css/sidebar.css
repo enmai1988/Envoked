@@ -61,7 +61,6 @@
     height: 100%;
     margin-right: -300px;
     overflow-y: auto;
-    /*background-color: rgb(240,95,64);*/
     -webkit-transition: all 0.25s ease;
     -moz-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
@@ -69,7 +68,6 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    /*width: 250px;*/
     width: 300px;
 }
 

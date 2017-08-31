@@ -1,5 +1,5 @@
-import webpack from 'webpack';
-import path from 'path';
+const webpack = require('webpack');
+const path = require('path');
 
 const config = {
   entry: './client/src/index.jsx',
@@ -15,10 +15,19 @@ const config = {
         use: [
           { loader: 'babel-loader',
             options: {
-              presets: ['react', 'es2015']
+              presets: ['react', 'es2015'],
+              cacheDirectory: true
             }
           }
         ]
+      },
+      {
+        test: /\.jpe?g$|\.gif$|\.png$|\.ttf$|\.eot$|\.svg$/,
+        use: 'file-loader?name=[name].[ext]?[hash]'
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/fontwoff'
       },
       {
         test: /\.css$/,
@@ -28,4 +37,4 @@ const config = {
   }
 };
 
-export default config;
+module.exports = config;

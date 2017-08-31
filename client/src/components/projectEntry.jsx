@@ -4,9 +4,9 @@ import { calculatePercentage } from '../../../helpers/util';
 import Progressbar from './progressbar.jsx';
 
 const ProjectEntry = ({ project }) => (
-  <div className='col-md-4 project-entry clearfix'>
+  <div className='column project-entry' style={{width: '30%', marginLeft: '2.5%'}}>
     <Link to={`/projects/${project.user.id}/${project.slug}`}>
-      <div className='thumbnails'>
+      <div className='ui fluid image'>
         <img src={project.imageURL}></img>
       </div>
     </Link>

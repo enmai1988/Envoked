@@ -2,8 +2,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-const LinkedinStrategy = require('passport-linkedin').Strategy;
-const LocalStrategy = require('passport-local').Strategy;
 const config = require('config')['passport'];
 const color = require('colors');
 const { User } = require('../../db/');
@@ -23,24 +21,6 @@ passport.deserializeUser((id, done) => {
       done(null, false, { messages: 'user not found' });
     });
 });
-
-passport.use('local-signup', new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password',
-  passReqToCallback: true
-}, (req, email, password, done) => {
-  // check to see if there is any account with this email address
-
-}));
-
-passport.use('local-login', new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password',
-  passReqToCallback: true
-}, (req, email, password, done) => {
-  // fetch any profiles that have a local auth account with this email address
-
-}));
 
 passport.use('google', new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENTID || config.Google.clientID,
